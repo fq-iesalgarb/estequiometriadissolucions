@@ -458,13 +458,13 @@
                   <div class="space-y-2 pt-2"><p>$$${mKClO3}\\text{ g KClO}_3 \\cdot \\frac{1\\text{ mol KClO}_3}{122{,}55\\text{ g KClO}_3} \\cdot \\frac{2\\text{ mol KCl}}{2\\text{ mol KClO}_3} \\cdot \\frac{74{,}55\\text{ g KCl}}{1\\text{ mol KCl}} = ${correctVal.toFixed(2)}\\text{ g KCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de KCl</p></div>`
           };
         },
-        // 3. 4 Na + O2 -> 2 Na2O (Exercici 28 del PDF)
+        // 3. 4 Na + O2 -> 2 Na2O (Oxidació del sodi)
         function() {
           const mNa = randFloat(5, 30, 1);
           const correctVal = (mNa / 22.99) * (2 / 4) * 61.98;
           return {
             unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `El sodi metall reacciona espontàniament amb el dioxigen de l'aire per produir òxid de sodi. Calcula els grams d'<strong>òxid de sodi</strong> que s'obtindran a partir de <strong>${mNa} g de sodi</strong>.`,
+            statementNames: `El sodi metall reacciona espontàniament amb el dioxigen de l'aire per produir òxid de sodi. Calcula els grams d'<strong>òxid de sodi</strong> que s'obtindran a partir de <strong>${mNa} g de sodi metall</strong>.`,
             statementFormulas: `El $\\text{Na}(s)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{Na}_2\\text{O}(s)$. Calcula la massa de $\\text{Na}_2\\text{O}$ obtinguda a partir de <strong>${mNa} g de $\\text{Na}$</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Na} + \\text{O}_2 \\rightarrow \\text{Na}_2\\text{O}$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $4\\,\\text{Na}(s) + \\text{O}_2(g) \\rightarrow 2\\,\\text{Na}_2\\text{O}(s)$</p>`,
@@ -476,7 +476,7 @@
                   <div class="space-y-2 pt-2"><p>$$${mNa}\\text{ g Na} \\cdot \\frac{1\\text{ mol Na}}{22{,}99\\text{ g Na}} \\cdot \\frac{2\\text{ mol Na}_2\\text{O}}{4\\text{ mol Na}} \\cdot \\frac{61{,}98\\text{ g Na}_2\\text{O}}{1\\text{ mol Na}_2\\text{O}} = ${correctVal.toFixed(2)}\\text{ g Na}_2\\text{O}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Na₂O</p></div>`
           };
         },
-        // 4. Cu + 2 H2SO4 -> CuSO4 + SO2 + 2 H2O (Exercici 37 del PDF)
+        // 4. Cu + 2 H2SO4 -> CuSO4 + SO2 + 2 H2O (Cobre amb àcid sulfúric)
         function() {
           const mCuSO4 = randFloat(50, 200, 1);
           const correctVal = (mCuSO4 / 159.61) * 63.55;
@@ -493,24 +493,60 @@
                   </div>
                   <div class="space-y-2 pt-2"><p>$$${mCuSO4}\\text{ g CuSO}_4 \\cdot \\frac{1\\text{ mol CuSO}_4}{159{,}61\\text{ g CuSO}_4} \\cdot \\frac{1\\text{ mol Cu}}{1\\text{ mol CuSO}_4} \\cdot \\frac{63{,}55\\text{ g Cu}}{1\\text{ mol Cu}} = ${correctVal.toFixed(2)}\\text{ g Cu}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Cu</p></div>`
           };
+        },
+        // 5. 2 H2 + O2 -> 2 H2O (Combustió del dihidrogen)
+        function() {
+          const mH2 = randFloat(2, 15, 1);
+          const correctVal = (mH2 / 2.02) * (2 / 2) * 18.02;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El dihidrogen gasós reacciona amb el dioxigen gasós per produir aigua líquida. Calcula els grams d'<strong>aigua</strong> que es formaran quan cremen completament <strong>${mH2} g de dihidrogen gasós</strong>.`,
+            statementFormulas: `El $\\text{H}_2(g)$ reacciona amb $\\text{O}_2(g)$ per produir $\\text{H}_2\\text{O}(l)$. Calcula la massa de $\\text{H}_2\\text{O}$ obtinguda a partir de <strong>${mH2} g de $\\text{H}_2$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{H}_2 + \\text{O}_2 \\rightarrow \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{H}_2(g) + \\text{O}_2(g) \\rightarrow 2\\,\\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 H₂',x:180,isComp:true,w:50},{text:'+',x:230},{text:'O₂',x:275,isComp:true,w:50},{text:'→',x:325},{text:'2 H₂O',x:385,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'H₂', startVal:`${mH2}`, startUnit:'g', targetSubstance:'H₂O', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{H}_2) = 2{,}02\\text{ g/mol}, \\quad M(\\text{H}_2\\text{O}) = 18{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mH2}\\text{ g H}_2 \\cdot \\frac{1\\text{ mol H}_2}{2{,}02\\text{ g H}_2} \\cdot \\frac{2\\text{ mol H}_2\\text{O}}{2\\text{ mol H}_2} \\cdot \\frac{18{,}02\\text{ g H}_2\\text{O}}{1\\text{ mol H}_2\\text{O}} = ${correctVal.toFixed(2)}\\text{ g H}_2\\text{O}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de H₂O</p></div>`
+          };
+        },
+        // 6. 2 Fe + 3 Cl2 -> 2 FeCl3 (Síntesi del clorur de ferro(III))
+        function() {
+          const mFe = randFloat(10, 50, 1);
+          const correctVal = (mFe / 55.85) * (2 / 2) * 162.20;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El ferro metall reacciona amb el diclor gasós per produir clorur de ferro(III) sòlid. Quina massa de <strong>clorur de ferro(III)</strong> es formarà a partir de <strong>${mFe} g de ferro metall</strong>?`,
+            statementFormulas: `El $\\text{Fe}(s)$ reacciona amb $\\text{Cl}_2(g)$ per donar $\\text{FeCl}_3(s)$. Quina massa de $\\text{FeCl}_3$ es formarà a partir de <strong>${mFe} g de $\\text{Fe}$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Fe} + \\text{Cl}_2 \\rightarrow \\text{FeCl}_3$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Fe}(s) + 3\\,\\text{Cl}_2(g) \\rightarrow 2\\,\\text{FeCl}_3(s)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Fe',x:180,isComp:true,w:50},{text:'+',x:230},{text:'3 Cl₂',x:280,isComp:true,w:55},{text:'→',x:335},{text:'2 FeCl₃',x:400,isComp:true,w:65}], startIndex:0, targetIndex:4, startSubstance:'Fe', startVal:`${mFe}`, startUnit:'g', targetSubstance:'FeCl₃', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{Fe}) = 55{,}85\\text{ g/mol}, \\quad M(\\text{FeCl}_3) = 55{,}85 + 3 \\cdot 35{,}45 = 162{,}20\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mFe}\\text{ g Fe} \\cdot \\frac{1\\text{ mol Fe}}{55{,}85\\text{ g Fe}} \\cdot \\frac{2\\text{ mol FeCl}_3}{2\\text{ mol Fe}} \\cdot \\frac{162{,}20\\text{ g FeCl}_3}{1\\text{ mol FeCl}_3} = ${correctVal.toFixed(2)}\\text{ g FeCl}_3$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de FeCl₃</p></div>`
+          };
         }
       ],
       'sub_volum_volum': [
-        // 1. N2 + 3 H2 -> 2 NH3
+        // 1. N2 + 3 H2 -> 2 NH3 (Síntesi de l'amoníac)
         function() {
           const V_NH3 = randInt(40, 250);
           const correctVal = V_NH3 * (3 / 2);
           return {
             unit: 'L', correctValue: parseFloat(correctVal.toFixed(1)),
-            statementNames: `En la síntesi de l'amoníac, el dinitrogen gasós reacciona amb el dihidrogen gasós per formar amoníac gasós. Calcula el volum de <strong>dihidrogen gasós</strong> necessari en condicions normals per produir <strong>${V_NH3} L d'amoníac gasós</strong>.`,
-            statementFormulas: `En la reacció de $\\text{N}_2(g)$ i $\\text{H}_2(g)$ per donar $\\text{NH}_3(g)$, calcula el volum de $\\text{H}_2(g)$ necessari en c.n. per produir <strong>${V_NH3} L de $\\text{NH}_3(g)$</strong>.`,
+            statementNames: `En la síntesi de l'amoníac, el dinitrogen gasós reacciona amb el dihidrogen gasós per formar amoníac gasós. Calcula el volum de <strong>dihidrogen gasós</strong> necessari per produir <strong>${V_NH3} L d'amoníac gasós</strong> (mesurats en les mateixes condicions de P i T).`,
+            statementFormulas: `En la reacció de $\\text{N}_2(g)$ i $\\text{H}_2(g)$ per donar $\\text{NH}_3(g)$, calcula el volum de $\\text{H}_2(g)$ necessari per produir <strong>${V_NH3} L de $\\text{NH}_3(g)$</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{N}_2 + \\text{H}_2 \\rightarrow \\text{NH}_3$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $\\text{N}_2(g) + 3\\,\\text{H}_2(g) \\rightarrow 2\\,\\text{NH}_3(g)$</p>`,
             tab3: generateStrategySVG({ items: [{text:'N₂',x:180,isComp:true,w:50},{text:'+',x:225},{text:'3 H₂',x:270,isComp:true,w:55},{text:'→',x:320},{text:'2 NH₃',x:380,isComp:true,w:60}], startIndex:4, targetIndex:2, startSubstance:'NH₃', startVal:`${V_NH3}`, startUnit:'L', targetSubstance:'H₂', targetUnit:'L' }) +
                   `<div class="space-y-2 pt-2"><p>$$${V_NH3}\\text{ L NH}_3 \\cdot \\frac{3\\text{ L H}_2}{2\\text{ L NH}_3} = ${correctVal.toFixed(1)}\\text{ L H}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} L de H₂</p></div>`
           };
         },
-        // 2. C3H8 + 5 O2 -> 3 CO2 + 4 H2O (Exercici 22 del PDF)
+        // 2. C3H8 + 5 O2 -> 3 CO2 + 4 H2O (Combustió del propà)
         function() {
           const V_C3H8 = randInt(2, 25);
           const correctVal = V_C3H8 * 5;
@@ -523,16 +559,58 @@
             tab3: generateStrategySVG({ items: [{text:'C₃H₈',x:150,isComp:true,w:60},{text:'+',x:200},{text:'5 O₂',x:250,isComp:true,w:55},{text:'→',x:300},{text:'3 CO₂',x:360,isComp:true,w:60},{text:'+',x:415},{text:'4 H₂O',x:470,isComp:true,w:60}], startIndex:0, targetIndex:2, startSubstance:'C₃H₈', startVal:`${V_C3H8}`, startUnit:'L', targetSubstance:'O₂', targetUnit:'L' }) +
                   `<div class="space-y-2 pt-2"><p>$$${V_C3H8}\\text{ L C}_3\\text{H}_8 \\cdot \\frac{5\\text{ L O}_2}{1\\text{ L C}_3\\text{H}_8} = ${correctVal.toFixed(1)}\\text{ L O}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} L de O₂</p></div>`
           };
+        },
+        // 3. CH4 + 2 O2 -> CO2 + 2 H2O (Combustió del metà)
+        function() {
+          const V_CH4 = randInt(10, 80);
+          const correctVal = V_CH4 * 1;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `El metà gasós crema amb el dioxigen gasós per donar diòxid de carboni gasós i vapor d'aigua. Quin volum de <strong>diòxid de carboni gasós</strong> es generarà en la combustió de <strong>${V_CH4} L de metà gasós</strong>?`,
+            statementFormulas: `El $\\text{CH}_4(g)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{CO}_2(g)$ i $\\text{H}_2\\text{O}(g)$. Quin volum de $\\text{CO}_2(g)$ es formarà a partir de <strong>${V_CH4} L de $\\text{CH}_4(g)$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CH}_4 + \\text{O}_2 \\rightarrow \\text{CO}_2 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CH}_4(g) + 2\\,\\text{O}_2(g) \\rightarrow \\text{CO}_2(g) + 2\\,\\text{H}_2\\text{O}(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CH₄',x:160,isComp:true,w:55},{text:'+',x:205},{text:'2 O₂',x:250,isComp:true,w:55},{text:'→',x:295},{text:'CO₂',x:340,isComp:true,w:55},{text:'+',x:385},{text:'2 H₂O',x:435,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'CH₄', startVal:`${V_CH4}`, startUnit:'L', targetSubstance:'CO₂', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V_CH4}\\text{ L CH}_4 \\cdot \\frac{1\\text{ L CO}_2}{1\\text{ L CH}_4} = ${correctVal.toFixed(1)}\\text{ L CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} L de CO₂</p></div>`
+          };
+        },
+        // 4. H2 + Cl2 -> 2 HCl (Formació de clorur d'hidrogen)
+        function() {
+          const V_H2 = randInt(15, 60);
+          const correctVal = V_H2 * 2;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `El dihidrogen gasós reacciona amb el diclor gasós per produir clorur d'hidrogen gasós. Quin volum de <strong>clorur d'hidrogen gasós</strong> es formarà si reaccionen <strong>${V_H2} L de dihidrogen gasós</strong>?`,
+            statementFormulas: `El $\\text{H}_2(g)$ reacciona amb $\\text{Cl}_2(g)$ per donar $\\text{HCl}(g)$. Quin volum de $\\text{HCl}(g)$ es produirà a partir de <strong>${V_H2} L de $\\text{H}_2(g)$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{H}_2 + \\text{Cl}_2 \\rightarrow \\text{HCl}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{H}_2(g) + \\text{Cl}_2(g) \\rightarrow 2\\,\\text{HCl}(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'H₂',x:180,isComp:true,w:50},{text:'+',x:230},{text:'Cl₂',x:280,isComp:true,w:50},{text:'→',x:330},{text:'2 HCl',x:390,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'H₂', startVal:`${V_H2}`, startUnit:'L', targetSubstance:'HCl', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V_H2}\\text{ L H}_2 \\cdot \\frac{2\\text{ L HCl}}{1\\text{ L H}_2} = ${correctVal.toFixed(1)}\\text{ L HCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} L de HCl</p></div>`
+          };
+        },
+        // 5. 2 CO + O2 -> 2 CO2 (Oxidació del monòxid de carboni)
+        function() {
+          const V_CO = randInt(20, 100);
+          const correctVal = V_CO * (1 / 2);
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `El monòxid de carboni gasós reacciona amb el dioxigen gasós per formar diòxid de carboni gasós. Quin volum de <strong>dioxigen gasós</strong> serà necessari per cremar <strong>${V_CO} L de monòxid de carboni gasós</strong>?`,
+            statementFormulas: `El $\\text{CO}(g)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{CO}_2(g)$. Quin volum de $\\text{O}_2(g)$ cal per oxidar <strong>${V_CO} L de $\\text{CO}(g)$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CO} + \\text{O}_2 \\rightarrow \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{CO}(g) + \\text{O}_2(g) \\rightarrow 2\\,\\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 CO',x:180,isComp:true,w:55},{text:'+',x:235},{text:'O₂',x:280,isComp:true,w:50},{text:'→',x:330},{text:'2 CO₂',x:390,isComp:true,w:60}], startIndex:0, targetIndex:2, startSubstance:'CO', startVal:`${V_CO}`, startUnit:'L', targetSubstance:'O₂', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V_CO}\\text{ L CO} \\cdot \\frac{1\\text{ L O}_2}{2\\text{ L CO}} = ${correctVal.toFixed(1)}\\text{ L O}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} L de O₂</p></div>`
+          };
         }
       ],
       'sub_massa_volum_cn': [
-        // 1. 2 KClO3 -> 2 KCl + 3 O2 (Exercici 21b del PDF)
+        // 1. 2 KClO3 -> 2 KCl + 3 O2 (Descomposició clorat)
         function() {
           const mKClO3 = randFloat(15, 75, 1);
           const correctVal = (mKClO3 / 122.55) * (3 / 2) * 22.4;
           return {
             unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `Quin volum de <strong>dioxigen gasós</strong> en condicions normals ($1\\text{ atm}, 0^\\circ\\text{C}$) s'obté en la descomposició tèrmica de <strong>${mKClO3} g de clorat de potassi sòlid</strong> per donar clorur de potassi i dioxigen?`,
+            statementNames: `Quin volum de <strong>dioxigen gasós</strong> en condicions normals ($1\\text{ atm}, 0^\\circ\\text{C}$) s'obté en la descomposició tèrmica de <strong>${mKClO3} g de clorat de potassi sòlid</strong> per donar clorur de potassi sòlid i dioxigen gasós?`,
             statementFormulas: `Quin volum de $\\text{O}_2(g)$ en c.n. s'obté per descomposició de <strong>${mKClO3} g de $\\text{KClO}_3(s)$</strong> en $\\text{KCl}(s)$ i $\\text{O}_2(g)$?`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{KClO}_3 \\rightarrow \\text{KCl} + \\text{O}_2$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{KClO}_3(s) \\rightarrow 2\\,\\text{KCl}(s) + 3\\,\\text{O}_2(g)$</p>`,
@@ -544,13 +622,13 @@
                   <div class="space-y-2 pt-2"><p>$$${mKClO3}\\text{ g KClO}_3 \\cdot \\frac{1\\text{ mol KClO}_3}{122{,}55\\text{ g KClO}_3} \\cdot \\frac{3\\text{ mol O}_2}{2\\text{ mol KClO}_3} \\cdot \\frac{22{,}4\\text{ L O}_2}{1\\text{ mol O}_2} = ${correctVal.toFixed(2)}\\text{ L O}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de O₂ en C.N.</p></div>`
           };
         },
-        // 2. 2 ZnS + 3 O2 -> 2 ZnO + 2 SO2 (Exercici 23 del PDF)
+        // 2. 2 ZnS + 3 O2 -> 2 ZnO + 2 SO2 (Tostació de blenda)
         function() {
           const mZnS = randFloat(10, 50, 1);
           const correctVal = (mZnS / 97.44) * (2 / 2) * 22.4;
           return {
             unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `El sulfur de zinc sòlid reacciona amb el dioxigen gasós per donar òxid de zinc sòlid i diòxid d'azofre gasós. Determina el volum de <strong>diòxid d'azofre</strong> obtingut en condicions normals quan reaccionen <strong>${mZnS} g de sulfur de zinc</strong> amb excés de dioxigen.`,
+            statementNames: `El sulfur de zinc sòlid reacciona amb el dioxigen gasós per donar òxid de zinc sòlid i diòxid d'azofre gasós. Determina el volum de <strong>diòxid d'azofre gasós</strong> obtingut en condicions normals quan reaccionen <strong>${mZnS} g de sulfur de zinc</strong> amb excés de dioxigen.`,
             statementFormulas: `El $\\text{ZnS}(s)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{ZnO}(s)$ i $\\text{SO}_2(g)$. Calcula el volum de $\\text{SO}_2(g)$ en c.n. quan reaccionen <strong>${mZnS} g de $\\text{ZnS}$</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{ZnS} + \\text{O}_2 \\rightarrow \\text{ZnO} + \\text{SO}_2$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{ZnS}(s) + 3\\,\\text{O}_2(g) \\rightarrow 2\\,\\text{ZnO}(s) + 2\\,\\text{SO}_2(g)$</p>`,
@@ -561,10 +639,64 @@
                   </div>
                   <div class="space-y-2 pt-2"><p>$$${mZnS}\\text{ g ZnS} \\cdot \\frac{1\\text{ mol ZnS}}{97{,}44\\text{ g ZnS}} \\cdot \\frac{2\\text{ mol SO}_2}{2\\text{ mol ZnS}} \\cdot \\frac{22{,}4\\text{ L SO}_2}{1\\text{ mol SO}_2} = ${correctVal.toFixed(2)}\\text{ L SO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de SO₂ en C.N.</p></div>`
           };
+        },
+        // 3. CaCO3 + 2 HCl -> CaCl2 + H2O + CO2 (Calissa i HCl)
+        function() {
+          const mCaCO3 = randFloat(10, 60, 1);
+          const correctVal = (mCaCO3 / 100.09) * 22.4;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El carbonat de calci reacciona amb àcid clorhídric per donar clorur de calci en dissolució, aigua i diòxid de carboni gasós. Calcula el volum de <strong>diòxid de carboni gasós</strong> obtingut en condicions normals a partir de <strong>${mCaCO3} g de carbonat de calci</strong>.`,
+            statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Calcula el volum de $\\text{CO}_2(g)$ en c.n. produït per <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:8, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'CO₂', targetUnit:'L' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{CaCO}_3) = 100{,}09\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mCaCO3}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol CaCO}_3}{100{,}09\\text{ g CaCO}_3} \\cdot \\frac{1\\text{ mol CO}_2}{1\\text{ mol CaCO}_3} \\cdot \\frac{22{,}4\\text{ L CO}_2}{1\\text{ mol CO}_2} = ${correctVal.toFixed(2)}\\text{ L CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de CO₂ en C.N.</p></div>`
+          };
+        },
+        // 4. 2 Al + 3 H2SO4 -> Al2(SO4)3 + 3 H2 (Alumini amb àcid sulfúric)
+        function() {
+          const mAl = randFloat(5, 25, 1);
+          const correctVal = (mAl / 26.98) * (3 / 2) * 22.4;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `L'alumini metall reacciona amb l'àcid sulfúric en dissolució aquosa per formar sulfat d'alumini en dissolució i dihidrogen gasós. Determina el volum de <strong>dihidrogen gasós</strong> en condicions normals que es desprenen quan reaccionen <strong>${mAl} g d'alumini metall</strong>.`,
+            statementFormulas: `El $\\text{Al}(s)$ reacciona amb $\\text{H}_2\\text{SO}_4(aq)$ per donar $\\text{Al}_2(\\text{SO}_4)_3(aq)$ i $\\text{H}_2(g)$. Calcula el volum de $\\text{H}_2(g)$ en c.n. desprès per <strong>${mAl} g de $\\text{Al}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Al} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{Al}_2(\\text{SO}_4)_3 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Al}(s) + 3\\,\\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{Al}_2(\\text{SO}_4)_3(aq) + 3\\,\\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Al',x:150,isComp:true,w:50},{text:'+',x:195},{text:'3 H₂SO₄',x:250,isComp:true,w:70},{text:'→',x:305},{text:'Al₂(SO₄)₃',x:375,isComp:true,w:80},{text:'+',x:435},{text:'3 H₂',x:480,isComp:true,w:55}], startIndex:0, targetIndex:6, startSubstance:'Al', startVal:`${mAl}`, startUnit:'g', targetSubstance:'H₂', targetUnit:'L' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{Al}) = 26{,}98\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mAl}\\text{ g Al} \\cdot \\frac{1\\text{ mol Al}}{26{,}98\\text{ g Al}} \\cdot \\frac{3\\text{ mol H}_2}{2\\text{ mol Al}} \\cdot \\frac{22{,}4\\text{ L H}_2}{1\\text{ mol H}_2} = ${correctVal.toFixed(2)}\\text{ L H}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de H₂ en C.N.</p></div>`
+          };
+        },
+        // 5. C + O2 -> CO2 (Combustió del carboni)
+        function() {
+          const mC = randFloat(12, 80, 1);
+          const correctVal = (mC / 12.01) * 22.4;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El carboni pur reacciona amb el dioxigen gasós per formar diòxid de carboni gasós. Quin volum de <strong>dioxigen gasós</strong> en condicions normals es consumirà per cremar <strong>${mC} g de carboni</strong>?`,
+            statementFormulas: `El $\\text{C}(s)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{CO}_2(g)$. Quin volum de $\\text{O}_2(g)$ en c.n. es consumeix per cremar <strong>${mC} g de $\\text{C}$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{C} + \\text{O}_2 \\rightarrow \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{C}(s) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'C',x:180,isComp:true,w:45},{text:'+',x:225},{text:'O₂',x:270,isComp:true,w:50},{text:'→',x:320},{text:'CO₂',x:380,isComp:true,w:55}], startIndex:0, targetIndex:2, startSubstance:'C', startVal:`${mC}`, startUnit:'g', targetSubstance:'O₂', targetUnit:'L' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{C}) = 12{,}01\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mC}\\text{ g C} \\cdot \\frac{1\\text{ mol C}}{12{,}01\\text{ g C}} \\cdot \\frac{1\\text{ mol O}_2}{1\\text{ mol C}} \\cdot \\frac{22{,}4\\text{ L O}_2}{1\\text{ mol O}_2} = ${correctVal.toFixed(2)}\\text{ L O}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de O₂ en C.N.</p></div>`
+          };
         }
       ],
       'sub_massa_volum_nocn': [
-        // 1. Zn + 2 HCl -> ZnCl2 + H2 (Exercici 27b del PDF)
+        // 1. Zn + 2 HCl -> ZnCl2 + H2 (Zinc amb HCl a T i P donades)
         function() {
           const mZn = randFloat(4, 20, 1);
           const P_mmHg = 770;
@@ -574,12 +706,84 @@
           const correctVal = (n_H2 * 0.08206 * T) / P_atm;
           return {
             unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `El zinc metall reacciona amb àcid clorhídric per donar clorur de zinc en dissolució i dihidrogen gasós. Calcula el volum de <strong>dihidrogen gasós</strong> que es formarà a $20^\\circ\\text{C}$ i $770\\text{ mmHg}$ a partir de <strong>${mZn} g de zinc</strong>.`,
+            statementNames: `El zinc metall reacciona amb àcid clorhídric per donar clorur de zinc en dissolució i dihidrogen gasós. Calcula el volum de <strong>dihidrogen gasós</strong> que es formarà a $20^\\circ\\text{C}$ i $770\\text{ mmHg}$ de pressió a partir de <strong>${mZn} g de zinc metall</strong>.`,
             statementFormulas: `El $\\text{Zn}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{ZnCl}_2(aq)$ i $\\text{H}_2(g)$. Calcula el volum de $\\text{H}_2(g)$ a $20^\\circ\\text{C}$ i $770\\text{ mmHg}$ a partir de <strong>${mZn} g de $\\text{Zn}$</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $\\text{Zn}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{ZnCl}_2(aq) + \\text{H}_2(g)$</p>`,
             tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'ZnCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:0, targetIndex:6, startSubstance:'Zn', startVal:`${mZn}`, startUnit:'g', targetSubstance:'H₂', targetUnit:'L' }) +
                   `<div class="space-y-2 pt-2"><p>$$P = \\frac{770\\text{ mmHg}}{760\\text{ mmHg/atm}} = 1{,}013\\text{ atm}, \\quad T = 20 + 273 = 293\\text{ K}$$</p><p>$$${mZn}\\text{ g Zn} \\cdot \\frac{1\\text{ mol Zn}}{65{,}38\\text{ g Zn}} \\cdot \\frac{1\\text{ mol H}_2}{1\\text{ mol Zn}} = ${n_H2.toFixed(3)}\\text{ mol H}_2$$</p><p>$$V = \\frac{n \\cdot R \\cdot T}{P} = \\frac{${n_H2.toFixed(3)} \\cdot 0{,}082 \\cdot 293}{1{,}013} = ${correctVal.toFixed(2)}\\text{ L H}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de H₂</p></div>`
+          };
+        },
+        // 2. CaCO3 + 2 HCl -> CaCl2 + H2O + CO2 (Calissa a T i P donades)
+        function() {
+          const mCaCO3 = randFloat(15, 50, 1);
+          const P_mmHg = 730;
+          const P_atm = P_mmHg / 760;
+          const T = 298; // 25 ºC
+          const n_CO2 = mCaCO3 / 100.09;
+          const correctVal = (n_CO2 * 0.08206 * T) / P_atm;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En fer reaccionar carbonat de calci sòlid amb àcid clorhídric s'obté clorur de calci, aigua i diòxid de carboni gasós. Quin volum de <strong>diòxid de carboni gasós</strong> mesurat a $25^\\circ\\text{C}$ i $730\\text{ mmHg}$ es desprèn en reaccionar <strong>${mCaCO3} g de carbonat de calci</strong>?`,
+            statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Calcula el volum de $\\text{CO}_2(g)$ a $25^\\circ\\text{C}$ i $730\\text{ mmHg}$ desprès per <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:8, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'CO₂', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$P = \\frac{730\\text{ mmHg}}{760\\text{ mmHg/atm}} = 0{,}961\\text{ atm}, \\quad T = 25 + 273 = 298\\text{ K}$$</p><p>$$${mCaCO3}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol CaCO}_3}{100{,}09\\text{ g CaCO}_3} \\cdot \\frac{1\\text{ mol CO}_2}{1\\text{ mol CaCO}_3} = ${n_CO2.toFixed(3)}\\text{ mol CO}_2$$</p><p>$$V = \\frac{n \\cdot R \\cdot T}{P} = \\frac{${n_CO2.toFixed(3)} \\cdot 0{,}082 \\cdot 298}{0{,}961} = ${correctVal.toFixed(2)}\\text{ L CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de CO₂</p></div>`
+          };
+        },
+        // 3. Mg + 2 HCl -> MgCl2 + H2 (Magnesi amb HCl a T i P donades)
+        function() {
+          const mMg = randFloat(2, 12, 1);
+          const P_mmHg = 750;
+          const P_atm = P_mmHg / 760;
+          const T = 291; // 18 ºC
+          const n_H2 = mMg / 24.31;
+          const correctVal = (n_H2 * 0.08206 * T) / P_atm;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El magnesi metall reacciona amb àcid clorhídric en dissolució per donar clorur de magnesi i dihidrogen gasós. Quin volum de <strong>dihidrogen gasós</strong> a $18^\\circ\\text{C}$ i $750\\text{ mmHg}$ es produirà a partir de <strong>${mMg} g de magnesi metall</strong>?`,
+            statementFormulas: `El $\\text{Mg}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{MgCl}_2(aq)$ i $\\text{H}_2(g)$. Calcula el volum de $\\text{H}_2(g)$ a $18^\\circ\\text{C}$ i $750\\text{ mmHg}$ a partir de <strong>${mMg} g de $\\text{Mg}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Mg} + \\text{HCl} \\rightarrow \\text{MgCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Mg}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{MgCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Mg',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'MgCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:0, targetIndex:6, startSubstance:'Mg', startVal:`${mMg}`, startUnit:'g', targetSubstance:'H₂', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$P = \\frac{750\\text{ mmHg}}{760\\text{ mmHg/atm}} = 0{,}987\\text{ atm}, \\quad T = 18 + 273 = 291\\text{ K}$$</p><p>$$${mMg}\\text{ g Mg} \\cdot \\frac{1\\text{ mol Mg}}{24{,}31\\text{ g Mg}} \\cdot \\frac{1\\text{ mol H}_2}{1\\text{ mol Mg}} = ${n_H2.toFixed(3)}\\text{ mol H}_2$$</p><p>$$V = \\frac{n \\cdot R \\cdot T}{P} = \\frac{${n_H2.toFixed(3)} \\cdot 0{,}082 \\cdot 291}{0{,}987} = ${correctVal.toFixed(2)}\\text{ L H}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de H₂</p></div>`
+          };
+        },
+        // 4. FeS + 2 HCl -> FeCl2 + H2S (Sulfur de ferro(II) amb HCl)
+        function() {
+          const mFeS = randFloat(10, 45, 1);
+          const P_mmHg = 740;
+          const P_atm = P_mmHg / 760;
+          const T = 295; // 22 ºC
+          const n_H2S = mFeS / 87.91;
+          const correctVal = (n_H2S * 0.08206 * T) / P_atm;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El sulfur de ferro(II) sòlid reacciona amb àcid clorhídric per formar clorur de ferro(II) en dissolució i sulfur de dihidrogen gasós. Calcula el volum de <strong>sulfur de dihidrogen gasós</strong> a $22^\\circ\\text{C}$ i $740\\text{ mmHg}$ que s'obté amb <strong>${mFeS} g de sulfur de ferro(II)</strong>.`,
+            statementFormulas: `El $\\text{FeS}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{FeCl}_2(aq)$ i $\\text{H}_2\\text{S}(g)$. Calcula el volum de $\\text{H}_2\\text{S}(g)$ a $22^\\circ\\text{C}$ i $740\\text{ mmHg}$ per a <strong>${mFeS} g de $\\text{FeS}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{FeS} + \\text{HCl} \\rightarrow \\text{FeCl}_2 + \\text{H}_2\\text{S}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{FeS}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{FeCl}_2(aq) + \\text{H}_2\\text{S}(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'FeS',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'FeCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂S',x:475,isComp:true,w:50}], startIndex:0, targetIndex:6, startSubstance:'FeS', startVal:`${mFeS}`, startUnit:'g', targetSubstance:'H₂S', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$P = \\frac{740\\text{ mmHg}}{760\\text{ mmHg/atm}} = 0{,}974\\text{ atm}, \\quad T = 22 + 273 = 295\\text{ K}$$</p><p>$$${mFeS}\\text{ g FeS} \\cdot \\frac{1\\text{ mol FeS}}{87{,}91\\text{ g FeS}} \\cdot \\frac{1\\text{ mol H}_2\\text{S}}{1\\text{ mol FeS}} = ${n_H2S.toFixed(3)}\\text{ mol H}_2\\text{S}$$</p><p>$$V = \\frac{n \\cdot R \\cdot T}{P} = \\frac{${n_H2S.toFixed(3)} \\cdot 0{,}082 \\cdot 295}{0{,}974} = ${correctVal.toFixed(2)}\\text{ L H}_2\\text{S}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de H₂S</p></div>`
+          };
+        },
+        // 5. Na2CO3 + 2 HCl -> 2 NaCl + H2O + CO2 (Carbonat de sodi i HCl)
+        function() {
+          const mNa2CO3 = randFloat(10, 40, 1);
+          const P_mmHg = 760;
+          const P_atm = 1.0;
+          const T = 300; // 27 ºC
+          const n_CO2 = mNa2CO3 / 105.99;
+          const correctVal = (n_CO2 * 0.08206 * T) / P_atm;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El carbonat de sodi sòlid reacciona amb àcid clorhídric per donar clorur de sodi en dissolució, aigua i diòxid de carboni gasós. Calcula el volum de <strong>diòxid de carboni gasós</strong> mesurat a $27^\\circ\\text{C}$ i $1\\text{ atm}$ que s'obté a partir de <strong>${mNa2CO3} g de carbonat de sodi</strong>.`,
+            statementFormulas: `El $\\text{Na}_2\\text{CO}_3(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{NaCl}(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Calcula el volum de $\\text{CO}_2(g)$ a $27^\\circ\\text{C}$ i $1\\text{ atm}$ desprès per <strong>${mNa2CO3} g de $\\text{Na}_2\\text{CO}_3$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Na}_2\\text{CO}_3 + \\text{HCl} \\rightarrow \\text{NaCl} + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Na}_2\\text{CO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow 2\\,\\text{NaCl}(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Na₂CO₃',x:130,isComp:true,w:75},{text:'+',x:180},{text:'2 HCl',x:225,isComp:true,w:60},{text:'→',x:270},{text:'2 NaCl',x:315,isComp:true,w:60},{text:'+',x:360},{text:'H₂O',x:400,isComp:true,w:50},{text:'+',x:440},{text:'CO₂',x:480,isComp:true,w:50}], startIndex:0, targetIndex:8, startSubstance:'Na₂CO₃', startVal:`${mNa2CO3}`, startUnit:'g', targetSubstance:'CO₂', targetUnit:'L' }) +
+                  `<div class="space-y-2 pt-2"><p>$$P = 1{,}00\\text{ atm}, \\quad T = 27 + 273 = 300\\text{ K}$$</p><p>$$${mNa2CO3}\\text{ g Na}_2\\text{CO}_3 \\cdot \\frac{1\\text{ mol Na}_2\\text{CO}_3}{105{,}99\\text{ g Na}_2\\text{CO}_3} \\cdot \\frac{1\\text{ mol CO}_2}{1\\text{ mol Na}_2\\text{CO}_3} = ${n_CO2.toFixed(3)}\\text{ mol CO}_2$$</p><p>$$V = \\frac{n \\cdot R \\cdot T}{P} = \\frac{${n_CO2.toFixed(3)} \\cdot 0{,}082 \\cdot 300}{1{,}00} = ${correctVal.toFixed(2)}\\text{ L CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de CO₂</p></div>`
           };
         }
       ],
@@ -611,9 +815,52 @@
             tab2: `<p><strong>Fórmula:</strong> $m_{\\text{dis}} = m_{\\text{solut}} + m_{\\text{dissolvent}}$</p>`,
             tab3: `<div class="space-y-2 pt-2"><p>$$m_{\\text{dis}} = ${mSolut}\\text{ g} + ${mSolvent}\\text{ g} = ${correctVal.toFixed(1)}\\text{ g}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} g</p></div>`
           };
+        },
+        // 3. KNO3 en aigua (Massa de dissolvent necessària)
+        function() {
+          const mSolut = randFloat(10, 40, 1);
+          const mTotal = randFloat(120, 300, 1);
+          const correctVal = mTotal - mSolut;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `Es vol preparar una dissolució que contingui exactament <strong>${mSolut} g de nitrat de potassi</strong> de manera que la massa total de la dissolució sigui de <strong>${mTotal} g</strong>. Quina massa d'aigua destil·lada caldrà afegir-hi?`,
+            statementFormulas: `Es volen obtenir <strong>${mTotal} g de dissolució</strong> amb <strong>${mSolut} g de $\\text{KNO}_3$</strong>. Quina massa de $\\text{H}_2\\text{O}$ es necessita?`,
+            tab1: `<p>Dades: $m_{\\text{solut}} = ${mSolut}\\text{ g}$, $m_{\\text{dissolució}} = ${mTotal}\\text{ g}$. Incògnita: $m_{\\text{aigua}} = ?\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $m_{\\text{aigua}} = m_{\\text{dissolució}} - m_{\\text{solut}}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$m_{\\text{aigua}} = ${mTotal}\\text{ g dis} - ${mSolut}\\text{ g KNO}_3 = ${correctVal.toFixed(1)}\\text{ g H}_2\\text{O}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} g d'aigua</p></div>`
+          };
+        },
+        // 4. CuSO4 en aigua
+        function() {
+          const mSolut = randFloat(8, 35, 1);
+          const mSolvent = randFloat(100, 250, 1);
+          const correctVal = mSolut + mSolvent;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `Es dissoleixen <strong>${mSolut} g de sulfat de coure(II)</strong> en <strong>${mSolvent} g d'aigua destil·lada</strong>. Determina la massa de la dissolució blava obtinguda.`,
+            statementFormulas: `Es dissoleixen <strong>${mSolut} g de $\\text{CuSO}_4$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Determina la massa de la dissolució.`,
+            tab1: `<p>Dades: $m_{\\text{CuSO}_4} = ${mSolut}\\text{ g}$, $m_{\\text{H}_2\\text{O}} = ${mSolvent}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $m_{\\text{dis}} = m_{\\text{solut}} + m_{\\text{dissolvent}}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$m_{\\text{dis}} = ${mSolut}\\text{ g} + ${mSolvent}\\text{ g} = ${correctVal.toFixed(1)}\\text{ g}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} g de dissolució</p></div>`
+          };
+        },
+        // 5. CaCl2 en aigua (Massa de solut)
+        function() {
+          const mTotal = randFloat(150, 400, 1);
+          const mSolvent = randFloat(120, 350, 1);
+          const correctVal = mTotal - mSolvent;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `En el laboratori es disposa d'una dissolució aquosa de clorur de calci que té una massa total de <strong>${mTotal} g</strong>. Si se sap que s'hi van utilitzar <strong>${mSolvent} g d'aigua</strong>, quants grams de clorur de calci pur hi ha dissolts?`,
+            statementFormulas: `S'obtenen <strong>${mTotal} g de dissolució de $\\text{CaCl}_2$</strong> usant <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Quants grams de $\\text{CaCl}_2$ hi ha?`,
+            tab1: `<p>Dades: $m_{\\text{dissolució}} = ${mTotal}\\text{ g}$, $m_{\\text{aigua}} = ${mSolvent}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $m_{\\text{solut}} = m_{\\text{dissolució}} - m_{\\text{aigua}}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$m_{\\text{solut}} = ${mTotal}\\text{ g dis} - ${mSolvent}\\text{ g H}_2\\text{O} = ${correctVal.toFixed(1)}\\text{ g CaCl}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} g de CaCl₂</p></div>`
+          };
         }
       ],
       'sub_dis_gl': [
+        // 1. NaCl en aigua
         function() {
           const m = randFloat(5, 35, 1);
           const V_mL = randInt(250, 800);
@@ -626,6 +873,62 @@
             tab2: `<p><strong>Fórmula:</strong> $C = \\frac{m_{\\text{solut}}}{V_{\\text{dissolució}}}$</p>`,
             tab3: `<div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} = ${(V_mL/1000).toFixed(3)}\\text{ L dis}$$</p><p>$$C = \\frac{${m}\\text{ g NaCl}}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ g/L}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g/L</p></div>`
           };
+        },
+        // 2. H2SO4 en aigua (Exercici 3 / 7d del PDF)
+        function() {
+          const m = randFloat(8, 30, 1);
+          const V_mL = randInt(150, 500);
+          const correctVal = m / (V_mL / 1000);
+          return {
+            unit: 'g/L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Una dissolució d'àcid sulfúric es prepara afegint <strong>${m} g d'àcid sulfúric pur</strong> en aigua fins a un volum total de <strong>${V_mL} cm³ de dissolució</strong>. Determina la seva concentració expressada en grams per litre.`,
+            statementFormulas: `Es dissoleixen <strong>${m} g de $\\text{H}_2\\text{SO}_4$</strong> en <strong>${V_mL} \\text{cm}^3$ de dissolució</strong>. Determina la concentració en g/L.`,
+            tab1: `<p>Dades: $m(\\text{H}_2\\text{SO}_4) = ${m}\\text{ g}$, $V = ${V_mL}\\text{ cm}^3 = ${(V_mL/1000).toFixed(3)}\\text{ L}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $C = \\frac{m_{\\text{solut}}}{V_{\\text{dissolució}}}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$C = \\frac{${m}\\text{ g H}_2\\text{SO}_4}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ g/L}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g/L</p></div>`
+          };
+        },
+        // 3. NaOH en aigua
+        function() {
+          const m = randFloat(4, 25, 1);
+          const V_mL = randInt(100, 400);
+          const correctVal = m / (V_mL / 1000);
+          return {
+            unit: 'g/L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En un matràs aforat de <strong>${V_mL} mL</strong> es dissoleixen <strong>${m} g d'hidròxid de sodi</strong> en aigua destil·lada fins a la línia d'enràs. Calcula la concentració de la dissolució en g/L.`,
+            statementFormulas: `En <strong>${V_mL} mL de dissolució</strong> hi ha <strong>${m} g de $\\text{NaOH}$</strong>. Calcula la concentració en g/L.`,
+            tab1: `<p>Dades: $m(\\text{NaOH}) = ${m}\\text{ g}$, $V = ${V_mL}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $C = \\frac{m_{\\text{solut}}}{V(\\text{L})}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$C = \\frac{${m}\\text{ g NaOH}}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ g/L}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g/L</p></div>`
+          };
+        },
+        // 4. KNO3 en aigua
+        function() {
+          const m = randFloat(15, 60, 1);
+          const V_mL = randInt(300, 1000);
+          const correctVal = m / (V_mL / 1000);
+          return {
+            unit: 'g/L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es prepara una dissolució de nitrat de potassi dissolvent <strong>${m} g de solut</strong> en aigua fins a un volum final de <strong>${V_mL} mL</strong>. Determina la concentració en g/L.`,
+            statementFormulas: `Es dissoleixen <strong>${m} g de $\\text{KNO}_3$</strong> fins a tenir <strong>${V_mL} mL de dissolució</strong>. Calcula la concentració en g/L.`,
+            tab1: `<p>Dades: $m(\\text{KNO}_3) = ${m}\\text{ g}$, $V = ${V_mL}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $C = \\frac{m}{V}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$C = \\frac{${m}\\text{ g KNO}_3}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ g/L}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g/L</p></div>`
+          };
+        },
+        // 5. Na2CO3 en aigua
+        function() {
+          const m = randFloat(10, 45, 1);
+          const V_mL = randInt(200, 750);
+          const correctVal = m / (V_mL / 1000);
+          return {
+            unit: 'g/L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Calcula la concentració en g/L d'una dissolució preparada dissolvent <strong>${m} g de carbonat de sodi</strong> en aigua fins a un volum total de <strong>${V_mL} mL</strong>.`,
+            statementFormulas: `Calcula la concentració en g/L si tenim <strong>${m} g de $\\text{Na}_2\\text{CO}_3$</strong> en <strong>${V_mL} mL de dissolució</strong>.`,
+            tab1: `<p>Dades: $m(\\text{Na}_2\\text{CO}_3) = ${m}\\text{ g}$, $V = ${V_mL}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $C = \\frac{m}{V}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$C = \\frac{${m}\\text{ g Na}_2\\text{CO}_3}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ g/L}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g/L</p></div>`
+          };
         }
       ],
       'sub_dis_pct_massa': [
@@ -637,8 +940,8 @@
           const correctVal = (mSolut / mTotal) * 100;
           return {
             unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `Se dissoleixen <strong>${mSolut} g de clorur de sodi</strong> en <strong>${mSolvent} g d'aigua</strong>. Quin és el percentatge en massa del solut en aquesta dissolució?`,
-            statementFormulas: `Se dissoleixen <strong>${mSolut} g de $\\text{NaCl}$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Troba el $\\%\\text{ en massa}$.`,
+            statementNames: `Es dissoleixen <strong>${mSolut} g de clorur de sodi</strong> en <strong>${mSolvent} g d'aigua</strong>. Quin és el percentatge en massa del solut en aquesta dissolució?`,
+            statementFormulas: `Es dissoleixen <strong>${mSolut} g de $\\text{NaCl}$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Troba el $\\%\\text{ en massa}$.`,
             tab1: `<p>Dades: $m_{\\text{solut}} = ${mSolut}\\text{ g}$, $m_{\\text{aigua}} = ${mSolvent}\\text{ g}$, $m_{\\text{total}} = ${mTotal.toFixed(1)}\\text{ g}$.</p>`,
             tab2: `<p><strong>Fórmula:</strong> $\\%\\text{ massa} = \\frac{m_{\\text{solut}}}{m_{\\text{total}}} \\cdot 100$</p>`,
             tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${mSolut}\\text{ g NaCl}}{${mTotal.toFixed(1)}\\text{ g dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
@@ -658,9 +961,54 @@
             tab2: `<p><strong>Fórmula:</strong> $\\%\\text{ massa} = \\frac{m_{\\text{solut}}}{m_{\\text{total}}} \\cdot 100$</p>`,
             tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${mSolut}\\text{ g glucosa}}{${mTotal.toFixed(1)}\\text{ g dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
           };
+        },
+        // 3. KKBr en aigua (Exercici 10 del PDF)
+        function() {
+          const mSolut = randFloat(10, 30, 1);
+          const mSolvent = randFloat(100, 200, 1);
+          const mTotal = mSolut + mSolvent;
+          const correctVal = (mSolut / mTotal) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Una dissolució es prepara barrejant <strong>${mSolut} g de bromur de potassi</strong> amb <strong>${mSolvent} g d'aigua destil·lada</strong>. Determina la riquesa o concentració centesimal en massa.`,
+            statementFormulas: `Es dissoleixen <strong>${mSolut} g de $\\text{KBr}$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Troba el $\\%\\text{ en massa}$.`,
+            tab1: `<p>Dades: $m_{\\text{KBr}} = ${mSolut}\\text{ g}$, $m_{\\text{aigua}} = ${mSolvent}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\% = \\frac{m_{\\text{solut}}}{m_{\\text{solut}} + m_{\\text{aigua}}} \\cdot 100$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${mSolut}\\text{ g KBr}}{${mTotal.toFixed(1)}\\text{ g dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 4. Sucre en aigua
+        function() {
+          const mSolut = randFloat(15, 45, 1);
+          const mSolvent = randFloat(150, 300, 1);
+          const mTotal = mSolut + mSolvent;
+          const correctVal = (mSolut / mTotal) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En un vas es dissoleixen <strong>${mSolut} g de sucrosa (sucre de taula)</strong> en <strong>${mSolvent} g d'aigua</strong>. Quin és el percentatge en massa de sucre a la dissolució?`,
+            statementFormulas: `Es dissoleixen <strong>${mSolut} g de $\\text{C}_{12}\\text{H}_{22}\\text{O}_{11}$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Determina el $\\%\\text{ en massa}$.`,
+            tab1: `<p>Dades: $m_{\\text{sucre}} = ${mSolut}\\text{ g}$, $m_{\\text{total}} = ${mTotal.toFixed(1)}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\% = \\frac{m_{\\text{solut}}}{m_{\\text{total}}} \\cdot 100$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${mSolut}\\text{ g sucre}}{${mTotal.toFixed(1)}\\text{ g dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 5. KOH en dissolució (Massa de solut pura)
+        function() {
+          const mTotal = randFloat(100, 400, 1);
+          const pct = randFloat(10, 30, 1);
+          const correctVal = mTotal * (pct / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es disposa de <strong>${mTotal} g d'una dissolució d'hidròxid de potassi</strong> que té un percentatge en massa del <strong>${pct}%</strong>. Quina massa d'hidròxid de potassi pur hi ha dissolta?`,
+            statementFormulas: `Quin és el contingut de $\\text{KOH}$ pur en <strong>${mTotal} g de dissolució al ${pct}\\%\\text{ en massa}$</strong>?`,
+            tab1: `<p>Dades: $m_{\\text{dis}} = ${mTotal}\\text{ g}$, $\\% = ${pct}\\%$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $m_{\\text{solut}} = m_{\\text{dis}} \\cdot \\frac{\\%}{100}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$m(\\text{KOH}) = ${mTotal}\\text{ g dis} \\cdot \\frac{${pct}\\text{ g KOH}}{100\\text{ g dis}} = ${correctVal.toFixed(2)}\\text{ g KOH}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de KOH</p></div>`
+          };
         }
       ],
       'sub_dis_pct_volum': [
+        // 1. Etanol en aigua
         function() {
           const vSolut = randInt(20, 60);
           const vSolvent = randInt(120, 250);
@@ -674,18 +1022,75 @@
             tab2: `<p><strong>Fórmula:</strong> $\\%\\text{ volum} = \\frac{V_{\\text{solut}}}{V_{\\text{total}}} \\cdot 100$</p>`,
             tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${vSolut}\\text{ mL etanol}}{${vTotal}\\text{ mL dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
           };
+        },
+        // 2. Isopropanol en aigua
+        function() {
+          const vSolut = randInt(30, 80);
+          const vSolvent = randInt(180, 400);
+          const vTotal = vSolut + vSolvent;
+          const correctVal = (vSolut / vTotal) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `S'ha preparat un alcohol desinfectant mesclant <strong>${vSolut} mL d'alcohol isopropílic</strong> amb <strong>${vSolvent} mL d'aigua</strong>. Determina la concentració en percentatge en volum d'alcohol.`,
+            statementFormulas: `Es barregen <strong>${vSolut} mL d'isopropanol</strong> amb <strong>${vSolvent} mL de $\\text{H}_2\\text{O}$</strong>. Calcula el $\\%\\text{ en volum}$.`,
+            tab1: `<p>Dades: $V_{\\text{solut}} = ${vSolut}\\text{ mL}$, $V_{\\text{total}} = ${vTotal}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\%\\text{ volum} = \\frac{V_{\\text{solut}}}{V_{\\text{total}}} \\cdot 100$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${vSolut}\\text{ mL solut}}{${vTotal}\\text{ mL dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 3. Acetona en aigua
+        function() {
+          const vSolut = randInt(15, 50);
+          const vTotal = randInt(150, 350);
+          const correctVal = (vSolut / vTotal) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Un d dissolvent de vernís conté <strong>${vSolut} mL d'acetona</strong> ($\text{C}_3\text{H}_6\text{O}$) en un volum total de <strong>${vTotal} mL de dissolució</strong>. Quin és el percentatge en volum d'acetona?`,
+            statementFormulas: `Es tenen <strong>${vSolut} mL de $\\text{C}_3\\text{H}_6\\text{O}$</strong> en <strong>${vTotal} mL de dissolució</strong>. Calcula el $\\%\\text{ en volum}$.`,
+            tab1: `<p>Dades: $V_{\\text{acetona}} = ${vSolut}\\text{ mL}$, $V_{\\text{total}} = ${vTotal}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\% = \\frac{V_{\\text{solut}}}{V_{\\text{total}}} \\cdot 100$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${vSolut}\\text{ mL acetona}}{${vTotal}\\text{ mL dis}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 4. Àcid acètic en vinagre
+        function() {
+          const vSolut = randInt(10, 30);
+          const vTotal = randInt(200, 500);
+          const correctVal = (vSolut / vTotal) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En una ampolla de <strong>${vTotal} mL de vinagre comercial</strong> hi ha dissolts <strong>${vSolut} mL d'àcid acètic pur</strong>. Quin és el grau d'acidesa (percentatge en volum d'àcid acètic) del vinagre?`,
+            statementFormulas: `En <strong>${vTotal} mL de vinagre</strong> hi ha <strong>${vSolut} mL d'àcid acètic</strong>. Calcula el $\\%\\text{ en volum}$.`,
+            tab1: `<p>Dades: $V_{\\text{acètic}} = ${vSolut}\\text{ mL}$, $V_{\\text{vinagre}} = ${vTotal}\\text{ mL}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\% = \\frac{V_{\\text{acètic}}}{V_{\\text{vinagre}}} \\cdot 100$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$\\% = \\frac{${vSolut}\\text{ mL acètic}}{${vTotal}\\text{ mL vinagre}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 5. Volum d'etanol necessari
+        function() {
+          const vTotal = randInt(250, 1000);
+          const pct = randInt(60, 80);
+          const correctVal = vTotal * (pct / 100);
+          return {
+            unit: 'mL', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `Quin volum d'<strong>etanol pur</strong> es necessitarà per preparar <strong>${vTotal} mL d'una dissolució hidroalcohòlica de desinfecció al ${pct}% en volum</strong>?`,
+            statementFormulas: `Quin volum d'etanol pur cal per obtenir <strong>${vTotal} mL de dissolució al ${pct}\\%\\text{ en volum}$</strong>?`,
+            tab1: `<p>Dades: $V_{\\text{total}} = ${vTotal}\\text{ mL}$, $\\% = ${pct}\\%$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $V_{\\text{solut}} = V_{\\text{total}} \\cdot \\frac{\\%}{100}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$V(\\text{etanol}) = ${vTotal}\\text{ mL dis} \\cdot \\frac{${pct}\\text{ mL etanol}}{100\\text{ mL dis}} = ${correctVal.toFixed(1)}\\text{ mL etanol}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} mL d'etanol</p></div>`
+          };
         }
       ],
       'sub_dis_molaritat': [
-        // 1. NaOH en 20 mL (Exercici 2 del PDF)
+        // 1. NaOH en V mL (Exercici 2 del PDF)
         function() {
-          const mNaOH = randFloat(1.0, 5.0, 1);
+          const mNaOH = randFloat(1.5, 6.0, 1);
           const V_mL = randInt(20, 100);
           const n_NaOH = mNaOH / 40.00;
           const correctVal = n_NaOH / (V_mL / 1000);
           return {
             unit: 'M', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `En <strong>${V_mL} mL de dissolució d'hidròxid de sodi</strong> hi ha dissolts <strong>${mNaOH} g de solut</strong>. Calcula la Molaritat (M).`,
+            statementNames: `En <strong>${V_mL} mL de dissolució d'hidròxid de sodi</strong> hi ha dissolts <strong>${mNaOH} g de solut pur</strong>. Calcula la Molaritat (M) d'aquesta dissolució.`,
             statementFormulas: `En <strong>${V_mL} mL de dissolució de $\\text{NaOH}$</strong> hi ha <strong>${mNaOH} g de solut</strong>. Calcula la Molaritat (M).`,
             tab1: `<p>Dades: $m(\\text{NaOH}) = ${mNaOH}\\text{ g}$, $V = ${(V_mL/1000).toFixed(3)}\\text{ L}$.</p>`,
             tab2: `<p><strong>Fórmula:</strong> $M = \\frac{n_{\\text{solut}}}{V(\\text{L})}$</p>`,
@@ -696,7 +1101,26 @@
                   <div class="space-y-2 pt-2"><p>$$${mNaOH}\\text{ g NaOH} \\cdot \\frac{1\\text{ mol NaOH}}{40{,}00\\text{ g NaOH}} = ${n_NaOH.toFixed(4)}\\text{ mol NaOH}$$</p><p>$$M = \\frac{${n_NaOH.toFixed(4)}\\text{ mol NaOH}}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} M</p></div>`
           };
         },
-        // 2. Ca(OH)2 preparació (Exercici 6 del PDF)
+        // 2. H2SO4 en V mL (Exercici 3 del PDF)
+        function() {
+          const mH2SO4 = randFloat(4.9, 19.6, 1);
+          const V_mL = randInt(100, 500);
+          const n_H2SO4 = mH2SO4 / 98.08;
+          const correctVal = n_H2SO4 / (V_mL / 1000);
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Determina la Molaritat d'una dissolució d'àcid sulfúric si <strong>${V_mL} cm³ de dissolució</strong> contenen <strong>${mH2SO4} g d'àcid pur</strong>.`,
+            statementFormulas: `Determina la Molaritat si <strong>${V_mL} \\text{cm}^3$ de dissolució de $\\text{H}_2\\text{SO}_4$</strong> contenen <strong>${mH2SO4} g d'àcid</strong>.`,
+            tab1: `<p>Dades: $m(\\text{H}_2\\text{SO}_4) = ${mH2SO4}\\text{ g}$, $V = ${V_mL}\\text{ cm}^3 = ${(V_mL/1000).toFixed(3)}\\text{ L}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $M = \\frac{n_{\\text{solut}}}{V(\\text{L})}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{H}_2\\text{SO}_4) = 2 \\cdot 1{,}01 + 32{,}06 + 4 \\cdot 16{,}00 = 98{,}08\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mH2SO4}\\text{ g H}_2\\text{SO}_4 \\cdot \\frac{1\\text{ mol H}_2\\text{SO}_4}{98{,}08\\text{ g H}_2\\text{SO}_4} = ${n_H2SO4.toFixed(4)}\\text{ mol}$$</p><p>$$M = \\frac{${n_H2SO4.toFixed(4)}\\text{ mol}}{${(V_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} M</p></div>`
+          };
+        },
+        // 3. Ca(OH)2 preparació (Exercici 6 del PDF)
         function() {
           const V_L = randFloat(1.0, 5.0, 1);
           const M_target = 0.002;
@@ -713,27 +1137,161 @@
                   </div>
                   <div class="space-y-2 pt-2"><p>$$${V_L}\\text{ L dis} \\cdot \\frac{${M_target}\\text{ mol Ca(OH)}_2}{1\\text{ L dis}} \\cdot \\frac{74{,}10\\text{ g Ca(OH)}_2}{1\\text{ mol Ca(OH)}_2} = ${correctVal.toFixed(3)}\\text{ g Ca(OH)}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} g de Ca(OH)₂</p></div>`
           };
+        },
+        // 4. NaOH preparació (Exercici 14 del PDF)
+        function() {
+          const V_L = randInt(1, 6);
+          const M_target = randFloat(0.2, 1.0, 1);
+          const correctVal = V_L * M_target * 40.00;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(1)),
+            statementNames: `Determina la massa d'<strong>hidròxid de sodi (sosa)</strong> que s'ha de pesar per preparar <strong>${V_L} L de dissolució ${M_target} M</strong>.`,
+            statementFormulas: `Calcula la massa de $\\text{NaOH}$ per preparar <strong>${V_L} L de dissolució ${M_target} M</strong>.`,
+            tab1: `<p>Dades: $V = ${V_L}\\text{ L}$, $M = ${M_target}\\text{ M}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $m = M \\cdot V \\cdot M_{\\text{molar}}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{NaOH}) = 40{,}00\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${V_L}\\text{ L dis} \\cdot \\frac{${M_target}\\text{ mol NaOH}}{1\\text{ L dis}} \\cdot \\frac{40{,}00\\text{ g NaOH}}{1\\text{ mol NaOH}} = ${correctVal.toFixed(1)}\\text{ g NaOH}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(1)} g de NaOH</p></div>`
+          };
+        },
+        // 5. KBr % i densitat -> Molaritat (Exercici 10 del PDF)
+        function() {
+          const pct = 14.0;
+          const d = 1.105; // g/mL
+          const correctVal = (d * 1000 * (pct / 100)) / 119.00;
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `La concentració centesimal d'una dissolució aquosa de bromur de potassi és del <strong>${pct}% en massa</strong> i la seva densitat és de <strong>${d} g/mL</strong>. Quina és la Molaritat d'aquesta dissolució?`,
+            statementFormulas: `Calcula la Molaritat d'una dissolució de $\\text{KBr}$ al <strong>${pct}\\%\\text{ en massa}$</strong> amb densitat <strong>${d} g/mL</strong>.`,
+            tab1: `<p>Dades: $\\% = ${pct}\\%$, $d = ${d}\\text{ g/mL}$. Base de càlcul: $1\\text{ L de dissolució}$.</p>`,
+            tab2: `<p><strong>Massa de 1 L:</strong> $m_{\\text{dis}} = 1000\\text{ mL} \\cdot ${d}\\text{ g/mL} = ${(d*1000).toFixed(1)}\\text{ g}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{KBr}) = 39{,}10 + 79{,}90 = 119{,}00\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$m(\\text{KBr}) = ${(d*1000).toFixed(1)}\\text{ g dis} \\cdot \\frac{14\\text{ g KBr}}{100\\text{ g dis}} = ${(d*1000*0.14).toFixed(2)}\\text{ g KBr}$$</p><p>$$n = \\frac{${(d*1000*0.14).toFixed(2)}\\text{ g}}{119{,}00\\text{ g/mol}} = ${correctVal.toFixed(2)}\\text{ mol}$$</p><p>$$M = \\frac{${correctVal.toFixed(2)}\\text{ mol}}{1\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} M</p></div>`
+          };
+        },
+        // 6. HNO3 % i densitat -> Molaritat (Exercici 9 del PDF)
+        function() {
+          const pct = 69.0;
+          const d = 1.41; // g/mL
+          const correctVal = (d * 1000 * (pct / 100)) / 63.02;
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Determina la Molaritat d'una dissolució comercial d'àcid nítric la riquesa en massa de la qual és del <strong>${pct}%</strong> i la seva densitat és de <strong>${d} g/mL</strong>.`,
+            statementFormulas: `Calcula la Molaritat d'una dissolució de $\\text{HNO}_3$ al <strong>${pct}\\%\\text{ en massa}$</strong> amb densitat <strong>${d} g/mL</strong>.`,
+            tab1: `<p>Dades: $\\% = ${pct}\\%$, $d = ${d}\\text{ g/mL}$. Base de càlcul: $1\\text{ L de dissolució}$.</p>`,
+            tab2: `<p><strong>Massa de 1 L:</strong> $m_{\\text{dis}} = 1000\\text{ mL} \\cdot ${d}\\text{ g/mL} = ${(d*1000).toFixed(1)}\\text{ g}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{HNO}_3) = 1{,}01 + 14{,}01 + 3 \\cdot 16{,}00 = 63{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$m(\\text{HNO}_3) = ${(d*1000).toFixed(1)}\\text{ g dis} \\cdot \\frac{69\\text{ g HNO}_3}{100\\text{ g dis}} = ${(d*1000*0.69).toFixed(1)}\\text{ g HNO}_3$$</p><p>$$n = \\frac{${(d*1000*0.69).toFixed(1)}\\text{ g}}{63{,}02\\text{ g/mol}} = ${correctVal.toFixed(2)}\\text{ mol}$$</p><p>$$M = \\frac{${correctVal.toFixed(2)}\\text{ mol}}{1\\text{ L dis}} = ${correctVal.toFixed(2)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} M</p></div>`
+          };
         }
       ],
       'sub_dis_fraccio_molar': [
-        // Etanol i aigua (Exercici 5 / 12 del PDF)
+        // 1. Etanol i aigua (Exercici 5 del PDF)
         function() {
-          const mEthanol = randFloat(20, 60, 1);
-          const mH2O = randFloat(30, 120, 1);
+          const mEthanol = randFloat(15, 45, 1);
+          const mH2O = randFloat(25, 90, 1);
           const n_Et = mEthanol / 46.07;
           const n_H2O = mH2O / 18.02;
           const correctVal = n_Et / (n_Et + n_H2O);
           return {
             unit: '', correctValue: parseFloat(correctVal.toFixed(3)),
-            statementNames: `Se dissoleixen <strong>${mEthanol} g d'etanol</strong> ($\text{C}_2\text{H}_6\text{O}$) en <strong>${mH2O} g d'aigua destil·lada</strong>. Determina la fracció molar d'etanol ($\chi_{\text{etanol}}$).`,
-            statementFormulas: `Se dissoleixen <strong>${mEthanol} g de $\\text{C}_2\\text{H}_6\\text{O}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Determina $\\chi_{\\text{etanol}}$.`,
+            statementNames: `Es dissoleixen <strong>${mEthanol} g d'etanol</strong> ($\text{C}_2\text{H}_6\text{O}$) en <strong>${mH2O} g d'aigua destil·lada</strong>. Determina la fracció molar d'etanol ($\chi_{\text{etanol}}$) en aquesta dissolució.`,
+            statementFormulas: `Es dissoleixen <strong>${mEthanol} g de $\\text{C}_2\\text{H}_6\\text{O}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Determina $\\chi_{\\text{etanol}}$.`,
             tab1: `<p>Dades: $m(\\text{etanol}) = ${mEthanol}\\text{ g}$, $m(\\text{H}_2\\text{O}) = ${mH2O}\\text{ g}$.</p>`,
             tab2: `<p><strong>Fórmula:</strong> $\\chi_{\\text{etanol}} = \\frac{n_{\\text{etanol}}}{n_{\\text{etanol}} + n_{\\text{aigua}}}$</p>`,
             tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
                     <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
                     <p>$$M(\\text{C}_2\\text{H}_6\\text{O}) = 46{,}07\\text{ g/mol}, \\quad M(\\text{H}_2\\text{O}) = 18{,}02\\text{ g/mol}$$</p>
                   </div>
-                  <div class="space-y-2 pt-2"><p>$$${mEthanol}\\text{ g} \\cdot \\frac{1\\text{ mol}}{46{,}07\\text{ g}} = ${n_Et.toFixed(3)}\\text{ mol}, \\quad ${mH2O}\\text{ g} \\cdot \\frac{1\\text{ mol}}{18{,}02\\text{ g}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi_{\\text{etanol}} = \\frac{${n_Et.toFixed(3)}}{${n_Et.toFixed(3)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(3)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ = ${correctVal.toFixed(3)}</p></div>`
+                  <div class="space-y-2 pt-2"><p>$$n_{\\text{etanol}} = ${mEthanol}\\text{ g} \\cdot \\frac{1\\text{ mol}}{46{,}07\\text{ g}} = ${n_Et.toFixed(3)}\\text{ mol}, \\quad n_{\\text{aigua}} = ${mH2O}\\text{ g} \\cdot \\frac{1\\text{ mol}}{18{,}02\\text{ g}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi_{\\text{etanol}} = \\frac{${n_Et.toFixed(3)}}{${n_Et.toFixed(3)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(3)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ = ${correctVal.toFixed(3)}</p></div>`
+          };
+        },
+        // 2. Glucosa i aigua (Exercici 4 del PDF)
+        function() {
+          const mGluc = randFloat(5, 20, 1);
+          const mH2O = randFloat(80, 150, 1);
+          const n_Gluc = mGluc / 180.16;
+          const n_H2O = mH2O / 18.02;
+          const correctVal = n_Gluc / (n_Gluc + n_H2O);
+          return {
+            unit: '', correctValue: parseFloat(correctVal.toFixed(4)),
+            statementNames: `Es prepara una dissolució dissolvent <strong>${mGluc} g de glucosa</strong> ($\text{C}_6\text{H}_{12}\text{O}_6$) en <strong>${mH2O} g d'aigua</strong>. Calcula la fracció molar de glucosa.`,
+            statementFormulas: `Es dissoleixen <strong>${mGluc} g de $\\text{C}_6\\text{H}_{12}\\text{O}_6$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Calcula $\\chi_{\\text{glucosa}}$.`,
+            tab1: `<p>Dades: $m(\\text{glucosa}) = ${mGluc}\\text{ g}$, $m(\\text{H}_2\\text{O}) = ${mH2O}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\chi = \\frac{n_{\\text{solut}}}{n_{\\text{total}}}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{C}_6\\text{H}_{12}\\text{O}_6) = 180{,}16\\text{ g/mol}, \\quad M(\\text{H}_2\\text{O}) = 18{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$n_{\\text{glucosa}} = ${mGluc}\\text{ g} \\cdot \\frac{1\\text{ mol}}{180{,}16\\text{ g}} = ${n_Gluc.toFixed(4)}\\text{ mol}$$</p><p>$$n_{\\text{aigua}} = ${mH2O}\\text{ g} \\cdot \\frac{1\\text{ mol}}{18{,}02\\text{ g}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi = \\frac{${n_Gluc.toFixed(4)}}{${n_Gluc.toFixed(4)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(4)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ = ${correctVal.toFixed(4)}</p></div>`
+          };
+        },
+        // 3. NaCl i aigua
+        function() {
+          const mNaCl = randFloat(5, 25, 1);
+          const mH2O = randFloat(50, 150, 1);
+          const n_NaCl = mNaCl / 58.44;
+          const n_H2O = mH2O / 18.02;
+          const correctVal = n_NaCl / (n_NaCl + n_H2O);
+          return {
+            unit: '', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `S'ha dissolt <strong>${mNaCl} g de clorur de sodi</strong> en <strong>${mH2O} g d'aigua destil·lada</strong>. Troba la fracció molar de clorur de sodi ($\chi_{\text{NaCl}}$).`,
+            statementFormulas: `S'ha dissolt <strong>${mNaCl} g de $\\text{NaCl}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Troba $\\chi_{\\text{NaCl}}$.`,
+            tab1: `<p>Dades: $m(\\text{NaCl}) = ${mNaCl}\\text{ g}$, $m(\\text{H}_2\\text{O}) = ${mH2O}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\chi_{\\text{NaCl}} = \\frac{n_{\\text{NaCl}}}{n_{\\text{NaCl}} + n_{\\text{aigua}}}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{NaCl}) = 58{,}44\\text{ g/mol}, \\quad M(\\text{H}_2\\text{O}) = 18{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$n_{\\text{NaCl}} = ${mNaCl}\\text{ g} \\cdot \\frac{1\\text{ mol}}{58{,}44\\text{ g}} = ${n_NaCl.toFixed(3)}\\text{ mol}$$</p><p>$$n_{\\text{aigua}} = ${mH2O}\\text{ g} \\cdot \\frac{1\\text{ mol}}{18{,}02\\text{ g}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi_{\\text{NaCl}} = \\frac{${n_NaCl.toFixed(3)}}{${n_NaCl.toFixed(3)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(3)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ = ${correctVal.toFixed(3)}</p></div>`
+          };
+        },
+        // 4. Etanol i aigua (Fracció molar de l'aigua - Exercici 12 del PDF)
+        function() {
+          const mEt = randFloat(30, 70, 1);
+          const mH2O = randFloat(80, 160, 1);
+          const n_Et = mEt / 46.07;
+          const n_H2O = mH2O / 18.02;
+          const correctVal = n_H2O / (n_Et + n_H2O);
+          return {
+            unit: '', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `Calcula la fracció molar d'<strong>aigua</strong> ($\chi_{\text{aigua}}$) en una dissolució que s'ha preparat afegint <strong>${mEt} g d'etanol</strong> ($\text{C}_2\text{H}_6\text{O}$) a <strong>${mH2O} g d'aigua destil·lada</strong>.`,
+            statementFormulas: `Calcula $\\chi_{\\text{aigua}}$ en una dissolució de <strong>${mEt} g de $\\text{C}_2\\text{H}_6\\text{O}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>.`,
+            tab1: `<p>Dades: $m(\\text{etanol}) = ${mEt}\\text{ g}$, $m(\\text{aigua}) = ${mH2O}\\text{ g}$. Incògnita: $\\chi_{\\text{aigua}}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\chi_{\\text{aigua}} = \\frac{n_{\\text{aigua}}}{n_{\\text{etanol}} + n_{\\text{aigua}}}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{C}_2\\text{H}_6\\text{O}) = 46{,}07\\text{ g/mol}, \\quad M(\\text{H}_2\\text{O}) = 18{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$n_{\\text{etanol}} = ${n_Et.toFixed(3)}\\text{ mol}, \\quad n_{\\text{aigua}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi_{\\text{aigua}} = \\frac{${n_H2O.toFixed(3)}}{${n_Et.toFixed(3)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(3)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ(aigua) = ${correctVal.toFixed(3)}</p></div>`
+          };
+        },
+        // 5. Sucrosa en aigua
+        function() {
+          const mSuc = randFloat(20, 60, 1);
+          const mH2O = randFloat(100, 250, 1);
+          const n_Suc = mSuc / 342.30;
+          const n_H2O = mH2O / 18.02;
+          const correctVal = n_Suc / (n_Suc + n_H2O);
+          return {
+            unit: '', correctValue: parseFloat(correctVal.toFixed(4)),
+            statementNames: `En disoldre <strong>${mSuc} g de sucrosa</strong> ($\text{C}_{12}\text{H}_{22}\text{O}_{11}$) en <strong>${mH2O} g d'aigua destil·lada</strong>, quina serà la fracció molar de la sucrosa?`,
+            statementFormulas: `Es dissoleixen <strong>${mSuc} g de $\\text{C}_{12}\\text{H}_{22}\\text{O}_{11}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Troba $\\chi_{\\text{sucrosa}}$.`,
+            tab1: `<p>Dades: $m(\\text{sucrosa}) = ${mSuc}\\text{ g}$, $m(\\text{aigua}) = ${mH2O}\\text{ g}$.</p>`,
+            tab2: `<p><strong>Fórmula:</strong> $\\chi = \\frac{n_{\\text{solut}}}{n_{\\text{solut}} + n_{\\text{aigua}}}$</p>`,
+            tab3: `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{C}_{12}\\text{H}_{22}\\text{O}_{11}) = 12 \\cdot 12{,}01 + 22 \\cdot 1{,}01 + 11 \\cdot 16{,}00 = 342{,}30\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$n_{\\text{sucrosa}} = ${mSuc}\\text{ g} \\cdot \\frac{1\\text{ mol}}{342{,}30\\text{ g}} = ${n_Suc.toFixed(4)}\\text{ mol}$$</p><p>$$n_{\\text{aigua}} = ${mH2O}\\text{ g} \\cdot \\frac{1\\text{ mol}}{18{,}02\\text{ g}} = ${n_H2O.toFixed(3)}\\text{ mol}$$</p><p>$$\\chi = \\frac{${n_Suc.toFixed(4)}}{${n_Suc.toFixed(4)} + ${n_H2O.toFixed(3)}} = ${correctVal.toFixed(4)}$$</p><p class="font-semibold text-emerald-600">Resultat: χ = ${correctVal.toFixed(4)}</p></div>`
           };
         }
       ],
@@ -746,20 +1304,101 @@
           const correctVal = (n_HCl / 2) * 100.09;
           return {
             unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `El carbonat de calci reacciona amb àcid clorhídric per produir clorur de calci, diòxid de carboni i aigua. Quina massa de <strong>carbonat de calci pur</strong> pot reaccionar completament amb <strong>${V_mL} mL d'una dissolució d'àcid clorhídric ${M_HCl} M</strong>?`,
+            statementNames: `El carbonat de calci sòlid reacciona amb àcid clorhídric en dissolució per produir clorur de calci en dissolució, diòxid de carboni gasós i aigua. Quina massa de <strong>carbonat de calci pur</strong> pot reaccionar completament amb <strong>${V_mL} mL d'una dissolució d'àcid clorhídric ${M_HCl} M</strong>?`,
             statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb $\\text{HCl}(aq)$ per produir $\\text{CaCl}_2(aq)$, $\\text{CO}_2(g)$ i $\\text{H}_2\\text{O}(l)$. Quina massa de $\\text{CaCO}_3$ reacciona amb <strong>${V_mL} mL de $\\text{HCl}$ ${M_HCl} M</strong>?`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{CO}_2 + \\text{H}_2\\text{O}$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{CO}_2(g) + \\text{H}_2\\text{O}(l)$</p>`,
             tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:140,isComp:true,w:70},{text:'+',x:195},{text:'2 HCl',x:245,isComp:true,w:60},{text:'→',x:295},{text:'CaCl₂',x:350,isComp:true,w:60},{text:'+',x:395},{text:'CO₂',x:435,isComp:true,w:50},{text:'+',x:475},{text:'H₂O',x:515,isComp:true,w:50}], startIndex:2, targetIndex:0, startSubstance:'HCl', startVal:`${V_mL} mL, ${M_HCl}`, startUnit:'M', targetSubstance:'CaCO₃', targetUnit:'g' }) +
                   `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
                     <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
-                    <p>$$M(\\text{CaCO}_3) = 100{,}09\\text{ g/mol}$$</p>
+                    <p>$$M(\\text{CaCO}_3) = 40{,}08 + 12{,}01 + 3 \\cdot 16{,}00 = 100{,}09\\text{ g/mol}$$</p>
                   </div>
                   <div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} \\cdot \\frac{${M_HCl}\\text{ mol HCl}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol CaCO}_3}{2\\text{ mol HCl}} \\cdot \\frac{100{,}09\\text{ g CaCO}_3}{1\\text{ mol CaCO}_3} = ${correctVal.toFixed(2)}\\text{ g CaCO}_3$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de CaCO₃</p></div>`
+          };
+        },
+        // 2. Zn + 2 HCl -> ZnCl2 + H2 (Zinc amb HCl Molar)
+        function() {
+          const V_mL = randInt(100, 400);
+          const M_HCl = randFloat(0.5, 2.5, 1);
+          const n_HCl = (V_mL / 1000) * M_HCl;
+          const correctVal = (n_HCl / 2) * 136.28;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El zinc metall reacciona amb una dissolució d'àcid clorhídric per donar clorur de zinc en dissolució i dihidrogen gasós. Quina massa de <strong>clorur de zinc</strong> es formarà quan reaccionin <strong>${V_mL} mL d'àcid clorhídric ${M_HCl} M</strong> amb excés de zinc?`,
+            statementFormulas: `El $\\text{Zn}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{ZnCl}_2(aq)$ i $\\text{H}_2(g)$. Quina massa de $\\text{ZnCl}_2$ es forma amb <strong>${V_mL} mL de $\\text{HCl}$ ${M_HCl} M</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Zn}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{ZnCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'ZnCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:2, targetIndex:4, startSubstance:'HCl', startVal:`${V_mL} mL, ${M_HCl}`, startUnit:'M', targetSubstance:'ZnCl₂', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{ZnCl}_2) = 65{,}38 + 2 \\cdot 35{,}45 = 136{,}28\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} \\cdot \\frac{${M_HCl}\\text{ mol HCl}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol ZnCl}_2}{2\\text{ mol HCl}} \\cdot \\frac{136{,}28\\text{ g ZnCl}_2}{1\\text{ mol ZnCl}_2} = ${correctVal.toFixed(2)}\\text{ g ZnCl}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de ZnCl₂</p></div>`
+          };
+        },
+        // 3. 2 Al + 3 H2SO4 -> Al2(SO4)3 + 3 H2 (Alumini amb H2SO4 Molar)
+        function() {
+          const V_mL = randInt(150, 500);
+          const M_H2SO4 = randFloat(0.2, 1.5, 1);
+          const n_H2SO4 = (V_mL / 1000) * M_H2SO4;
+          const correctVal = (n_H2SO4 / 3) * 342.14;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `L'alumini metall reacciona amb àcid sulfúric en dissolució aquosa per donar sulfat d'alumini i dihidrogen gasós. Determina la massa de <strong>sulfat d'alumini</strong> que s'obté en reaccionar <strong>${V_mL} mL d'àcid sulfúric ${M_H2SO4} M</strong> amb alumini en excés.`,
+            statementFormulas: `El $\\text{Al}(s)$ reacciona amb $\\text{H}_2\\text{SO}_4(aq)$ per donar $\\text{Al}_2(\\text{SO}_4)_3(aq)$ i $\\text{H}_2(g)$. Determina la massa de $\\text{Al}_2(\\text{SO}_4)_3$ formada a partir de <strong>${V_mL} mL de $\\text{H}_2\\text{SO}_4$ ${M_H2SO4} M</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Al} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{Al}_2(\\text{SO}_4)_3 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Al}(s) + 3\\,\\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{Al}_2(\\text{SO}_4)_3(aq) + 3\\,\\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Al',x:150,isComp:true,w:50},{text:'+',x:195},{text:'3 H₂SO₄',x:250,isComp:true,w:70},{text:'→',x:305},{text:'Al₂(SO₄)₃',x:375,isComp:true,w:80},{text:'+',x:435},{text:'3 H₂',x:480,isComp:true,w:55}], startIndex:2, targetIndex:4, startSubstance:'H₂SO₄', startVal:`${V_mL} mL, ${M_H2SO4}`, startUnit:'M', targetSubstance:'Al₂(SO₄)₃', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{Al}_2(\\text{SO}_4)_3) = 2 \\cdot 26{,}98 + 3 \\cdot (32{,}06 + 4 \\cdot 16{,}00) = 342{,}14\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} \\cdot \\frac{${M_H2SO4}\\text{ mol H}_2\\text{SO}_4}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol Al}_2(\\text{SO}_4)_3}{3\\text{ mol H}_2\\text{SO}_4} \\cdot \\frac{342{,}14\\text{ g}}{1\\text{ mol}} = ${correctVal.toFixed(2)}\\text{ g}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Al₂(SO₄)₃</p></div>`
+          };
+        },
+        // 4. Mg + 2 HCl -> MgCl2 + H2 (Magnesi amb HCl Molar)
+        function() {
+          const V_mL = randInt(100, 350);
+          const M_HCl = randFloat(0.5, 2.0, 1);
+          const n_HCl = (V_mL / 1000) * M_HCl;
+          const correctVal = (n_HCl / 2) * 24.31;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El magnesi metall reacciona amb àcid clorhídric en dissolució per donar clorur de magnesi i dihidrogen gasós. Quina massa de <strong>magnesi metall</strong> es consumirà per reaccionar completament amb <strong>${V_mL} mL d'àcid clorhídric ${M_HCl} M</strong>?`,
+            statementFormulas: `El $\\text{Mg}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{MgCl}_2(aq)$ i $\\text{H}_2(g)$. Quina massa de $\\text{Mg}$ reacciona amb <strong>${V_mL} mL de $\\text{HCl}$ ${M_HCl} M</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Mg} + \\text{HCl} \\rightarrow \\text{MgCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Mg}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{MgCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Mg',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'MgCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:2, targetIndex:0, startSubstance:'HCl', startVal:`${V_mL} mL, ${M_HCl}`, startUnit:'M', targetSubstance:'Mg', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{Mg}) = 24{,}31\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} \\cdot \\frac{${M_HCl}\\text{ mol HCl}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol Mg}}{2\\text{ mol HCl}} \\cdot \\frac{24{,}31\\text{ g Mg}}{1\\text{ mol Mg}} = ${correctVal.toFixed(2)}\\text{ g Mg}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Mg</p></div>`
+          };
+        },
+        // 5. AgNO3 + NaCl -> AgCl + NaNO3 (Precipitació)
+        function() {
+          const V_mL = randInt(50, 250);
+          const M_AgNO3 = randFloat(0.1, 0.8, 2);
+          const n_AgNO3 = (V_mL / 1000) * M_AgNO3;
+          const correctVal = n_AgNO3 * 143.32;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En barrejar una dissolució de nitrat de argent amb clorur de sodi en dissolució es produeix un precipitat blanc de clorur d'argent i nitrat de sodi en dissolució. Calcula la massa de <strong>clorur d'argent precipitat</strong> que s'obté a partir de <strong>${V_mL} mL de nitrat d'argent ${M_AgNO3} M</strong> en reacció amb excés de clorur de sodi.`,
+            statementFormulas: `El $\\text{AgNO}_3(aq)$ reacciona amb $\\text{NaCl}(aq)$ per produir un precipitat de $\\text{AgCl}(s)$ i $\\text{NaNO}_3(aq)$. Calcula la massa de $\\text{AgCl}$ a partir de <strong>${V_mL} mL de $\\text{AgNO}_3$ ${M_AgNO3} M</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{AgNO}_3 + \\text{NaCl} \\rightarrow \\text{AgCl} + \\text{NaNO}_3$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{AgNO}_3(aq) + \\text{NaCl}(aq) \\rightarrow \\text{AgCl}(s) + \\text{NaNO}_3(aq)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'AgNO₃',x:150,isComp:true,w:65},{text:'+',x:205},{text:'NaCl',x:255,isComp:true,w:55},{text:'→',x:305},{text:'AgCl',x:360,isComp:true,w:55},{text:'+',x:410},{text:'NaNO₃',x:465,isComp:true,w:65}], startIndex:0, targetIndex:4, startSubstance:'AgNO₃', startVal:`${V_mL} mL, ${M_AgNO3}`, startUnit:'M', targetSubstance:'AgCl', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{AgCl}) = 107{,}87 + 35{,}45 = 143{,}32\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${V_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L dis}}{1000\\text{ mL dis}} \\cdot \\frac{${M_AgNO3}\\text{ mol AgNO}_3}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol AgCl}}{1\\text{ mol AgNO}_3} \\cdot \\frac{143{,}32\\text{ g}}{1\\text{ mol}} = ${correctVal.toFixed(2)}\\text{ g}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de AgCl</p></div>`
           };
         }
       ],
       'sub_est_dis_neutralitzacio': [
+        // 1. H2SO4 + 2 NaOH -> Na2SO4 + 2 H2O
         function() {
           const V1_mL = randInt(20, 50);
           const V2_mL = randInt(30, 80);
@@ -776,36 +1415,199 @@
             tab3: generateStrategySVG({ items: [{text:'H₂SO₄',x:140,isComp:true,w:65},{text:'+',x:200},{text:'2 NaOH',x:260,isComp:true,w:70},{text:'→',x:325},{text:'Na₂SO₄',x:390,isComp:true,w:70},{text:'+',x:450},{text:'2 H₂O',x:495,isComp:true,w:60}], startIndex:2, targetIndex:0, startSubstance:'NaOH', startVal:`${V2_mL} mL, ${M2}`, startUnit:'M', targetSubstance:'H₂SO₄', targetUnit:'M' }) +
                   `<div class="space-y-2 pt-2"><p>$$${V2_mL}\\text{ mL dis NaOH} \\cdot \\frac{1\\text{ L}}{1000\\text{ mL}} \\cdot \\frac{${M2}\\text{ mol NaOH}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol H}_2\\text{SO}_4}{2\\text{ mol NaOH}} = ${n_H2SO4.toFixed(4)}\\text{ mol H}_2\\text{SO}_4$$</p><p>$$M = \\frac{${n_H2SO4.toFixed(4)}\\text{ mol H}_2\\text{SO}_4}{${(V1_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(3)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} M</p></div>`
           };
+        },
+        // 2. HCl + NaOH -> NaCl + H2O
+        function() {
+          const V1_mL = randInt(15, 40);
+          const V2_mL = randInt(20, 60);
+          const M2 = randFloat(0.1, 0.4, 2);
+          const n_NaOH = (V2_mL / 1000) * M2;
+          const correctVal = n_NaOH / (V1_mL / 1000);
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `L'àcid clorhídric reacciona amb hidròxid de sodi en una valoració àcid-base per donar clorur de sodi i aigua. Calcula la Molaritat d'una dissolució d'<strong>àcid clorhídric</strong> si <strong>${V1_mL} mL</strong> es neutralitzen exactament amb <strong>${V2_mL} mL d'hidròxid de sodi ${M2} M</strong>.`,
+            statementFormulas: `El $\\text{HCl}(aq)$ es neutralitza amb $\\text{NaOH}(aq)$ per donar $\\text{NaCl}(aq)$ i $\\text{H}_2\\text{O}(l)$. Calcula la Molaritat de $\\text{HCl}$ si <strong>${V1_mL} mL</strong> reaccionen amb <strong>${V2_mL} mL de $\\text{NaOH}$ ${M2} M</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{HCl} + \\text{NaOH} \\rightarrow \\text{NaCl} + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{HCl}(aq) + \\text{NaOH}(aq) \\rightarrow \\text{NaCl}(aq) + \\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'HCl',x:170,isComp:true,w:50},{text:'+',x:215},{text:'NaOH',x:265,isComp:true,w:60},{text:'→',x:320},{text:'NaCl',x:375,isComp:true,w:55},{text:'+',x:425},{text:'H₂O',x:470,isComp:true,w:50}], startIndex:2, targetIndex:0, startSubstance:'NaOH', startVal:`${V2_mL} mL, ${M2}`, startUnit:'M', targetSubstance:'HCl', targetUnit:'M' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V2_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L}}{1000\\text{ mL}} \\cdot \\frac{${M2}\\text{ mol NaOH}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol HCl}}{1\\text{ mol NaOH}} = ${n_NaOH.toFixed(4)}\\text{ mol HCl}$$</p><p>$$M = \\frac{${n_NaOH.toFixed(4)}\\text{ mol}}{${(V1_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(3)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} M</p></div>`
+          };
+        },
+        // 3. HNO3 + KOH -> KNO3 + H2O
+        function() {
+          const V1_mL = randInt(25, 60);
+          const V2_mL = randInt(20, 50);
+          const M2 = randFloat(0.15, 0.6, 2);
+          const n_KOH = (V2_mL / 1000) * M2;
+          const correctVal = n_KOH / (V1_mL / 1000);
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `L'àcid nítric es neutralitza amb hidròxid de potassi per produir nitrat de potassi i aigua. Quina és la Molaritat de la dissolució d'<strong>àcid nítric</strong> si <strong>${V1_mL} mL d'àcid</strong> requereixen <strong>${V2_mL} mL d'hidròxid de potassi ${M2} M</strong> per a la seva neutralització completa?`,
+            statementFormulas: `El $\\text{HNO}_3(aq)$ reacciona amb $\\text{KOH}(aq)$ per formar $\\text{KNO}_3(aq)$ i $\\text{H}_2\\text{O}(l)$. Quina és la Molaritat de $\\text{HNO}_3$ si <strong>${V1_mL} mL</strong> requereixen <strong>${V2_mL} mL de $\\text{KOH}$ ${M2} M</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{HNO}_3 + \\text{KOH} \\rightarrow \\text{KNO}_3 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{HNO}_3(aq) + \\text{KOH}(aq) \\rightarrow \\text{KNO}_3(aq) + \\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'HNO₃',x:170,isComp:true,w:55},{text:'+',x:220},{text:'KOH',x:270,isComp:true,w:55},{text:'→',x:320},{text:'KNO₃',x:375,isComp:true,w:55},{text:'+',x:425},{text:'H₂O',x:470,isComp:true,w:50}], startIndex:2, targetIndex:0, startSubstance:'KOH', startVal:`${V2_mL} mL, ${M2}`, startUnit:'M', targetSubstance:'HNO₃', targetUnit:'M' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V2_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L}}{1000\\text{ mL}} \\cdot \\frac{${M2}\\text{ mol KOH}}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol HNO}_3}{1\\text{ mol KOH}} = ${n_KOH.toFixed(4)}\\text{ mol HNO}_3$$</p><p>$$M = \\frac{${n_KOH.toFixed(4)}\\text{ mol}}{${(V1_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(3)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} M</p></div>`
+          };
+        },
+        // 4. H2SO4 + Ca(OH)2 -> CaSO4 + 2 H2O
+        function() {
+          const V1_mL = randInt(30, 80);
+          const V2_mL = randInt(25, 75);
+          const M2 = randFloat(0.05, 0.25, 2);
+          const n_CaOH2 = (V2_mL / 1000) * M2;
+          const correctVal = n_CaOH2 / (V1_mL / 1000);
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `L'àcid sulfúric es neutralitza amb hidròxid de calci per formar sulfat de calci i aigua. Troba la Molaritat d'una dissolució d'<strong>àcid sulfúric</strong> si <strong>${V1_mL} mL</strong> d'aquesta es neutralitzen amb <strong>${V2_mL} mL d'hidròxid de calci ${M2} M</strong>.`,
+            statementFormulas: `El $\\text{H}_2\\text{SO}_4(aq)$ reacciona amb $\\text{Ca(OH)}_2(aq)$ per formar $\\text{CaSO}_4(aq)$ i $\\text{H}_2\\text{O}(l)$. Troba la Molaritat de $\\text{H}_2\\text{SO}_4$ si <strong>${V1_mL} mL</strong> reaccionen amb <strong>${V2_mL} mL de $\\text{Ca(OH)}_2$ ${M2} M</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{H}_2\\text{SO}_4 + \\text{Ca(OH)}_2 \\rightarrow \\text{CaSO}_4 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{H}_2\\text{SO}_4(aq) + \\text{Ca(OH)}_2(aq) \\rightarrow \\text{CaSO}_4(aq) + 2\\,\\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'H₂SO₄',x:150,isComp:true,w:65},{text:'+',x:205},{text:'Ca(OH)₂',x:265,isComp:true,w:70},{text:'→',x:325},{text:'CaSO₄',x:385,isComp:true,w:65},{text:'+',x:440},{text:'2 H₂O',x:485,isComp:true,w:55}], startIndex:2, targetIndex:0, startSubstance:'Ca(OH)₂', startVal:`${V2_mL} mL, ${M2}`, startUnit:'M', targetSubstance:'H₂SO₄', targetUnit:'M' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V2_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L}}{1000\\text{ mL}} \\cdot \\frac{${M2}\\text{ mol Ca(OH)}_2}{1\\text{ L dis}} \\cdot \\frac{1\\text{ mol H}_2\\text{SO}_4}{1\\text{ mol Ca(OH)}_2} = ${n_CaOH2.toFixed(4)}\\text{ mol}$$</p><p>$$M = \\frac{${n_CaOH2.toFixed(4)}\\text{ mol}}{${(V1_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(3)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} M</p></div>`
+          };
+        },
+        // 5. 2 HCl + Ca(OH)2 -> CaCl2 + 2 H2O
+        function() {
+          const V1_mL = randInt(20, 50);
+          const V2_mL = randInt(15, 45);
+          const M2 = randFloat(0.05, 0.3, 2);
+          const n_CaOH2 = (V2_mL / 1000) * M2;
+          const n_HCl = 2 * n_CaOH2;
+          const correctVal = n_HCl / (V1_mL / 1000);
+          return {
+            unit: 'M', correctValue: parseFloat(correctVal.toFixed(3)),
+            statementNames: `L'àcid clorhídric es neutralitza amb hidròxid de calci per donar clorur de calci i aigua. Determina la Molaritat de la dissolució d'<strong>àcid clorhídric</strong> si <strong>${V1_mL} mL</strong> es neutralitzen amb <strong>${V2_mL} mL d'hidròxid de calci ${M2} M</strong>.`,
+            statementFormulas: `El $\\text{HCl}(aq)$ reacciona amb $\\text{Ca(OH)}_2(aq)$ per donar $\\text{CaCl}_2(aq)$ i $\\text{H}_2\\text{O}(l)$. Determina la Molaritat de $\\text{HCl}$ si <strong>${V1_mL} mL</strong> reaccionen amb <strong>${V2_mL} mL de $\\text{Ca(OH)}_2$ ${M2} M</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{HCl} + \\text{Ca(OH)}_2 \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{HCl}(aq) + \\text{Ca(OH)}_2(aq) \\rightarrow \\text{CaCl}_2(aq) + 2\\,\\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 HCl',x:150,isComp:true,w:60},{text:'+',x:200},{text:'Ca(OH)₂',x:260,isComp:true,w:70},{text:'→',x:320},{text:'CaCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'2 H₂O',x:475,isComp:true,w:55}], startIndex:2, targetIndex:0, startSubstance:'Ca(OH)₂', startVal:`${V2_mL} mL, ${M2}`, startUnit:'M', targetSubstance:'HCl', targetUnit:'M' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${V2_mL}\\text{ mL dis} \\cdot \\frac{1\\text{ L}}{1000\\text{ mL}} \\cdot \\frac{${M2}\\text{ mol Ca(OH)}_2}{1\\text{ L dis}} \\cdot \\frac{2\\text{ mol HCl}}{1\\text{ mol Ca(OH)}_2} = ${n_HCl.toFixed(4)}\\text{ mol HCl}$$</p><p>$$M = \\frac{${n_HCl.toFixed(4)}\\text{ mol}}{${(V1_mL/1000).toFixed(3)}\\text{ L dis}} = ${correctVal.toFixed(3)}\\text{ M}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(3)} M</p></div>`
+          };
         }
       ],
       'sub_est_dis_densitat': [
-        // HCl comercial (Exercici 15 / 44b del PDF)
+        // 1. CaCO3 + 2 HCl comercial -> CaCl2 + H2O + CO2 (Exercici 50 del PDF)
         function() {
-          const V_mL = randInt(50, 200);
-          const pctMassa = 36.6;
-          const d = 1.17;
-          const mHCl = V_mL * d * (pctMassa / 100);
+          const mCaCO3 = randFloat(10, 50, 1);
+          const pctMassa = 36.0;
+          const d = 1.18; // g/mL
+          const n_CaCO3 = mCaCO3 / 100.09;
+          const n_HCl = n_CaCO3 * 2;
+          const m_HCl_pur = n_HCl * 36.45;
+          const m_dis = m_HCl_pur * (100 / pctMassa);
+          const correctVal = m_dis / d;
           return {
-            unit: 'g', correctValue: parseFloat(mHCl.toFixed(2)),
-            statementNames: `Quina massa d'<strong>àcid clorhídric pur</strong> hi haurà en <strong>${V_mL} mL d'una dissolució comercial</strong> d'àcid clorhídric que té una densitat de $1{,}17\\text{ g/mL}$ i una riquesa del $36{,}6\\%$ en massa?`,
-            statementFormulas: `Calcula la massa de $\\text{HCl}$ pur en <strong>${V_mL} mL de dissolució comercial</strong> ($d = 1{,}17\\text{ g/mL}, 36{,}6\\%\\text{ en massa}$).`,
+            unit: 'mL', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El carbonat de calci sòlid reacciona amb àcid clorhídric per donar clorur de calci en dissolució, aigua i diòxid de carboni gasós. Quin volum d'<strong>àcid clorhídric comercial</strong> ($d = 1{,}18\\text{ g/mL}$ i $36\\%$ de riquesa en massa) es necessitarà per reaccionar completament amb <strong>${mCaCO3} g de carbonat de calci</strong>?`,
+            statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Quin volum de $\\text{HCl}$ comercial ($d = 1{,}18\\text{ g/mL}, 36\\%$) cal per reaccionar amb <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:2, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'HCl (Comercial)', targetUnit:'mL' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{CaCO}_3) = 100{,}09\\text{ g/mol}, \\quad M(\\text{HCl}) = 36{,}45\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mCaCO3}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol CaCO}_3}{100{,}09\\text{ g}} \\cdot \\frac{2\\text{ mol HCl}}{1\\text{ mol CaCO}_3} \\cdot \\frac{36{,}45\\text{ g HCl}}{1\\text{ mol}} = ${m_HCl_pur.toFixed(2)}\\text{ g HCl pur}$$</p><p>$$${m_HCl_pur.toFixed(2)}\\text{ g HCl pur} \\cdot \\frac{100\\text{ g dis}}{36\\text{ g HCl pur}} \\cdot \\frac{1\\text{ mL dis}}{1{,}18\\text{ g dis}} = ${correctVal.toFixed(2)}\\text{ mL dis}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} mL d'HCl comercial</p></div>`
+          };
+        },
+        // 2. Zn + H2SO4 concentrat -> ZnSO4 + H2 (Exercici 17 del PDF)
+        function() {
+          const mZn = randFloat(5, 25, 1);
+          const pctMassa = 92.0;
+          const d = 1.81; // g/mL
+          const n_Zn = mZn / 65.38;
+          const m_H2SO4_pur = n_Zn * 98.08;
+          const m_dis = m_H2SO4_pur * (100 / pctMassa);
+          const correctVal = m_dis / d;
+          return {
+            unit: 'mL', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El zinc metall reacciona amb àcid sulfúric concentrat per formar sulfat de zinc en dissolució i dihidrogen gasós. Calcula el volum d'<strong>àcid sulfúric concentrat</strong> ($92\\%$ en massa i $d = 1{,}81\\text{ g/mL}$) necessari per reaccionar completament amb <strong>${mZn} g de zinc metall</strong>.`,
+            statementFormulas: `El $\\text{Zn}(s)$ reacciona amb $\\text{H}_2\\text{SO}_4(aq)$ per donar $\\text{ZnSO}_4(aq)$ i $\\text{H}_2(g)$. Calcula el volum de $\\text{H}_2\\text{SO}_4$ concentrat ($92\\%, d = 1{,}81\\text{ g/mL}$) per a <strong>${mZn} g de $\\text{Zn}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{ZnSO}_4 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Zn}(s) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{ZnSO}_4(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'H₂SO₄',x:275,isComp:true,w:65},{text:'→',x:330},{text:'ZnSO₄',x:385,isComp:true,w:65},{text:'+',x:440},{text:'H₂',x:480,isComp:true,w:45}], startIndex:0, targetIndex:2, startSubstance:'Zn', startVal:`${mZn}`, startUnit:'g', targetSubstance:'H₂SO₄ (Conc.)', targetUnit:'mL' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{Zn}) = 65{,}38\\text{ g/mol}, \\quad M(\\text{H}_2\\text{SO}_4) = 98{,}08\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mZn}\\text{ g Zn} \\cdot \\frac{1\\text{ mol Zn}}{65{,}38\\text{ g}} \\cdot \\frac{1\\text{ mol H}_2\\text{SO}_4}{1\\text{ mol Zn}} \\cdot \\frac{98{,}08\\text{ g pur}}{1\\text{ mol}} = ${m_H2SO4_pur.toFixed(2)}\\text{ g pur}$$</p><p>$$${m_H2SO4_pur.toFixed(2)}\\text{ g pur} \\cdot \\frac{100\\text{ g dis}}{92\\text{ g pur}} \\cdot \\frac{1\\text{ mL dis}}{1{,}81\\text{ g dis}} = ${correctVal.toFixed(2)}\\text{ mL dis}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} mL d'àcid concentrat</p></div>`
+          };
+        },
+        // 3. HNO3 comercial + NaOH -> NaNO3 + H2O (Exercici 20 del PDF)
+        function() {
+          const mNaOH = randFloat(2, 12, 1);
+          const pctMassa = 60.0;
+          const d = 1.25; // g/mL
+          const n_NaOH = mNaOH / 40.00;
+          const m_HNO3_pur = n_NaOH * 63.02;
+          const m_dis = m_HNO3_pur * (100 / pctMassa);
+          const correctVal = m_dis / d;
+          return {
+            unit: 'mL', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `L'àcid nítric comercial reacciona amb hidròxid de sodi per produir nitrat de sodi i aigua. Quin volum d'<strong>àcid nítric comercial</strong> ($60\\%$ en massa i $d = 1{,}25\\text{ g/mL}$) es requereix per neutralitzar <strong>${mNaOH} g d'hidròxid de sodi pur</strong>?`,
+            statementFormulas: `El $\\text{HNO}_3(aq)$ reacciona amb $\\text{NaOH}(s)$ per formar $\\text{NaNO}_3(aq)$ i $\\text{H}_2\\text{O}(l)$. Quin volum de $\\text{HNO}_3$ comercial ($60\\%, d = 1{,}25\\text{ g/mL}$) neutralitza <strong>${mNaOH} g de $\\text{NaOH}$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{HNO}_3 + \\text{NaOH} \\rightarrow \\text{NaNO}_3 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{HNO}_3(aq) + \\text{NaOH}(s) \\rightarrow \\text{NaNO}_3(aq) + \\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'HNO₃',x:160,isComp:true,w:60},{text:'+',x:210},{text:'NaOH',x:260,isComp:true,w:60},{text:'→',x:310},{text:'NaNO₃',x:365,isComp:true,w:65},{text:'+',x:420},{text:'H₂O',x:465,isComp:true,w:50}], startIndex:2, targetIndex:0, startSubstance:'NaOH', startVal:`${mNaOH}`, startUnit:'g', targetSubstance:'HNO₃ (Comercial)', targetUnit:'mL' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{NaOH}) = 40{,}00\\text{ g/mol}, \\quad M(\\text{HNO}_3) = 63{,}02\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mNaOH}\\text{ g NaOH} \\cdot \\frac{1\\text{ mol}}{40{,}00\\text{ g}} \\cdot \\frac{1\\text{ mol HNO}_3}{1\\text{ mol NaOH}} \\cdot \\frac{63{,}02\\text{ g}}{1\\text{ mol}} = ${m_HNO3_pur.toFixed(2)}\\text{ g HNO}_3\\text{ pur}$$</p><p>$$${m_HNO3_pur.toFixed(2)}\\text{ g pur} \\cdot \\frac{100\\text{ g dis}}{60\\text{ g pur}} \\cdot \\frac{1\\text{ mL dis}}{1{,}25\\text{ g dis}} = ${correctVal.toFixed(2)}\\text{ mL dis}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} mL d'àcid comercial</p></div>`
+          };
+        },
+        // 4. HCl comercial (Massa de solut en volum) - Exercici 15 del PDF
+        function() {
+          const V_mL = randInt(50, 250);
+          const pctMassa = 36.6;
+          const d = 1.17; // g/mL
+          const m_dis = V_mL * d;
+          const correctVal = m_dis * (pctMassa / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En el laboratori es disposa d'un àcid clorhídric concentrat amb les següents indicacions a l'etiqueta: densitat $1{,}17\\text{ g/mL}$ i riquesa del $36{,}6\\%$ en massa. Quina massa d'<strong>àcid clorhídric pur</strong> hi haurà continguda en <strong>${V_mL} mL d'aquesta dissolució</strong>?`,
+            statementFormulas: `Quin és el contingut de $\\text{HCl}$ pur en <strong>${V_mL} mL de dissolució comercial</strong> ($d = 1{,}17\\text{ g/mL}, 36{,}6\\%\\text{ en massa}$)?`,
             tab1: `<p>Dades: $V = ${V_mL}\\text{ mL}$, $d = 1{,}17\\text{ g/mL}$, $\\% = 36{,}6\\%$.</p>`,
-            tab2: `<p><strong>Relació:</strong> $m_{\\text{solut}} = V_{\\text{dis}} \\cdot d \\cdot \\frac{\\%}{100}$</p>`,
-            tab3: `<div class="space-y-2 pt-2"><p>$$m(\\text{HCl}) = ${V_mL}\\text{ mL dis} \\cdot \\frac{1{,}17\\text{ g dis}}{1\\text{ mL dis}} \\cdot \\frac{36{,}6\\text{ g HCl}}{100\\text{ g dis}} = ${mHCl.toFixed(2)}\\text{ g HCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${mHCl.toFixed(2)} g de HCl</p></div>`
+            tab2: `<p><strong>Relació:</strong> $m_{\\text{dissolució}} = V \\cdot d \\implies m_{\\text{solut}} = m_{\\text{dissolució}} \\cdot \\frac{\\%}{100}$</p>`,
+            tab3: `<div class="space-y-2 pt-2"><p>$$m_{\\text{dis}} = ${V_mL}\\text{ mL dis} \\cdot \\frac{1{,}17\\text{ g dis}}{1\\text{ mL dis}} = ${m_dis.toFixed(2)}\\text{ g dis}$$</p><p>$$m(\\text{HCl}) = ${m_dis.toFixed(2)}\\text{ g dis} \\cdot \\frac{36{,}6\\text{ g HCl pur}}{100\\text{ g dis}} = ${correctVal.toFixed(2)}\\text{ g HCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de HCl pur</p></div>`
+          };
+        },
+        // 5. Calissa del 85% amb HCl Molar (Exercici 30 del PDF)
+        function() {
+          const mCalissa = randInt(100, 400);
+          const riquesa = 85.0;
+          const M_HCl = 2.0;
+          const m_CaCO3 = mCalissa * (riquesa / 100);
+          const n_CaCO3 = m_CaCO3 / 100.09;
+          const n_HCl = n_CaCO3 * 2;
+          const correctVal = n_HCl / M_HCl;
+          return {
+            unit: 'L', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Quan <strong>${mCalissa} g de calissa</strong> del $85\\%$ de riquesa en carbonat de calci reaccionen amb àcid clorhídric ${M_HCl} M, es produeix clorur de calci, diòxid de carboni gasós i aigua. Determina el volum de <strong>dissolució d'àcid clorhídric ${M_HCl} M</strong> utilitzat.`,
+            statementFormulas: `La calissa ($85\\%\\text{ en } \\text{CaCO}_3$) reacciona amb $\\text{HCl}(aq)$ ${M_HCl} M per donar $\\text{CaCl}_2(aq)$, $\\text{CO}_2(g)$ i $\\text{H}_2\\text{O}(l)$. Quin volum de $\\text{HCl}$ ${M_HCl} M cal per a <strong>${mCalissa} g de calissa</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{CO}_2 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{CO}_2(g) + \\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:2, startSubstance:'Calissa (85%)', startVal:`${mCalissa}`, startUnit:'g', targetSubstance:'HCl (2 M)', targetUnit:'L' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Massa molar ($M$):</p>
+                    <p>$$M(\\text{CaCO}_3) = 100{,}09\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$m(\\text{CaCO}_3) = ${mCalissa}\\text{ g calissa} \\cdot \\frac{85\\text{ g CaCO}_3}{100\\text{ g calissa}} = ${m_CaCO3.toFixed(1)}\\text{ g CaCO}_3$$</p><p>$$${m_CaCO3.toFixed(1)}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol}}{100{,}09\\text{ g}} \\cdot \\frac{2\\text{ mol HCl}}{1\\text{ mol CaCO}_3} = ${n_HCl.toFixed(3)}\\text{ mol HCl}$$</p><p>$$V = \\frac{${n_HCl.toFixed(3)}\\text{ mol HCl}}{2{,}0\\text{ mol/L}} = ${correctVal.toFixed(2)}\\text{ L dis HCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} L de HCl 2 M</p></div>`
           };
         }
       ],
       'sub_lim_exces_explicite': [
-        // BaCl2 + Na2SO4 -> BaSO4 + 2 NaCl (Exercici 39 del PDF)
+        // 1. BaCl2 + Na2SO4 -> BaSO4 + 2 NaCl (Exercici 39 del PDF)
         function() {
           const mBaCl2 = randFloat(80, 120, 1);
           const mNa2SO4 = randFloat(110, 150, 1);
-          const n_BaCl2 = mBaCl2 / 208.23;
+          const n_BaCl2 = mBaCl2 / 208.20;
           const correctVal = n_BaCl2 * 2 * 58.44;
           return {
             unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `Es barregen <strong>${mBaCl2} g de clorur de bari</strong> en dissolució amb <strong>${mNa2SO4} g de sulfat de sodi</strong> en excés. Es produeix un precipitat de sulfat de bari i clorur de sodi en dissolució. Calcula la massa de <strong>clorur de sodi</strong> obtinguda.`,
-            statementFormulas: `El $\\text{BaCl}_2(aq)$ reacciona amb $\\text{Na}_2\\text{SO}_4(aq)$ per donar $\\text{BaSO}_4(s)$ i $\\text{NaCl}(aq)$. Calcula la massa de $\\text{NaCl}$ a partir de <strong>${mBaCl2} g de $\\text{BaCl}_2$</strong> amb excés de $\\text{Na}_2\\text{SO}_4$.`,
+            statementNames: `Es barregen <strong>${mBaCl2} g de clorur de bari</strong> en dissolució aquosa amb un excés de <strong>sulfat de sodi</strong>. Es produeix un precipitat blanc de sulfat de bari i clorur de sodi en dissolució. Calcula la massa de <strong>clorur de sodi</strong> obtinguda.`,
+            statementFormulas: `El $\\text{BaCl}_2(aq)$ reacciona amb excés de $\\text{Na}_2\\text{SO}_4(aq)$ per donar $\\text{BaSO}_4(s)$ i $\\text{NaCl}(aq)$. Calcula la massa de $\\text{NaCl}$ produïda a partir de <strong>${mBaCl2} g de $\\text{BaCl}_2$</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{BaCl}_2 + \\text{Na}_2\\text{SO}_4 \\rightarrow \\text{BaSO}_4 + \\text{NaCl}$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $\\text{BaCl}_2(aq) + \\text{Na}_2\\text{SO}_4(aq) \\rightarrow \\text{BaSO}_4(s) + 2\\,\\text{NaCl}(aq)$</p>`,
             tab3: generateStrategySVG({ items: [{text:'BaCl₂',x:140,isComp:true,w:65},{text:'+',x:195},{text:'Na₂SO₄',x:255,isComp:true,w:70},{text:'→',x:315},{text:'BaSO₄',x:375,isComp:true,w:70},{text:'+',x:435},{text:'2 NaCl',x:485,isComp:true,w:65}], startIndex:0, targetIndex:6, startSubstance:'BaCl₂', startVal:`${mBaCl2}`, startUnit:'g', targetSubstance:'NaCl', targetUnit:'g' }) +
@@ -815,61 +1617,373 @@
                   </div>
                   <div class="space-y-2 pt-2"><p>$$${mBaCl2}\\text{ g BaCl}_2 \\cdot \\frac{1\\text{ mol BaCl}_2}{208{,}20\\text{ g BaCl}_2} \\cdot \\frac{2\\text{ mol NaCl}}{1\\text{ mol BaCl}_2} \\cdot \\frac{58{,}44\\text{ g NaCl}}{1\\text{ mol NaCl}} = ${correctVal.toFixed(2)}\\text{ g NaCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de NaCl</p></div>`
           };
+        },
+        // 2. Zn + 2 HCl -> ZnCl2 + H2 (Zinc amb excés de HCl)
+        function() {
+          const mZn = randFloat(5, 30, 1);
+          const n_Zn = mZn / 65.38;
+          const correctVal = n_Zn * 136.28;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En un matràs es fan reaccionar <strong>${mZn} g de zinc metall</strong> amb un excés d'àcid clorhídric en dissolució aquosa. Es produeix clorur de zinc en dissolució i es desprèn dihidrogen gasós. Quina massa de <strong>clorur de zinc</strong> es formarà?`,
+            statementFormulas: `El $\\text{Zn}(s)$ reacciona amb un excés de $\\text{HCl}(aq)$ per donar $\\text{ZnCl}_2(aq)$ i $\\text{H}_2(g)$. Quina massa de $\\text{ZnCl}_2$ es forma a partir de <strong>${mZn} g de $\\text{Zn}$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Zn}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{ZnCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'ZnCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:0, targetIndex:4, startSubstance:'Zn', startVal:`${mZn}`, startUnit:'g', targetSubstance:'ZnCl₂', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{Zn}) = 65{,}38\\text{ g/mol}, \\quad M(\\text{ZnCl}_2) = 136{,}28\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mZn}\\text{ g Zn} \\cdot \\frac{1\\text{ mol Zn}}{65{,}38\\text{ g Zn}} \\cdot \\frac{1\\text{ mol ZnCl}_2}{1\\text{ mol Zn}} \\cdot \\frac{136{,}28\\text{ g ZnCl}_2}{1\\text{ mol ZnCl}_2} = ${correctVal.toFixed(2)}\\text{ g ZnCl}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de ZnCl₂</p></div>`
+          };
+        },
+        // 3. 2 Al + 3 Cl2 -> 2 AlCl3 (Alumini amb excés de Cl2)
+        function() {
+          const mAl = randFloat(4, 20, 1);
+          const n_Al = mAl / 26.98;
+          const correctVal = n_Al * 133.33;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `L'alumini metall reacciona amb un excés de diclor gasós per donar clorur d'alumini sòlid. Determina la massa de <strong>clorur d'alumini</strong> que s'obté quan reaccionen <strong>${mAl} g d'alumini metall</strong>.`,
+            statementFormulas: `El $\\text{Al}(s)$ reacciona amb excés de $\\text{Cl}_2(g)$ per donar $\\text{AlCl}_3(s)$. Determina la massa de $\\text{AlCl}_3$ formada a partir de <strong>${mAl} g de $\\text{Al}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Al} + \\text{Cl}_2 \\rightarrow \\text{AlCl}_3$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Al}(s) + 3\\,\\text{Cl}_2(g) \\rightarrow 2\\,\\text{AlCl}_3(s)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Al',x:180,isComp:true,w:50},{text:'+',x:230},{text:'3 Cl₂',x:280,isComp:true,w:55},{text:'→',x:335},{text:'2 AlCl₃',x:400,isComp:true,w:65}], startIndex:0, targetIndex:4, startSubstance:'Al', startVal:`${mAl}`, startUnit:'g', targetSubstance:'AlCl₃', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{Al}) = 26{,}98\\text{ g/mol}, \\quad M(\\text{AlCl}_3) = 26{,}98 + 3 \\cdot 35{,}45 = 133{,}33\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mAl}\\text{ g Al} \\cdot \\frac{1\\text{ mol Al}}{26{,}98\\text{ g Al}} \\cdot \\frac{2\\text{ mol AlCl}_3}{2\\text{ mol Al}} \\cdot \\frac{133{,}33\\text{ g AlCl}_3}{1\\text{ mol AlCl}_3} = ${correctVal.toFixed(2)}\\text{ g AlCl}_3$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de AlCl₃</p></div>`
+          };
+        },
+        // 4. CaCO3 + 2 HCl -> CaCl2 + H2O + CO2 (Massa de CO2 amb excés de HCl)
+        function() {
+          const mCaCO3 = randFloat(12, 60, 1);
+          const n_CaCO3 = mCaCO3 / 100.09;
+          const correctVal = n_CaCO3 * 44.01;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En afegir un excés d'àcid clorhídric a <strong>${mCaCO3} g de carbonat de calci</strong>, es produeix clorur de calci, aigua i diòxid de carboni gasós. Quina massa de <strong>diòxid de carboni gasós</strong> es desprèn de la reacció?`,
+            statementFormulas: `En reaccionar <strong>${mCaCO3} g de $\\text{CaCO}_3(s)$</strong> amb excés de $\\text{HCl}(aq)$ es forma $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Quina massa de $\\text{CO}_2$ es desprèn?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:8, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'CO₂', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{CaCO}_3) = 100{,}09\\text{ g/mol}, \\quad M(\\text{CO}_2) = 12{,}01 + 2 \\cdot 16{,}00 = 44{,}01\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mCaCO3}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol CaCO}_3}{100{,}09\\text{ g CaCO}_3} \\cdot \\frac{1\\text{ mol CO}_2}{1\\text{ mol CaCO}_3} \\cdot \\frac{44{,}01\\text{ g CO}_2}{1\\text{ mol CO}_2} = ${correctVal.toFixed(2)}\\text{ g CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de CO₂</p></div>`
+          };
+        },
+        // 5. Fe + 2 HCl -> FeCl2 + H2 (Ferro amb excés de HCl)
+        function() {
+          const mFe = randFloat(8, 40, 1);
+          const n_Fe = mFe / 55.85;
+          const correctVal = n_Fe * 126.75;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `El ferro metall reacciona amb un excés d'àcid clorhídric per donar clorur de ferro(II) en dissolució i dihidrogen gasós. Calcula els grams de <strong>clorur de ferro(II)</strong> que s'obtenen a partir de <strong>${mFe} g de ferro metall</strong>.`,
+            statementFormulas: `El $\\text{Fe}(s)$ reacciona amb excés de $\\text{HCl}(aq)$ per formar $\\text{FeCl}_2(aq)$ i $\\text{H}_2(g)$. Calcula la massa de $\\text{FeCl}_2$ obtinguda per a <strong>${mFe} g de $\\text{Fe}$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Fe} + \\text{HCl} \\rightarrow \\text{FeCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Fe}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{FeCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Fe',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'FeCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:0, targetIndex:4, startSubstance:'Fe', startVal:`${mFe}`, startUnit:'g', targetSubstance:'FeCl₂', targetUnit:'g' }) +
+                  `<div class="bg-slate-100 dark:bg-slate-800/80 p-3 rounded-lg border border-slate-200 dark:border-slate-700/60 text-xs space-y-1">
+                    <p class="font-bold text-slate-700 dark:text-slate-300">Masses molars ($M$):</p>
+                    <p>$$M(\\text{Fe}) = 55{,}85\\text{ g/mol}, \\quad M(\\text{FeCl}_2) = 55{,}85 + 2 \\cdot 35{,}45 = 126{,}75\\text{ g/mol}$$</p>
+                  </div>
+                  <div class="space-y-2 pt-2"><p>$$${mFe}\\text{ g Fe} \\cdot \\frac{1\\text{ mol Fe}}{55{,}85\\text{ g Fe}} \\cdot \\frac{1\\text{ mol FeCl}_2}{1\\text{ mol Fe}} \\cdot \\frac{126{,}75\\text{ g FeCl}_2}{1\\text{ mol FeCl}_2} = ${correctVal.toFixed(2)}\\text{ g FeCl}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de FeCl₂</p></div>`
+          };
         }
       ],
       'sub_lim_identificacio': [
-        // FeCl2 + Ba -> Fe + BaCl2 (Exercici 40 del PDF)
+        // 1. BaCl2 + Na2SO4 -> BaSO4 + 2 NaCl (Exercici 39 del PDF)
+        function() {
+          const mBaCl2 = randFloat(80, 110, 1);
+          const mNa2SO4 = randFloat(100, 130, 1);
+          const n_BaCl2 = mBaCl2 / 208.20;
+          const n_Na2SO4 = mNa2SO4 / 142.04;
+          const isBaLimiting = n_BaCl2 <= n_Na2SO4;
+          const n_lim = isBaLimiting ? n_BaCl2 : n_Na2SO4;
+          const correctVal = n_lim * 2 * 58.44;
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `S'addicionen <strong>${mBaCl2} g de clorur de bari</strong> a una dissolució que conté <strong>${mNa2SO4} g de sulfat de sodi</strong>. Es produeix un precipitat de sulfat de bari i clorur de sodi en dissolució. Identifica el reactiu limitant i calcula la massa de <strong>clorur de sodi</strong> que es pot formar.`,
+            statementFormulas: `Es barregen <strong>${mBaCl2} g de $\\text{BaCl}_2(aq)$</strong> amb <strong>${mNa2SO4} g de $\\text{Na}_2\\text{SO}_4(aq)$</strong> per donar $\\text{BaSO}_4(s)$ i $\\text{NaCl}(aq)$. Identifica el limitant i troba la massa de $\\text{NaCl}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{BaCl}_2 + \\text{Na}_2\\text{SO}_4 \\rightarrow \\text{BaSO}_4 + \\text{NaCl}$</p>`,
+            tab2: `<p><strong>Ajustament i Càlcul de Mols:</strong></p><p>$$\\text{BaCl}_2(aq) + \\text{Na}_2\\text{SO}_4(aq) \\rightarrow \\text{BaSO}_4(s) + 2\\,\\text{NaCl}(aq)$$</p><p>$$n(\\text{BaCl}_2) = \\frac{${mBaCl2}}{208{,}20} = ${n_BaCl2.toFixed(3)}\\text{ mol}, \\quad n(\\text{Na}_2\\text{SO}_4) = \\frac{${mNa2SO4}}{142{,}04} = ${n_Na2SO4.toFixed(3)}\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isBaLimiting ? 'BaCl₂' : 'Na₂SO₄'}</p>`,
+            tab3: generateStrategySVG({ items: [{text:'BaCl₂',x:140,isComp:true,w:65},{text:'+',x:195},{text:'Na₂SO₄',x:255,isComp:true,w:70},{text:'→',x:315},{text:'BaSO₄',x:375,isComp:true,w:70},{text:'+',x:435},{text:'2 NaCl',x:485,isComp:true,w:65}], startIndex: isBaLimiting ? 0 : 2, targetIndex:6, startSubstance: isBaLimiting ? 'BaCl₂ (Lim)' : 'Na₂SO₄ (Lim)', startVal:`${n_lim.toFixed(3)}`, startUnit:'mol', targetSubstance:'NaCl', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$${n_lim.toFixed(3)}\\text{ mol limitant} \\cdot \\frac{2\\text{ mol NaCl}}{1\\text{ mol limitant}} \\cdot \\frac{58{,}44\\text{ g NaCl}}{1\\text{ mol NaCl}} = ${correctVal.toFixed(2)}\\text{ g NaCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de NaCl</p></div>`
+          };
+        },
+        // 2. FeCl2 + Ba -> Fe + BaCl2 (Exercici 40 del PDF)
         function() {
           const mFeCl2 = randFloat(40, 60, 1);
           const mBa = randFloat(20, 30, 1);
           const n_FeCl2 = mFeCl2 / 126.75;
           const n_Ba = mBa / 137.30;
-          const isBaLimiting = n_Ba < n_FeCl2;
+          const isBaLimiting = n_Ba <= n_FeCl2;
           const n_lim = isBaLimiting ? n_Ba : n_FeCl2;
           const correctVal = n_lim * 55.85;
           return {
             unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `El clorur de ferro(II) reacciona amb bari metall per donar ferro metall i clorur de bari. Es fan reaccionar <strong>${mFeCl2} g de clorur de ferro(II)</strong> amb <strong>${mBa} g de bari</strong>. Identifica el reactiu limitant i calcula la massa de <strong>ferro metall</strong> que s'obtindrà.`,
+            statementNames: `El clorur de ferro(II) reacciona amb bari metall per donar ferro metall i clorur de bari. Es fan reaccionar <strong>${mFeCl2} g de clorur de ferro(II)</strong> amb <strong>${mBa} g de bari metall</strong>. Identifica el reactiu limitant i calcula la massa de <strong>ferro metall</strong> que s'obtindrà.`,
             statementFormulas: `El $\\text{FeCl}_2(s)$ reacciona amb $\\text{Ba}(s)$ per donar $\\text{Fe}(s)$ i $\\text{BaCl}_2(s)$. Fem reaccionar <strong>${mFeCl2} g de $\\text{FeCl}_2$</strong> amb <strong>${mBa} g de $\\text{Ba}$</strong>. Identifica el limitant i calcula els grams de $\\text{Fe}$.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{FeCl}_2 + \\text{Ba} \\rightarrow \\text{Fe} + \\text{BaCl}_2$</p>`,
-            tab2: `<p><strong>Ajustament i Mols:</strong> $n(\\text{FeCl}_2) = ${n_FeCl2.toFixed(3)}\\text{ mol}$, $n(\\text{Ba}) = ${n_Ba.toFixed(3)}\\text{ mol}$. Limitant: ${isBaLimiting ? 'Bari (Ba)' : 'FeCl₂'}.</p>`,
+            tab2: `<p><strong>Ajustament i Mols:</strong></p><p>$$\\text{FeCl}_2(s) + \\text{Ba}(s) \\rightarrow \\text{Fe}(s) + \\text{BaCl}_2(s)$$</p><p>$$n(\\text{FeCl}_2) = \\frac{${mFeCl2}}{126{,}75} = ${n_FeCl2.toFixed(3)}\\text{ mol}, \\quad n(\\text{Ba}) = \\frac{${mBa}}{137{,}30} = ${n_Ba.toFixed(3)}\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isBaLimiting ? 'Bari (Ba)' : 'FeCl₂'}</p>`,
             tab3: generateStrategySVG({ items: [{text:'FeCl₂',x:160,isComp:true,w:65},{text:'+',x:215},{text:'Ba',x:255,isComp:true,w:45},{text:'→',x:295},{text:'Fe',x:335,isComp:true,w:45},{text:'+',x:375},{text:'BaCl₂',x:430,isComp:true,w:65}], startIndex: isBaLimiting ? 2 : 0, targetIndex:4, startSubstance: isBaLimiting ? 'Ba (Lim)' : 'FeCl₂ (Lim)', startVal:`${n_lim.toFixed(3)}`, startUnit:'mol', targetSubstance:'Fe', targetUnit:'g' }) +
                   `<div class="space-y-2 pt-2"><p>$$${n_lim.toFixed(3)}\\text{ mol limitant} \\cdot \\frac{1\\text{ mol Fe}}{1\\text{ mol limitant}} \\cdot \\frac{55{,}85\\text{ g Fe}}{1\\text{ mol Fe}} = ${correctVal.toFixed(2)}\\text{ g Fe}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Fe</p></div>`
+          };
+        },
+        // 3. Na2CO3 + 2 HCl -> 2 NaCl + H2O + CO2 (Exercici 41 del PDF)
+        function() {
+          const mNa2CO3 = randFloat(0.8, 1.8, 2);
+          const V_mL = 100;
+          const M_HCl = 0.3;
+          const n_Na2CO3 = mNa2CO3 / 105.99;
+          const n_HCl = (V_mL / 1000) * M_HCl; // 0.03 mol
+          const isNa2CO3Limiting = n_Na2CO3 * 2 <= n_HCl;
+          const correctVal = isNa2CO3Limiting ? (n_Na2CO3 * 2 * 58.44) : (n_HCl * 58.44);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es barregen <strong>${mNa2CO3} g de carbonat de sodi</strong> amb <strong>${V_mL} mL d'àcid clorhídric ${M_HCl} M</strong>. Es produeix clorur de sodi en dissolució, diòxid de carboni gasós i aigua. Identifica el reactiu limitant i calcula la massa de <strong>clorur de sodi</strong> que es formarà.`,
+            statementFormulas: `Es barregen <strong>${mNa2CO3} g de $\\text{Na}_2\\text{CO}_3$</strong> amb <strong>${V_mL} mL de $\\text{HCl}$ ${M_HCl} M</strong> per donar $\\text{NaCl}(aq)$, $\\text{CO}_2(g)$ i $\\text{H}_2\\text{O}(l)$. Identifica el limitant i troba els grams de $\\text{NaCl}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Na}_2\\text{CO}_3 + \\text{HCl} \\rightarrow \\text{NaCl} + \\text{CO}_2 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament i Mols:</strong></p><p>$$\\text{Na}_2\\text{CO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow 2\\,\\text{NaCl}(aq) + \\text{CO}_2(g) + \\text{H}_2\\text{O}(l)$$</p><p>$$n(\\text{Na}_2\\text{CO}_3) = ${n_Na2CO3.toFixed(3)}\\text{ mol}, \\quad n(\\text{HCl}) = 0{,}030\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isNa2CO3Limiting ? 'Na₂CO₃' : 'HCl'}</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Na₂CO₃',x:130,isComp:true,w:75},{text:'+',x:180},{text:'2 HCl',x:225,isComp:true,w:60},{text:'→',x:270},{text:'2 NaCl',x:315,isComp:true,w:60},{text:'+',x:360},{text:'CO₂',x:400,isComp:true,w:50},{text:'+',x:440},{text:'H₂O',x:480,isComp:true,w:50}], startIndex: isNa2CO3Limiting ? 0 : 2, targetIndex:4, startSubstance: isNa2CO3Limiting ? 'Na₂CO₃ (Lim)' : 'HCl (Lim)', startVal: isNa2CO3Limiting ? `${n_Na2CO3.toFixed(3)}` : '0.030', startUnit:'mol', targetSubstance:'NaCl', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m(\\text{NaCl}) = ${correctVal.toFixed(2)}\\text{ g NaCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de NaCl</p></div>`
+          };
+        },
+        // 4. 2 Na + Cl2 -> 2 NaCl (Exercici 47 del PDF)
+        function() {
+          const mNa = randFloat(15, 25, 1);
+          const mCl2 = randFloat(15, 25, 1);
+          const n_Na = mNa / 22.99;
+          const n_Cl2 = mCl2 / 70.90;
+          const isCl2Limiting = (n_Cl2 * 2) <= n_Na;
+          const correctVal = isCl2Limiting ? (n_Cl2 * 2 * 58.44) : (n_Na * 58.44);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es fan reaccionar <strong>${mNa} g de sodi metall</strong> amb <strong>${mCl2} g de diclor gasós</strong> per donar clorur de sodi sòlid. Determina el reactiu limitant i la massa de <strong>clorur de sodi</strong> que s'obté.`,
+            statementFormulas: `Es barregen <strong>${mNa} g de $\\text{Na}(s)$</strong> amb <strong>${mCl2} g de $\\text{Cl}_2(g)$</strong> per donar $\\text{NaCl}(s)$. Determina el limitant i la massa de $\\text{NaCl}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Na} + \\text{Cl}_2 \\rightarrow \\text{NaCl}$</p>`,
+            tab2: `<p><strong>Ajustament i Mols:</strong></p><p>$$2\\,\\text{Na}(s) + \\text{Cl}_2(g) \\rightarrow 2\\,\\text{NaCl}(s)$$</p><p>$$n(\\text{Na}) = \\frac{${mNa}}{22{,}99} = ${n_Na.toFixed(3)}\\text{ mol}, \\quad n(\\text{Cl}_2) = \\frac{${mCl2}}{70{,}90} = ${n_Cl2.toFixed(3)}\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isCl2Limiting ? 'Cl₂' : 'Na'}</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Na',x:180,isComp:true,w:50},{text:'+',x:230},{text:'Cl₂',x:275,isComp:true,w:50},{text:'→',x:325},{text:'2 NaCl',x:385,isComp:true,w:60}], startIndex: isCl2Limiting ? 2 : 0, targetIndex:4, startSubstance: isCl2Limiting ? 'Cl₂ (Lim)' : 'Na (Lim)', startVal: isCl2Limiting ? `${n_Cl2.toFixed(3)}` : `${n_Na.toFixed(3)}`, startUnit:'mol', targetSubstance:'NaCl', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m(\\text{NaCl}) = ${correctVal.toFixed(2)}\\text{ g NaCl}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de NaCl</p></div>`
+          };
+        },
+        // 5. 2 NH3 + CO2 -> (NH2)2CO + H2O (Exercici 48 del PDF)
+        function() {
+          const mNH3 = randFloat(80, 120, 1);
+          const mCO2 = randFloat(180, 220, 1);
+          const n_NH3 = mNH3 / 17.03;
+          const n_CO2 = mCO2 / 44.01;
+          const isNH3Limiting = (n_NH3 / 2) <= n_CO2;
+          const correctVal = isNH3Limiting ? ((n_NH3 / 2) * 60.06) : (n_CO2 * 60.06);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `L'amoníac gasós reacciona amb diòxid de carboni gasós per produir urea sòlida, $(\\text{NH}_2)_2\\text{CO}$, i aigua. Es fan reaccionar <strong>${mNH3} g d'amoníac</strong> amb <strong>${mCO2} g de diòxid de carboni</strong>. Quin és el reactiu limitant i quina massa d'<strong>urea</strong> es pot obtenir teòricament?`,
+            statementFormulas: `El $\\text{NH}_3(g)$ reacciona amb $\\text{CO}_2(g)$ per donar $(\\text{NH}_2)_2\\text{CO}(s)$ i $\\text{H}_2\\text{O}(l)$. Amb <strong>${mNH3} g de $\\text{NH}_3$</strong> i <strong>${mCO2} g de $\\text{CO}_2$</strong>, quin és el limitant i la massa teòrica d'urea?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{NH}_3 + \\text{CO}_2 \\rightarrow (\\text{NH}_2)_2\\text{CO} + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament i Mols:</strong></p><p>$$2\\,\\text{NH}_3(g) + \\text{CO}_2(g) \\rightarrow (\\text{NH}_2)_2\\text{CO}(s) + \\text{H}_2\\text{O}(l)$$</p><p>$$n(\\text{NH}_3) = ${n_NH3.toFixed(3)}\\text{ mol}, \\quad n(\\text{CO}_2) = ${n_CO2.toFixed(3)}\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isNH3Limiting ? 'NH₃' : 'CO₂'}</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 NH₃',x:160,isComp:true,w:60},{text:'+',x:210},{text:'CO₂',x:255,isComp:true,w:50},{text:'→',x:300},{text:'(NH₂)₂CO',x:375,isComp:true,w:85},{text:'+',x:440},{text:'H₂O',x:480,isComp:true,w:50}], startIndex: isNH3Limiting ? 0 : 2, targetIndex:4, startSubstance: isNH3Limiting ? 'NH₃ (Lim)' : 'CO₂ (Lim)', startVal: isNH3Limiting ? `${n_NH3.toFixed(3)}` : `${n_CO2.toFixed(3)}`, startUnit:'mol', targetSubstance:'Urea', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m(\\text{urea}) = ${correctVal.toFixed(2)}\\text{ g urea}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g d'urea</p></div>`
+          };
+        },
+        // 6. Zn + H2SO4 -> ZnSO4 + H2 (Exercici 42 del PDF)
+        function() {
+          const mZn = randFloat(0.8, 1.5, 2);
+          const mH2SO4 = randFloat(1.8, 2.5, 2);
+          const n_Zn = mZn / 65.38;
+          const n_H2SO4 = mH2SO4 / 98.08;
+          const isZnLimiting = n_Zn <= n_H2SO4;
+          const correctVal = isZnLimiting ? (n_Zn * 161.44) : (n_H2SO4 * 161.44);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `S'afegeixen <strong>${mZn} g de zinc pur</strong> a una dissolució que conté <strong>${mH2SO4} g d'àcid sulfúric</strong>. Es produeix sulfat de zinc en dissolució i dihidrogen gasós. Identifica el reactiu limitant i troba la massa de <strong>sulfat de zinc</strong> formada.`,
+            statementFormulas: `Es barregen <strong>${mZn} g de $\\text{Zn}(s)$</strong> amb <strong>${mH2SO4} g de $\\text{H}_2\\text{SO}_4(aq)$</strong> per donar $\\text{ZnSO}_4(aq)$ i $\\text{H}_2(g)$. Troba el limitant i la massa de $\\text{ZnSO}_4$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{H}_2\\text{SO}_4 \\rightarrow \\text{ZnSO}_4 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament i Mols:</strong></p><p>$$\\text{Zn}(s) + \\text{H}_2\\text{SO}_4(aq) \\rightarrow \\text{ZnSO}_4(aq) + \\text{H}_2(g)$$</p><p>$$n(\\text{Zn}) = \\frac{${mZn}}{65{,}38} = ${n_Zn.toFixed(3)}\\text{ mol}, \\quad n(\\text{H}_2\\text{SO}_4) = \\frac{${mH2SO4}}{98{,}08} = ${n_H2SO4.toFixed(3)}\\text{ mol}$$</p><p class="font-bold text-amber-600 dark:text-amber-400">Reactiu limitant: ${isZnLimiting ? 'Zinc (Zn)' : 'H₂SO₄'}</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'H₂SO₄',x:275,isComp:true,w:65},{text:'→',x:330},{text:'ZnSO₄',x:385,isComp:true,w:65},{text:'+',x:440},{text:'H₂',x:480,isComp:true,w:45}], startIndex: isZnLimiting ? 0 : 2, targetIndex:4, startSubstance: isZnLimiting ? 'Zn (Lim)' : 'H₂SO₄ (Lim)', startVal: isZnLimiting ? `${n_Zn.toFixed(3)}` : `${n_H2SO4.toFixed(3)}`, startUnit:'mol', targetSubstance:'ZnSO₄', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m(\\text{ZnSO}_4) = ${correctVal.toFixed(2)}\\text{ g ZnSO}_4$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de ZnSO₄</p></div>`
           };
         }
       ],
       'sub_ren_massa_real': [
-        // 2 NH3 + CO2 -> (NH2)2CO + H2O (Exercici 48 del PDF - Urea)
+        // 1. 2 NH3 + CO2 -> (NH2)2CO + H2O (Urea)
         function() {
-          const mNH3 = randFloat(80, 120, 1);
-          const rendiment = randInt(75, 85);
+          const mNH3 = randFloat(70, 130, 1);
+          const rendiment = randInt(75, 90);
           const n_NH3 = mNH3 / 17.03;
           const mTeorica = (n_NH3 / 2) * 60.06;
           const correctVal = mTeorica * (rendiment / 100);
           return {
             unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `L'amoníac gasós reacciona amb diòxid de carboni per formar urea, $(\\text{NH}_2)_2\\text{CO}$, i aigua. Es fan reaccionar <strong>${mNH3} g d'amoníac</strong> amb diòxid de carboni en excés. Calcula la massa real d'<strong>urea</strong> obtinguda si el procés té un <strong>rendiment del ${rendiment}%</strong>.`,
-            statementFormulas: `El $\\text{NH}_3(g)$ reacciona amb $\\text{CO}_2(g)$ per donar $(\\text{NH}_2)_2\\text{CO}(s)$ i $\\text{H}_2\\text{O}(l)$. Calcula la massa real d'urea a partir de <strong>${mNH3} g de $\\text{NH}_3$</strong> si el <strong>rendiment és del ${rendiment}\\%</strong>.`,
+            statementNames: `L'amoníac gasós reacciona amb diòxid de carboni per formar urea, $(\\text{NH}_2)_2\\text{CO}$, i aigua. Es fan reaccionar <strong>${mNH3} g d'amoníac</strong> amb diòxid de carboni en excés. Calcula la massa real d'<strong>urea</strong> obtinguda si la reacció té un <strong>rendiment del ${rendiment}%</strong>.`,
+            statementFormulas: `El $\\text{NH}_3(g)$ reacciona amb $\\text{CO}_2(g)$ per donar $(\\text{NH}_2)_2\\text{CO}(s)$ i $\\text{H}_2\\text{O}(l)$. Calcula la massa real d'urea a partir de <strong>${mNH3} g de $\\text{NH}_3$</strong> si el <strong>rendiment és del ${rendiment}\\% $</strong>.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{NH}_3 + \\text{CO}_2 \\rightarrow (\\text{NH}_2)_2\\text{CO} + \\text{H}_2\\text{O}$</p>`,
             tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{NH}_3(g) + \\text{CO}_2(g) \\rightarrow (\\text{NH}_2)_2\\text{CO}(s) + \\text{H}_2\\text{O}(l)$</p>`,
             tab3: generateStrategySVG({ items: [{text:'2 NH₃',x:160,isComp:true,w:60},{text:'+',x:210},{text:'CO₂',x:255,isComp:true,w:50},{text:'→',x:300},{text:'(NH₂)₂CO',x:375,isComp:true,w:85},{text:'+',x:440},{text:'H₂O',x:480,isComp:true,w:50}], startIndex:0, targetIndex:4, startSubstance:'NH₃', startVal:`${mNH3}`, startUnit:'g', targetSubstance:'Urea (Real)', targetUnit:'g' }) +
-                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{urea}) = ${mTeorica.toFixed(2)}\\text{ g}$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}\\text{ g real}}{100\\text{ g teòric}} = ${correctVal.toFixed(2)}\\text{ g urea}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g d'urea</p></div>`
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}} = ${mTeorica.toFixed(2)}\\text{ g urea}$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}\\text{ g real}}{100\\text{ g teòric}} = ${correctVal.toFixed(2)}\\text{ g urea}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g d'urea real</p></div>`
+          };
+        },
+        // 2. N2 + 3 H2 -> 2 NH3 (Síntesi d'amoníac amb rendiment)
+        function() {
+          const mN2 = randFloat(20, 80, 1);
+          const rendiment = randInt(70, 88);
+          const n_N2 = mN2 / 28.02;
+          const mTeorica = n_N2 * 2 * 17.03;
+          const correctVal = mTeorica * (rendiment / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En la síntesi d'Haber-Bosch, el dinitrogen gasós reacciona amb el dihidrogen gasós per produir amoníac gasós. Es fan reaccionar <strong>${mN2} g de dinitrogen gasós</strong> amb dihidrogen en excés. Determina la massa real d'<strong>amoníac</strong> obtinguda si el procés té un <strong>rendiment del ${rendiment}%</strong>.`,
+            statementFormulas: `El $\\text{N}_2(g)$ reacciona amb $\\text{H}_2(g)$ per donar $\\text{NH}_3(g)$. Quants grams reals de $\\text{NH}_3$ s'obtenen a partir de <strong>${mN2} g de $\\text{N}_2$</strong> amb un <strong>rendiment del ${rendiment}\\%$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{N}_2 + \\text{H}_2 \\rightarrow \\text{NH}_3$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{N}_2(g) + 3\\,\\text{H}_2(g) \\rightarrow 2\\,\\text{NH}_3(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'N₂',x:180,isComp:true,w:50},{text:'+',x:225},{text:'3 H₂',x:270,isComp:true,w:55},{text:'→',x:320},{text:'2 NH₃',x:380,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'N₂', startVal:`${mN2}`, startUnit:'g', targetSubstance:'NH₃ (Real)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}} = ${mTeorica.toFixed(2)}\\text{ g NH}_3$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}}{100} = ${correctVal.toFixed(2)}\\text{ g NH}_3$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de NH₃ real</p></div>`
+          };
+        },
+        // 3. CaCO3 -> CaO + CO2 (Descomposició tèrmica amb rendiment)
+        function() {
+          const mCaCO3 = randFloat(50, 200, 1);
+          const rendiment = randInt(80, 95);
+          const n_CaCO3 = mCaCO3 / 100.09;
+          const mTeorica = n_CaCO3 * 56.08;
+          const correctVal = mTeorica * (rendiment / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En un forro industrial es calcinen <strong>${mCaCO3} g de carbonat de calci sòlid</strong> per produir òxid de calci sòlid i diòxid de carboni gasós. Calcula la massa real d'<strong>òxid de calci</strong> que s'obté si el rendiment del procés és del <strong>${rendiment}%</strong>.`,
+            statementFormulas: `El $\\text{CaCO}_3(s)$ es descompon en $\\text{CaO}(s)$ i $\\text{CO}_2(g)$. Calcula la massa real de $\\text{CaO}$ que s'obté a partir de <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong> amb un <strong>rendiment del ${rendiment}\\%$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 \\rightarrow \\text{CaO} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) \\rightarrow \\text{CaO}(s) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:180,isComp:true,w:70},{text:'→',x:260},{text:'CaO',x:320,isComp:true,w:50},{text:'+',x:365},{text:'CO₂',x:410,isComp:true,w:50}], startIndex:0, targetIndex:2, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'CaO (Real)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}} = ${mTeorica.toFixed(2)}\\text{ g CaO}$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}}{100} = ${correctVal.toFixed(2)}\\text{ g CaO}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de CaO real</p></div>`
+          };
+        },
+        // 4. CH4 + 2 O2 -> CO2 + 2 H2O (Combustió del metà amb rendiment)
+        function() {
+          const mCH4 = randFloat(10, 50, 1);
+          const rendiment = randInt(82, 96);
+          const n_CH4 = mCH4 / 16.05;
+          const mTeorica = n_CH4 * 44.01;
+          const correctVal = mTeorica * (rendiment / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En cremar <strong>${mCH4} g de metà gasós</strong> amb dioxigen en excés es forma diòxid de carboni gasós i vapor d'aigua. Calcula la massa real de <strong>diòxid de carboni gasós</strong> obtinguda si la reacció té un <strong>rendiment del ${rendiment}%</strong>.`,
+            statementFormulas: `El $\\text{CH}_4(g)$ reacciona amb excés de $\\text{O}_2(g)$ per donar $\\text{CO}_2(g)$ i $\\text{H}_2\\text{O}(g)$. Quina massa real de $\\text{CO}_2$ es produeix per a <strong>${mCH4} g de $\\text{CH}_4$</strong> si el <strong>rendiment és del ${rendiment}\\%$</strong>?`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CH}_4 + \\text{O}_2 \\rightarrow \\text{CO}_2 + \\text{H}_2\\text{O}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CH}_4(g) + 2\\,\\text{O}_2(g) \\rightarrow \\text{CO}_2(g) + 2\\,\\text{H}_2\\text{O}(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CH₄',x:160,isComp:true,w:55},{text:'+',x:205},{text:'2 O₂',x:250,isComp:true,w:55},{text:'→',x:295},{text:'CO₂',x:340,isComp:true,w:55},{text:'+',x:385},{text:'2 H₂O',x:435,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'CH₄', startVal:`${mCH4}`, startUnit:'g', targetSubstance:'CO₂ (Real)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}} = ${mTeorica.toFixed(2)}\\text{ g CO}_2$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}}{100} = ${correctVal.toFixed(2)}\\text{ g CO}_2$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de CO₂ real</p></div>`
+          };
+        },
+        // 5. 2 Al + 3 CuSO4 -> Al2(SO4)3 + 3 Cu (Desplaçament del coure amb rendiment)
+        function() {
+          const mAl = randFloat(5, 20, 1);
+          const rendiment = randInt(75, 92);
+          const n_Al = mAl / 26.98;
+          const mTeorica = (n_Al * 3 / 2) * 63.55;
+          const correctVal = mTeorica * (rendiment / 100);
+          return {
+            unit: 'g', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `S'introdueixen <strong>${mAl} g d'alumini metall</strong> en una dissolució de sulfat de coure(II) en excés. S'obté sulfat d'alumini en dissolució i coure metall dipositat. Determina la massa real de <strong>coure metall</strong> que es recuperarà si el rendiment de la reacció és del <strong>${rendiment}%</strong>.`,
+            statementFormulas: `El $\\text{Al}(s)$ reacciona amb excés de $\\text{CuSO}_4(aq)$ per donar $\\text{Al}_2(\\text{SO}_4)_3(aq)$ i $\\text{Cu}(s)$. Determina els grams reals de $\\text{Cu}$ per a <strong>${mAl} g de $\\text{Al}$</strong> amb un <strong>rendiment del ${rendiment}\\%$</strong>.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Al} + \\text{CuSO}_4 \\rightarrow \\text{Al}_2(\\text{SO}_4)_3 + \\text{Cu}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Al}(s) + 3\\,\\text{CuSO}_4(aq) \\rightarrow \\text{Al}_2(\\text{SO}_4)_3(aq) + 3\\,\\text{Cu}(s)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Al',x:150,isComp:true,w:50},{text:'+',x:195},{text:'3 CuSO₄',x:255,isComp:true,w:70},{text:'→',x:315},{text:'Al₂(SO₄)₃',x:385,isComp:true,w:80},{text:'+',x:445},{text:'3 Cu',x:490,isComp:true,w:55}], startIndex:0, targetIndex:6, startSubstance:'Al', startVal:`${mAl}`, startUnit:'g', targetSubstance:'Cu (Real)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}} = ${mTeorica.toFixed(2)}\\text{ g Cu}$$</p><p>$$m_{\\text{real}} = ${mTeorica.toFixed(2)}\\text{ g} \\cdot \\frac{${rendiment}}{100} = ${correctVal.toFixed(2)}\\text{ g Cu}$$</p><p class="font-semibold text-emerald-600">Resultat: ${correctVal.toFixed(2)} g de Cu real</p></div>`
           };
         }
       ],
       'sub_ren_percentatge': [
+        // 1. KOH + HCl -> KCl + H2O (Càlcul de % de rendiment)
         function() {
-          const mObtinguda = randFloat(5.5, 6.8, 1);
-          const mTeorica = 7.17;
-          const correctVal = (mObtinguda / mTeorica) * 100;
+          const mKOH = randFloat(10, 40, 1);
+          const n_KOH = mKOH / 56.11;
+          const mTeorica = n_KOH * 74.55;
+          const rendiment = randInt(72, 92);
+          const mReal = parseFloat((mTeorica * (rendiment / 100)).toFixed(2));
+          const correctVal = (mReal / mTeorica) * 100;
           return {
             unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
-            statementNames: `L'hidròxid de potassi reacciona amb àcid clorhídric per donar clorur de potassi i aigua. En el laboratori es fan reaccionar <strong>25 mL de dissolució d'hidròxid de potassi</strong> al 20% ($d = 1{,}08\\text{ g/mL}$) amb excés d'àcid clorhídric i s'obtenen realment <strong>${mObtinguda} g de clorur de potassi</strong>. Calcula el percentatge de rendiment.`,
-            statementFormulas: `El $\\text{KOH}(aq)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{KCl}(aq)$ i $\\text{H}_2\\text{O}(l)$. Fent reaccionar <strong>25 mL de $\\text{KOH}$</strong> al 20\\% ($d = 1{,}08\\text{ g/mL}$) s'obtenen realment <strong>${mObtinguda} g de $\\text{KCl}$</strong>. Calcula el rendiment (\\%).`,
+            statementNames: `En un assaig de laboratori es fan reaccionar <strong>${mKOH} g d'hidròxid de potassi</strong> amb àcid clorhídric en excés per produir clorur de potassi i aigua. Si al final de la reacció s'obtenen realment <strong>${mReal} g de clorur de potassi</strong>, quin ha estat el percentatge de rendiment de la reacció?`,
+            statementFormulas: `El $\\text{KOH}(s)$ reacciona amb $\\text{HCl}(aq)$ per donar $\\text{KCl}(aq)$ i $\\text{H}_2\\text{O}(l)$. A partir de <strong>${mKOH} g de $\\text{KOH}$</strong> s'obtenen realment <strong>${mReal} g de $\\text{KCl}$</strong>. Calcula el $\\%\\text{ de rendiment}$.`,
             tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{KOH} + \\text{HCl} \\rightarrow \\text{KCl} + \\text{H}_2\\text{O}$</p>`,
-            tab2: `<p><strong>Fórmula del rendiment:</strong> $\\%\\text{ Rendiment} = \\frac{m_{\\text{real}}}{m_{\\text{teòrica}}} \\cdot 100$</p>`,
-            tab3: generateStrategySVG({ items: [{text:'KOH',x:170,isComp:true,w:55},{text:'+',x:225},{text:'HCl',x:275,isComp:true,w:50},{text:'→',x:325},{text:'KCl',x:380,isComp:true,w:50},{text:'+',x:430},{text:'H₂O',x:475,isComp:true,w:50}], startIndex:0, targetIndex:4, startSubstance:'KOH', startVal:'25 mL dis.', startUnit:'20%', targetSubstance:'KCl (Teòric)', targetUnit:'g' }) +
-                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{KCl}) = 7{,}17\\text{ g KCl}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{${mObtinguda}\\text{ g real}}{7{,}17\\text{ g teòric}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
+            tab2: `<p><strong>Ajustament:</strong> $\\text{KOH}(s) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'KOH',x:170,isComp:true,w:55},{text:'+',x:225},{text:'HCl',x:275,isComp:true,w:50},{text:'→',x:325},{text:'KCl',x:380,isComp:true,w:50},{text:'+',x:430},{text:'H₂O',x:475,isComp:true,w:50}], startIndex:0, targetIndex:4, startSubstance:'KOH', startVal:`${mKOH}`, startUnit:'g', targetSubstance:'KCl (Teòric)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{KCl}) = ${mKOH}\\text{ g KOH} \\cdot \\frac{1\\text{ mol}}{56{,}11\\text{ g}} \\cdot \\frac{1\\text{ mol KCl}}{1\\text{ mol KOH}} \\cdot \\frac{74{,}55\\text{ g}}{1\\text{ mol}} = ${mTeorica.toFixed(2)}\\text{ g KCl}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{m_{\\text{real}}}{m_{\\text{teòrica}}} \\cdot 100 = \\frac{${mReal}\\text{ g}}{${mTeorica.toFixed(2)}\\text{ g}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 2. CaCO3 + 2 HCl -> CaCl2 + H2O + CO2 (% de rendiment)
+        function() {
+          const mCaCO3 = randFloat(20, 70, 1);
+          const n_CaCO3 = mCaCO3 / 100.09;
+          const mTeorica = n_CaCO3 * 110.98;
+          const rendiment = randInt(75, 93);
+          const mReal = parseFloat((mTeorica * (rendiment / 100)).toFixed(2));
+          const correctVal = (mReal / mTeorica) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es tracten <strong>${mCaCO3} g de carbonat de calci</strong> amb un excés d'àcid clorhídric per produir clorur de calci, aigua i diòxid de carboni. Si en l'experiment s'aïllen realment <strong>${mReal} g de clorur de calci</strong>, calcula el percentatge de rendiment.`,
+            statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb excés de $\\text{HCl}(aq)$ per donar $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Si a partir de <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong> s'obtenen realment <strong>${mReal} g de $\\text{CaCl}_2$</strong>, troba el $\\%\\text{ de rendiment}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{CaCO}_3 + \\text{HCl} \\rightarrow \\text{CaCl}_2 + \\text{H}_2\\text{O} + \\text{CO}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'CaCO₃',x:130,isComp:true,w:70},{text:'+',x:175},{text:'2 HCl',x:220,isComp:true,w:60},{text:'→',x:265},{text:'CaCl₂',x:310,isComp:true,w:60},{text:'+',x:355},{text:'H₂O',x:395,isComp:true,w:50},{text:'+',x:435},{text:'CO₂',x:475,isComp:true,w:50}], startIndex:0, targetIndex:4, startSubstance:'CaCO₃', startVal:`${mCaCO3}`, startUnit:'g', targetSubstance:'CaCl₂ (Teòric)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{CaCl}_2) = ${mTeorica.toFixed(2)}\\text{ g}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{${mReal}}{${mTeorica.toFixed(2)}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 3. 2 Mg + O2 -> 2 MgO (% de rendiment)
+        function() {
+          const mMg = randFloat(5, 25, 1);
+          const n_Mg = mMg / 24.31;
+          const mTeorica = n_Mg * 40.31;
+          const rendiment = randInt(78, 94);
+          const mReal = parseFloat((mTeorica * (rendiment / 100)).toFixed(2));
+          const correctVal = (mReal / mTeorica) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En cremar una cinta de <strong>${mMg} g de magnesi metall</strong> amb dioxigen en excés es forma òxid de magnesi sòlid. Si al crisol es recuperen realment <strong>${mReal} g d'òxid de magnesi</strong>, calcula el rendiment en percentatge.`,
+            statementFormulas: `El $\\text{Mg}(s)$ reacciona amb $\\text{O}_2(g)$ per donar $\\text{MgO}(s)$. Si amb <strong>${mMg} g de $\\text{Mg}$</strong> s'obtenen <strong>${mReal} g de $\\text{MgO}$</strong>, determina el $\\%\\text{ de rendiment}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Mg} + \\text{O}_2 \\rightarrow \\text{MgO}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $2\\,\\text{Mg}(s) + \\text{O}_2(g) \\rightarrow 2\\,\\text{MgO}(s)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'2 Mg',x:180,isComp:true,w:50},{text:'+',x:230},{text:'O₂',x:275,isComp:true,w:50},{text:'→',x:325},{text:'2 MgO',x:385,isComp:true,w:60}], startIndex:0, targetIndex:4, startSubstance:'Mg', startVal:`${mMg}`, startUnit:'g', targetSubstance:'MgO (Teòric)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{MgO}) = ${mTeorica.toFixed(2)}\\text{ g}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{${mReal}}{${mTeorica.toFixed(2)}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 4. Zn + 2 HCl -> ZnCl2 + H2 (% de rendiment)
+        function() {
+          const mZn = randFloat(10, 40, 1);
+          const n_Zn = mZn / 65.38;
+          const mTeorica = n_Zn * 136.28;
+          const rendiment = randInt(75, 90);
+          const mReal = parseFloat((mTeorica * (rendiment / 100)).toFixed(2));
+          const correctVal = (mReal / mTeorica) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `Es fan reaccionar <strong>${mZn} g de zinc metall</strong> amb àcid clorhídric en excés per donar clorur de zinc en dissolució i dihidrogen gasós. Si s'aïllen realment <strong>${mReal} g de clorur de zinc</strong>, determina el percentatge de rendiment de la reacció.`,
+            statementFormulas: `El $\\text{Zn}(s)$ reacciona amb excés de $\\text{HCl}(aq)$ per formar $\\text{ZnCl}_2(aq)$ i $\\text{H}_2(g)$. Si amb <strong>${mZn} g de $\\text{Zn}$</strong> s'obtenen realment <strong>${mReal} g de $\\text{ZnCl}_2$</strong>, troba el $\\%\\text{ de rendiment}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Zn} + \\text{HCl} \\rightarrow \\text{ZnCl}_2 + \\text{H}_2$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Zn}(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{ZnCl}_2(aq) + \\text{H}_2(g)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Zn',x:170,isComp:true,w:50},{text:'+',x:220},{text:'2 HCl',x:270,isComp:true,w:60},{text:'→',x:320},{text:'ZnCl₂',x:375,isComp:true,w:60},{text:'+',x:430},{text:'H₂',x:470,isComp:true,w:45}], startIndex:0, targetIndex:4, startSubstance:'Zn', startVal:`${mZn}`, startUnit:'g', targetSubstance:'ZnCl₂ (Teòric)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{ZnCl}_2) = ${mTeorica.toFixed(2)}\\text{ g}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{${mReal}}{${mTeorica.toFixed(2)}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
+          };
+        },
+        // 5. Cu + 2 AgNO3 -> Cu(NO3)2 + 2 Ag (% de rendiment)
+        function() {
+          const mCu = randFloat(2, 10, 1);
+          const n_Cu = mCu / 63.55;
+          const mTeorica = n_Cu * 2 * 107.87;
+          const rendiment = randInt(80, 95);
+          const mReal = parseFloat((mTeorica * (rendiment / 100)).toFixed(2));
+          const correctVal = (mReal / mTeorica) * 100;
+          return {
+            unit: '%', correctValue: parseFloat(correctVal.toFixed(2)),
+            statementNames: `En submergir una làmina de <strong>${mCu} g de coure metall</strong> en una dissolució de nitrat d'argent en excés, es diposita argent metall i es forma nitrat de coure(II) en dissolució. Si es recuperen realment <strong>${mReal} g d'argent metall</strong>, calcula el rendiment de la reacció.`,
+            statementFormulas: `El $\\text{Cu}(s)$ reacciona amb excés de $\\text{AgNO}_3(aq)$ per donar $\\text{Cu}(\\text{NO}_3)_2(aq)$ i $\\text{Ag}(s)$. Si a partir de <strong>${mCu} g de $\\text{Cu}$</strong> s'obtenen realment <strong>${mReal} g de $\\text{Ag}$</strong>, determina el $\\%\\text{ de rendiment}$.`,
+            tab1: `<p><strong>1. Reacció SENSE AJUSTAR:</strong> $\\text{Cu} + \\text{AgNO}_3 \\rightarrow \\text{Cu}(\\text{NO}_3)_2 + \\text{Ag}$</p>`,
+            tab2: `<p><strong>Ajustament:</strong> $\\text{Cu}(s) + 2\\,\\text{AgNO}_3(aq) \\rightarrow \\text{Cu}(\\text{NO}_3)_2(aq) + 2\\,\\text{Ag}(s)$</p>`,
+            tab3: generateStrategySVG({ items: [{text:'Cu',x:150,isComp:true,w:50},{text:'+',x:195},{text:'2 AgNO₃',x:255,isComp:true,w:70},{text:'→',x:315},{text:'Cu(NO₃)₂',x:385,isComp:true,w:80},{text:'+',x:445},{text:'2 Ag',x:490,isComp:true,w:55}], startIndex:0, targetIndex:6, startSubstance:'Cu', startVal:`${mCu}`, startUnit:'g', targetSubstance:'Ag (Teòric)', targetUnit:'g' }) +
+                  `<div class="space-y-2 pt-2"><p>$$m_{\\text{teòrica}}(\\text{Ag}) = ${mTeorica.toFixed(2)}\\text{ g}$$</p><p>$$\\%\\text{ Rendiment} = \\frac{${mReal}}{${mTeorica.toFixed(2)}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$</p><p class="font-semibold text-emerald-600">Resultat: Rendiment = ${correctVal.toFixed(2)} %</p></div>`
           };
         }
       ]
