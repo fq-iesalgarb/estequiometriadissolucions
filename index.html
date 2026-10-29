@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="ca" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IES Algarb - Estequiometria i Dissolucions 4t ESO</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0284c7',
+              600: '#0284c7',
+              700: '#0369a1',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- KaTeX CSS & JS CDN + Auto-Render Extension -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  
+  <!-- Font Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .katex-display { margin: 0.4em 0 !important; }
+    .tab-active {
+      border-bottom-color: #0284c7;
+      color: #0284c7;
+      font-weight: 600;
+    }
+    .dark .tab-active {
+      border-bottom-color: #38bdf8;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-full flex flex-col transition-colors duration-200">
+
+  <!-- Header -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-500 to-teal-500 flex items-center justify-center text-white font-bold shadow-md shadow-sky-500/20 flex-shrink-0">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wide">IES Algarb · Departament de Física i Química</div>
+          <h1 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
+            Plataforma d'Estequiometria i Dissolucions (4t ESO)
+          </h1>
+        </div>
+      </div>
+
+      <!-- Right Toolbar -->
+      <div class="flex items-center gap-3">
+        <!-- Stats widget -->
+        <div class="hidden md:flex items-center gap-3 bg-slate-100 dark:bg-slate-800 px-3.5 py-2 rounded-xl text-xs font-medium">
+          <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="score-correct">Encerts: 0</span>
+          <span class="text-slate-300 dark:text-slate-600">|</span>
+          <span class="text-slate-600 dark:text-slate-300" id="score-total">Resolts: 0</span>
+        </div>
+
+        <!-- Cheat Sheet Modal Trigger -->
+        <button onclick="toggleModal('modal-constants')" class="px-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition flex items-center gap-1.5 text-xs font-semibold" title="Taula de Masses Atòmiques i Constants">
+          <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          <span class="hidden sm:inline">Masses Atòmiques i Constants</span>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Commuta fosc/lluminós">
+          <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+          </svg>
+          <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    
+    <!-- Sidebar: Categories & Subcategories Selection -->
+    <aside class="lg:col-span-4 space-y-4">
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-5 shadow-sm border border-slate-200/80 dark:border-slate-700/60">
+        <h2 class="text-base font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+          </svg>
+          Categories d'Exercicis
+        </h2>
+
+        <div id="category-accordion" class="space-y-3">
+          <!-- Accordion Items loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Info Box -->
+      <div class="bg-gradient-to-br from-sky-500/10 to-teal-500/10 border border-sky-500/20 rounded-2xl p-4 text-xs text-slate-600 dark:text-slate-300 space-y-2">
+        <p class="font-semibold text-sky-700 dark:text-sky-300 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Criteris d'Avaluació IES Algarb
+        </p>
+        <p>Les masses atòmiques emprades utilitzen una precisió de dos decimals (centèsimes). La solució inclou el plantejament inicial, l'ajustament, l'esquema visual de flux estequiomètric i el desenvolupament pas a pas amb factors de conversió.</p>
+      </div>
+    </aside>
+
+    <!-- Main Workspace: Exercise & Solution -->
+    <section class="lg:col-span-8 space-y-6">
+      
+      <!-- Exercise Card -->
+      <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200/80 dark:border-slate-700/60 space-y-6 relative">
+        
+        <!-- Category Badges & Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-700/60 pb-4">
+          <div>
+            <span id="badge-cat" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-sky-100 text-sky-800 dark:bg-sky-900/50 dark:text-sky-300">
+              1. Càlculs estequiomètrics directes
+            </span>
+            <span id="badge-subcat" class="ml-2 px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+              Massa - Massa
+            </span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <!-- Toggle Formula/Name mode -->
+            <button id="btn-toggle-mode" onclick="toggleStatementMode()" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              <span id="toggle-mode-text">Veure Fórmules</span>
+            </button>
+
+            <!-- New Random Exercise -->
+            <button onclick="generateNewExercise()" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-700 text-white shadow-sm transition flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              Nou exercici
+            </button>
+          </div>
+        </div>
+
+        <!-- Exercise Statement -->
+        <div id="statement-box" class="text-base text-slate-800 dark:text-slate-100 leading-relaxed font-normal bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200/60 dark:border-slate-700/40">
+          Carregant exercici...
+        </div>
+
+        <!-- Student Answer Form -->
+        <div class="bg-slate-100/70 dark:bg-slate-900/40 p-4 rounded-xl border border-slate-200/60 dark:border-slate-700/40 space-y-4">
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            Introdueix la teva resposta numèrica:
+          </label>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div class="relative flex-1">
+              <input type="number" step="any" id="user-answer" placeholder="0.00" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium focus:ring-2 focus:ring-sky-500 focus:outline-none transition">
+              <span id="answer-unit" class="absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-slate-400">g</span>
+            </div>
+
+            <button onclick="checkAnswer()" class="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              Comprova
+            </button>
+          </div>
+
+          <!-- Feedback message -->
+          <div id="feedback-box" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+        </div>
+
+        <!-- Toggle Solution Button -->
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-700/60 flex justify-center">
+          <button id="btn-toggle-solution" onclick="toggleSolutionVisibility()" class="px-5 py-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 font-semibold text-xs hover:bg-amber-100 dark:hover:bg-amber-900/60 transition flex items-center gap-2 shadow-sm">
+            <svg class="w-4 h-4 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            <span id="text-toggle-solution">Mostrar Solució Pas a Pas</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Solution Section with Exactly 3 Tabs (HIDDEN BY DEFAULT) -->
+      <div id="solution-section" class="hidden bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm border border-slate-200/80 dark:border-slate-700/60 space-y-4">
+        <h3 class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+          </svg>
+          Solució Pas a Pas desglossada
+        </h3>
+
+        <!-- Tab Headers (3 Tabs) -->
+        <div class="border-b border-slate-200 dark:border-slate-700 flex gap-2 sm:gap-4 text-xs sm:text-sm font-medium overflow-x-auto pb-1">
+          <button id="tab-btn-1" onclick="switchTab(1)" class="pb-2.5 border-b-2 tab-active transition whitespace-nowrap">
+            1. Plantejament
+          </button>
+          <button id="tab-btn-2" onclick="switchTab(2)" class="pb-2.5 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition whitespace-nowrap">
+            2. Ajustament
+          </button>
+          <button id="tab-btn-3" onclick="switchTab(3)" class="pb-2.5 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+            3. Estratègia i Càlculs
+          </button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div class="py-2 text-sm leading-relaxed text-slate-700 dark:text-slate-200 min-h-[160px]">
+          <!-- Tab 1 -->
+          <div id="tab-content-1" class="space-y-3"></div>
+          <!-- Tab 2 -->
+          <div id="tab-content-2" class="hidden space-y-3"></div>
+          <!-- Tab 3 (UNIFIED: SVG at top + Calculations below) -->
+          <div id="tab-content-3" class="hidden space-y-4"></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Modal: Atomic Masses Cheat Sheet -->
+  <div id="modal-constants" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl border border-slate-200 dark:border-slate-700 space-y-5">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-3">
+        <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+          <svg class="w-5 h-5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          Taula de Masses Atòmiques i Constants (IES Algarb)
+        </h3>
+        <button onclick="toggleModal('modal-constants')" class="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div id="modal-content-body" class="space-y-4 text-xs">
+        <div>
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-2">Masses Atòmiques d'elements comuns (en u):</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono">
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">H: 1,01</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">C: 12,01</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">N: 14,01</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">O: 16,00</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Na: 22,99</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Mg: 24,31</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Al: 26,98</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">S: 32,06</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Cl: 35,45</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">K: 39,10</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Ca: 40,08</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Fe: 55,85</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Cu: 63,55</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Zn: 65,38</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Br: 79,90</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Ag: 107,87</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">I: 126,90</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Au: 197,00</div>
+            <div class="p-2 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200/60 dark:border-slate-700/60">Pb: 207,20</div>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-700">
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-2">Constants d'utilitat en la unitat:</h4>
+          <ul class="list-disc list-inside space-y-1.5 text-slate-600 dark:text-slate-300">
+            <li>Constant dels gasos ideals: $R = 0{,}082 \text{ atm}\cdot\text{L}/(\text{mol}\cdot\text{K})$</li>
+            <li>Volum molar en condicions normals ($P=1\text{ atm}, T=273\text{ K}$): $V_m = 22{,}4 \text{ L/mol}$</li>
+            <li>Nombre d'Avogadro: $N_A = 6{,}022 \cdot 10^{23} \text{ partícules/mol}$</li>
+            <li>Equivalències de pressió: $1 \text{ atm} = 760 \text{ mmHg} = 101\,325 \text{ Pa}$</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    /* ==========================================================================
+       KA TEX AUTO-RENDER UTILS
+       ========================================================================== */
+    function renderMathInContainer(containerId) {
+      const el = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
+      if (el && window.renderMathInElement) {
+        renderMathInElement(el, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
+    /* ==========================================================================
+       SVG STRATEGY FLOW GENERATOR (EXACT CENTER FORMULA MASKING & COMPACT LAYOUT)
+       ========================================================================== */
+    function generateStrategySVG(options) {
+      const {
+        items, // array of { text, x, isComp?, w? }
+        startIndex,
+        targetIndex,
+        startVal,
+        startUnit,
+        startSubstance,
+        targetVal = '?',
+        targetUnit,
+        targetSubstance,
+        yTop = 22
+      } = options;
+
+      const startItem = items[startIndex];
+      const targetItem = items[targetIndex];
+      const startX = startItem.x;
+      const targetX = targetItem.x;
+
+      // Render reaction items: Compound formulas get background rects to mask the red arrow
+      const itemsSVG = items.map(item => {
+        if (item.isComp) {
+          const rectW = item.w || 65;
+          return `
+            <rect x="${item.x - rectW/2}" y="60" width="${rectW}" height="32" rx="6" class="fill-slate-50 dark:fill-slate-900" />
+            <text x="${item.x}" y="81" text-anchor="middle" class="fill-slate-900 dark:fill-slate-100 font-bold text-sm sm:text-base font-mono">${item.text}</text>
+          `;
+        } else {
+          return `
+            <text x="${item.x}" y="81" text-anchor="middle" class="fill-slate-500 dark:fill-slate-400 font-bold text-sm sm:text-base">${item.text}</text>
+          `;
+        }
+      }).join('');
+
+      return `
+        <div class="bg-slate-50 dark:bg-slate-900/60 rounded-xl p-4 border border-slate-200/80 dark:border-slate-700/60 space-y-2 overflow-hidden">
+          <p class="text-xs font-semibold text-sky-700 dark:text-sky-300 uppercase tracking-wider flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+            Esquema Visual de Flux Estequiomètric
+          </p>
+
+          <!-- SVG Diagram -->
+          <div class="relative w-full overflow-x-auto flex justify-center py-1">
+            <svg viewBox="0 0 600 180" class="w-full max-w-[620px] h-auto font-sans">
+              <defs>
+                <marker id="red-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="#ef4444" />
+                </marker>
+              </defs>
+
+              <!-- 1. Red Arrow Path (rendered first, so it passes BEHIND compound formula background masks) -->
+              <path d="M ${startX} 136 L ${startX} ${yTop} L ${targetX} ${yTop} L ${targetX} 134" 
+                    fill="none" 
+                    stroke="#ef4444" 
+                    stroke-width="2.5" 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round"
+                    opacity="0.9"
+                    marker-end="url(#red-arrow)" />
+
+              <!-- 2. Reaction Items (compound background rects mask the red line in the middle) -->
+              ${itemsSVG}
+
+              <!-- 3. Known Value Box (Start) -->
+              <rect x="${startX - 65}" y="136" width="130" height="36" rx="8" class="fill-sky-100 dark:fill-sky-950 stroke-sky-400 dark:stroke-sky-600" stroke-width="1.5" />
+              <text x="${startX}" y="158" text-anchor="middle" class="fill-sky-800 dark:fill-sky-200 font-bold text-xs">${startVal} ${startUnit} (${startSubstance})</text>
+
+              <!-- 4. Target Value Box (Unknown Target) -->
+              <rect x="${targetX - 65}" y="136" width="130" height="36" rx="8" class="fill-amber-100 dark:fill-amber-950 stroke-amber-400 dark:stroke-amber-600" stroke-width="1.5" />
+              <text x="${targetX}" y="158" text-anchor="middle" class="fill-amber-900 dark:fill-amber-200 font-bold text-xs">${targetVal} ${targetUnit} (${targetSubstance})</text>
+            </svg>
+          </div>
+        </div>
+      `;
+    }
+
+    /* Helper for formulas in SVG with halo */
+    function h(text) {
+      return `<span class="bg-slate-50 dark:bg-slate-900 px-1.5 py-0.5 rounded shadow-xs">${text}</span>`;
+    }
+
+    /* ==========================================================================
+       CATEGORIES AND SUBCATEGORIES STRUCTURE
+       ========================================================================== */
+    const CATEGORIES = [
+      {
+        id: 'cat1',
+        title: '1. Càlculs estequiomètrics directes',
+        subcategories: [
+          { id: 'sub_massa_massa', name: 'Massa - Massa' },
+          { id: 'sub_volum_volum', name: 'Volum - Volum (Gasos c.n.)' },
+          { id: 'sub_massa_volum_cn', name: 'Massa - Volum gasos (c.n.)' },
+          { id: 'sub_massa_volum_nocn', name: 'Massa - Volum gasos (no c.n. pV=nRT)' }
+        ]
+      },
+      {
+        id: 'cat2',
+        title: '2. Magnituds i concentració de dissolucions',
+        subcategories: [
+          { id: 'sub_dis_components', name: 'Components de la dissolució' },
+          { id: 'sub_dis_gl', name: 'Concentració en g/L' },
+          { id: 'sub_dis_pct_massa', name: 'Percentatge en massa (% massa)' },
+          { id: 'sub_dis_pct_volum', name: 'Percentatge en volum (% volum)' },
+          { id: 'sub_dis_molaritat', name: 'Molaritat (M)' },
+          { id: 'sub_dis_fraccio_molar', name: 'Fracció molar (χ)' }
+        ]
+      },
+      {
+        id: 'cat3',
+        title: '3. Càlculs estequiomètrics amb dissolucions',
+        subcategories: [
+          { id: 'sub_est_dis_vm_massa', name: 'Volum/Molaritat a Massa' },
+          { id: 'sub_est_dis_neutralitzacio', name: 'Neutralitzacions Volum/Molaritat a Volum/Molaritat' },
+          { id: 'sub_est_dis_densitat', name: 'Dissolució amb % en massa i densitat' }
+        ]
+      },
+      {
+        id: 'cat4',
+        title: '4. Reactiu limitant i en excés',
+        subcategories: [
+          { id: 'sub_lim_exces_explicite', name: 'Exercicis amb excés especificat' },
+          { id: 'sub_lim_identificacio', name: 'Identificació de reactiu limitant' }
+        ]
+      },
+      {
+        id: 'cat5',
+        title: '5. Rendiment d\'una reacció',
+        subcategories: [
+          { id: 'sub_ren_massa_real', name: 'Càlcul de massa real amb % de rendiment' },
+          { id: 'sub_ren_percentatge', name: 'Càlcul del % de rendiment de la reacció' }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       STATE MANAGEMENT
+       ========================================================================== */
+    let currentSubcatId = 'sub_massa_massa';
+    let currentCatTitle = '1. Càlculs estequiomètrics directes';
+    let currentSubcatName = 'Massa - Massa';
+    let currentExercise = null;
+    let showFormulas = false;
+    let isSolutionVisible = false;
+    let currentTab = 1;
+
+    let stats = { correct: 0, total: 0 };
+
+    /* ==========================================================================
+       RANDOM NUMBER UTILS
+       ========================================================================== */
+    function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function randFloat(min, max, decimals = 1) {
+      const v = Math.random() * (max - min) + min;
+      return parseFloat(v.toFixed(decimals));
+    }
+
+    /* ==========================================================================
+       EXERCISE GENERATORS
+       ========================================================================== */
+    const GENERATORS = {
+      
+      // 1.1 Massa - Massa
+      'sub_massa_massa': () => {
+        const mCaCO3 = randFloat(15, 80, 1);
+        const M_CaCO3 = 100.09;
+        const M_CaCl2 = 110.98;
+        const correctVal = (mCaCO3 / M_CaCO3) * M_CaCl2;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'CaCO₃', x: 130, isComp: true, w: 70 },
+            { text: '+', x: 175 },
+            { text: '2 HCl', x: 220, isComp: true, w: 60 },
+            { text: '→', x: 265 },
+            { text: 'CaCl₂', x: 310, isComp: true, w: 60 },
+            { text: '+', x: 355 },
+            { text: 'H₂O', x: 395, isComp: true, w: 50 },
+            { text: '+', x: 435 },
+            { text: 'CO₂', x: 475, isComp: true, w: 50 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'CaCO₃',
+          startVal: `${mCaCO3}`,
+          startUnit: 'g',
+          targetSubstance: 'CaCl₂',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '1. Càlculs estequiomètrics directes',
+          subcategory: 'Massa - Massa',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `El carbonat de calci sòlid reacciona amb l'àcid clorhídric en dissolució per donar clorur de calci en dissolució, aigua líquida i diòxid de carboni gasós. Calcula la massa de <strong>clorur de calci</strong> que s'obté quan reaccionen <strong>${mCaCO3} g de carbonat de calci</strong> amb la quantitat suficient d'àcid clorhídric.`,
+          statementFormulas: `El $\\text{CaCO}_3(s)$ reacciona amb el $\\text{HCl}(aq)$ per donar $\\text{CaCl}_2(aq)$, $\\text{H}_2\\text{O}(l)$ i $\\text{CO}_2(g)$. Calcula la massa de $\\text{CaCl}_2$ que s'obté quan reaccionen <strong>${mCaCO3} g de $\\text{CaCO}_3$</strong> amb la quantitat suficient de $\\text{HCl}$.`,
+          tab1: `
+            <p><strong>1. Reacció química SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              Carbonat de calci + Àcid clorhídric $\\rightarrow$ Clorur de calci + Aigua + Diòxid de carboni <br>
+              $$\\text{CaCO}_3(s) + \\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$$
+            </p>
+            <p><strong>2. Identificació de les dades:</strong></p>
+            <ul class="list-disc list-inside ml-2 space-y-1">
+              <li>Dada coneguda: $m(\\text{CaCO}_3) = ${mCaCO3}\\text{ g}$</li>
+              <li>Incògnita a calcular: $m(\\text{CaCl}_2) = ?\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            <p>Observem que el calci (Ca) i el carboni (C) estan ajustats (1 a cada costat). Per ajustar el clor (Cl) i l'hidrogen (H), necessitem 2 molècules de $\\text{HCl}$ als reactius.</p>
+            <p class="font-semibold mt-2">Equació química ajustada final:</p>
+            $$\\text{CaCO}_3(s) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l) + \\text{CO}_2(g)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Masses molars necessàries (centèsimes):</strong></p>
+              <ul class="list-disc list-inside ml-2 space-y-1">
+                <li>$M(\\text{CaCO}_3) = 40{,}08 + 12{,}01 + 3 \\cdot 16{,}00 = 100{,}09\\text{ g/mol}$</li>
+                <li>$M(\\text{CaCl}_2) = 40{,}08 + 2 \\cdot 35{,}45 = 110{,}98\\text{ g/mol}$</li>
+              </ul>
+              <p class="mt-3"><strong>2. Càlculs amb Factors de Conversió encadenats:</strong></p>
+              $$${mCaCO3}\\text{ g CaCO}_3 \\cdot \\frac{1\\text{ mol CaCO}_3}{100{,}09\\text{ g CaCO}_3} \\cdot \\frac{1\\text{ mol CaCl}_2}{1\\text{ mol CaCO}_3} \\cdot \\frac{110{,}98\\text{ g CaCl}_2}{1\\text{ mol CaCl}_2} = ${correctVal.toFixed(2)}\\text{ g CaCl}_2$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de CaCl₂</p>
+            </div>
+          `
+        };
+      },
+
+      // 1.2 Volum - Volum (Gasos c.n.)
+      'sub_volum_volum': () => {
+        const V_NH3 = randInt(40, 200);
+        const correctVal = V_NH3 * (3 / 2);
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: '3 H₂', x: 180, isComp: true, w: 55 },
+            { text: '+', x: 235 },
+            { text: 'N₂', x: 280, isComp: true, w: 50 },
+            { text: '→', x: 330 },
+            { text: '2 NH₃', x: 390, isComp: true, w: 60 }
+          ],
+          startIndex: 4,
+          targetIndex: 0,
+          startSubstance: 'NH₃',
+          startVal: `${V_NH3}`,
+          startUnit: 'L',
+          targetSubstance: 'H₂',
+          targetUnit: 'L'
+        });
+
+        return {
+          category: '1. Càlculs estequiomètrics directes',
+          subcategory: 'Volum - Volum (Gasos c.n.)',
+          unit: 'L',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Troba el volum necessari de <strong>dihidrogen gasós</strong> en condicions normals (c.n.) perquè en reaccionar amb dinitrogen gasós s'originin <strong>${V_NH3} L d'amoníac</strong> en condicions normals.`,
+          statementFormulas: `Troba el volum necessari de $\\text{H}_2(g)$ en c.n. perquè en reaccionar amb $\\text{N}_2(g)$ s'originin <strong>${V_NH3} L de $\\text{NH}_3(g)$</strong> en c.n.`,
+          tab1: `
+            <p><strong>1. Reacció química SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              Dihidrogen + Dinitrogen $\\rightarrow$ Amoníac <br>
+              $$\\text{H}_2(g) + \\text{N}_2(g) \\rightarrow \\text{NH}_3(g)$$
+            </p>
+            <p><strong>2. Dades i incògnita:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Dada coneguda: $V(\\text{NH}_3) = ${V_NH3}\\text{ L}$ (en c.n.)</li>
+              <li>Incògnita: $V(\\text{H}_2) = ?\\text{ L}$ (en c.n.)</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$3\\,\\text{H}_2(g) + \\text{N}_2(g) \\rightarrow 2\\,\\text{NH}_3(g)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>Càlculs amb el volum molar ($V_m = 22{,}4\\text{ L/mol}$):</strong></p>
+              $$${V_NH3}\\text{ L NH}_3 \\cdot \\frac{1\\text{ mol NH}_3}{22{,}4\\text{ L NH}_3} \\cdot \\frac{3\\text{ mol H}_2}{2\\text{ mol NH}_3} \\cdot \\frac{22{,}4\\text{ L H}_2}{1\\text{ mol H}_2} = ${correctVal.toFixed(1)}\\text{ L H}_2$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(1)} L de H₂</p>
+            </div>
+          `
+        };
+      },
+
+      // 1.3 Massa - Volum gasos (c.n.)
+      'sub_massa_volum_cn': () => {
+        const mKClO3 = randFloat(15, 60, 1);
+        const M_KClO3 = 122.55;
+        const correctVal = (mKClO3 / M_KClO3) * (3 / 2) * 22.4;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: '2 KClO₃', x: 170, isComp: true, w: 75 },
+            { text: '→', x: 250 },
+            { text: '2 KCl', x: 320, isComp: true, w: 60 },
+            { text: '+', x: 380 },
+            { text: '3 O₂', x: 440, isComp: true, w: 55 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'KClO₃',
+          startVal: `${mKClO3}`,
+          startUnit: 'g',
+          targetSubstance: 'O₂',
+          targetUnit: 'L'
+        });
+
+        return {
+          category: '1. Càlculs estequiomètrics directes',
+          subcategory: 'Massa - Volum gasos (c.n.)',
+          unit: 'L',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Si s'escalfa el clorat de potassi, es descompon donant lloc a clorur de potassi sòlid i dioxigen gasós. Quin volum de <strong>dioxigen gasós</strong> es recollirà en condicions normals (c.n.) si descomponem <strong>${mKClO3} g de clorat de potassi</strong>?`,
+          statementFormulas: `Si s'escalfa el $\\text{KClO}_3(s)$, es descompon en $\\text{KCl}(s)$ i $\\text{O}_2(g)$. Quin volum de $\\text{O}_2(g)$ es recollirà en c.n. si descomponem <strong>${mKClO3} g de $\\text{KClO}_3$</strong>?`,
+          tab1: `
+            <p><strong>1. Reacció química SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              Clorat de potassi $\\rightarrow$ Clorur de potassi + Dioxigen <br>
+              $$\\text{KClO}_3(s) \\rightarrow \\text{KCl}(s) + \\text{O}_2(g)$$
+            </p>
+            <p><strong>2. Dades del problema:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Massa inicial: $m(\\text{KClO}_3) = ${mKClO3}\\text{ g}$</li>
+              <li>Incògnita: $V(\\text{O}_2) = ?\\text{ L}$ en c.n.</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$2\\,\\text{KClO}_3(s) \\rightarrow 2\\,\\text{KCl}(s) + 3\\,\\text{O}_2(g)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Massa molar del $\\text{KClO}_3$:</strong></p>
+              <p>$M(\\text{KClO}_3) = 39{,}10 + 35{,}45 + 3 \\cdot 16{,}00 = 122{,}55\\text{ g/mol}$</p>
+              <p class="mt-3"><strong>2. Factors de conversió amb $V_m = 22{,}4\\text{ L/mol}$:</strong></p>
+              $$${mKClO3}\\text{ g KClO}_3 \\cdot \\frac{1\\text{ mol KClO}_3}{122{,}55\\text{ g KClO}_3} \\cdot \\frac{3\\text{ mol O}_2}{2\\text{ mol KClO}_3} \\cdot \\frac{22{,}4\\text{ L O}_2}{1\\text{ mol O}_2} = ${correctVal.toFixed(2)}\\text{ L O}_2$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} L de O₂</p>
+            </div>
+          `
+        };
+      },
+
+      // 1.4 Massa - Volum gasos (no c.n.)
+      'sub_massa_volum_nocn': () => {
+        const V_C3H8 = randFloat(1.5, 8.0, 1);
+        const P_atm = 100000 / 101325;
+        const T = 298;
+        const R = 0.08206;
+        
+        const n_C3H8 = (P_atm * V_C3H8) / (R * T);
+        const n_CO2 = n_C3H8 * 3;
+        const M_CO2 = 44.01;
+        const correctVal = n_CO2 * M_CO2;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'C₃H₈', x: 140, isComp: true, w: 60 },
+            { text: '+', x: 195 },
+            { text: '5 O₂', x: 245, isComp: true, w: 55 },
+            { text: '→', x: 295 },
+            { text: '3 CO₂', x: 355, isComp: true, w: 60 },
+            { text: '+', x: 410 },
+            { text: '4 H₂O', x: 465, isComp: true, w: 60 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'C₃H₈',
+          startVal: `${V_C3H8}`,
+          startUnit: 'L',
+          targetSubstance: 'CO₂',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '1. Càlculs estequiomètrics directes',
+          subcategory: 'Massa - Volum gasos (no c.n. pV=nRT)',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Donada la reacció de combustió del propà amb dioxigen per donar diòxid de carboni gasós i aigua gasosa, calcula la massa de <strong>diòxid de carboni</strong> que obtindrem a partir de <strong>${V_C3H8} L de propà gasós</strong> en condicions de $P = 100\\,000\\text{ Pa}$ i $T = 298\\text{ K}$.`,
+          statementFormulas: `Calcula la massa de $\\text{CO}_2$ que obtindrem a partir de <strong>${V_C3H8} L de $\\text{C}_3\\text{H}_8(g)$</strong> a $P = 100\\,000\\text{ Pa}$ i $T = 298\\text{ K}$.`,
+          tab1: `
+            <p><strong>1. Reacció química SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{C}_3\\text{H}_8(g) + \\text{O}_2(g) \\rightarrow \\text{CO}_2(g) + \\text{H}_2\\text{O}(g)$$
+            </p>
+            <p><strong>2. Dades conegudes i incògnita:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>$V(\\text{C}_3\\text{H}_8) = ${V_C3H8}\\text{ L}$, $P = 100\\,000\\text{ Pa} = 0{,}987\\text{ atm}$, $T = 298\\text{ K}$</li>
+              <li>Incògnita: $m(\\text{CO}_2) = ?\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$\\text{C}_3\\text{H}_8(g) + 5\\,\\text{O}_2(g) \\rightarrow 3\\,\\text{CO}_2(g) + 4\\,\\text{H}_2\\text{O}(g)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Mols de propà ($P \\cdot V = n \\cdot R \\cdot T$):</strong></p>
+              $$n(\\text{C}_3\\text{H}_8) = \\frac{P \\cdot V}{R \\cdot T} = \\frac{0{,}987 \\cdot ${V_C3H8}}{0{,}082 \\cdot 298} = ${n_C3H8.toFixed(4)}\\text{ mol}$$
+              <p class="mt-2"><strong>2. Factor de conversió a massa de $\\text{CO}_2$:</strong></p>
+              $$${n_C3H8.toFixed(4)}\\text{ mol C}_3\\text{H}_8 \\cdot \\frac{3\\text{ mol CO}_2}{1\\text{ mol C}_3\\text{H}_8} \\cdot \\frac{44{,}01\\text{ g CO}_2}{1\\text{ mol CO}_2} = ${correctVal.toFixed(2)}\\text{ g CO}_2$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de CO₂</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.1 Components de la dissolució
+      'sub_dis_components': () => {
+        const mSolut = randFloat(10, 40, 1);
+        const mSolvent = randFloat(150, 300, 1);
+        const correctVal = mSolut + mSolvent;
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Components de la dissolució',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(1)),
+          statementNames: `Es dissoleixen <strong>${mSolut} g de nitrat de potassi</strong> en <strong>${mSolvent} g d'aigua destil·lada</strong>. Determina la massa total de la dissolució obtinguda.`,
+          statementFormulas: `Es dissoleixen <strong>${mSolut} g de $\\text{KNO}_3$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Determina la massa total de la dissolució.`,
+          tab1: `
+            <p><strong>1. Identificació dels components:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Solut: Nitrat de potassi ($\\text{KNO}_3$), $m_{\\text{solut}} = ${mSolut}\\text{ g}$</li>
+              <li>Dissolvent: Aigua ($\\text{H}_2\\text{O}$), $m_{\\text{dissolvent}} = ${mSolvent}\\text{ g}$</li>
+              <li>Incògnita: Massa de la dissolució ($m_{\\text{dissolució}}$)</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Relació de massa en dissolucions:</strong></p>
+            <p>La massa total és conservativa:</p>
+            $$m_{\\text{dissolució}} = m_{\\text{solut}} + m_{\\text{dissolvent}}$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <div class="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 text-center space-y-3">
+                <p class="font-bold text-sky-700 dark:text-sky-300">Esquema d'Addició de Masses</p>
+                <div class="flex justify-center items-center gap-3 text-sm font-semibold">
+                  <span class="px-3 py-1.5 bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-200 rounded-lg">${mSolut} g (Solut)</span>
+                  <span>+</span>
+                  <span class="px-3 py-1.5 bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-200 rounded-lg">${mSolvent} g (Dissolvent)</span>
+                  <span>=</span>
+                  <span class="px-3 py-1.5 bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-200 rounded-lg">? g (Dissolució)</span>
+                </div>
+              </div>
+              <p><strong>Càlcul directe:</strong></p>
+              $$m_{\\text{dissolució}} = ${mSolut}\\text{ g} + ${mSolvent}\\text{ g} = ${correctVal.toFixed(1)}\\text{ g}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(1)} g de dissolució</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.2 Concentració en g/L
+      'sub_dis_gl': () => {
+        const m = randFloat(5, 30, 1);
+        const V_mL = randInt(200, 800);
+        const correctVal = m / (V_mL / 1000);
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Concentració en g/L',
+          unit: 'g/L',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Al laboratori es dissoleixen <strong>${m} g de sucre</strong> en aigua destil·lada fins a tenir un volum total de <strong>${V_mL} mL de dissolució</strong>. Calcula la concentració de la dissolució en g/L.`,
+          statementFormulas: `Al laboratori es dissoleixen <strong>${m} g de sucre ($\\text{C}_{12}\\text{H}_{22}\\text{O}_{11}$)</strong> fins tenir <strong>${V_mL} mL de dissolució</strong>. Calcula la concentració en g/L.`,
+          tab1: `
+            <p><strong>1. Identificació de les dades:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Massa de solut = ${m} g</li>
+              <li>Volum de dissolució = ${V_mL} mL = ${(V_mL/1000).toFixed(3)} L</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Fórmula de la concentració en massa per volum:</strong></p>
+            $$\\text{Concentració (g/L)} = \\frac{m_{\\text{solut}}(\\text{g})}{V_{\\text{dissolució}}(\\text{L})}$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <p><strong>Substitució i càlcul:</strong></p>
+              $$\\text{Concentració} = \\frac{${m}\\text{ g}}{${(V_mL/1000).toFixed(3)}\\text{ L}} = ${correctVal.toFixed(2)}\\text{ g/L}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g/L</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.3 % en massa
+      'sub_dis_pct_massa': () => {
+        const mSolut = randFloat(10, 40, 1);
+        const mSolvent = randFloat(150, 350, 1);
+        const mTotal = mSolut + mSolvent;
+        const correctVal = (mSolut / mTotal) * 100;
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Percentatge en massa (% massa)',
+          unit: '%',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `S'han dissolt <strong>${mSolut} g d'àcid clorhídric</strong> en <strong>${mSolvent} g d'aigua</strong>. Calcula el percentatge en massa de la dissolució resultant.`,
+          statementFormulas: `S'han dissolt <strong>${mSolut} g de $\\text{HCl}$</strong> en <strong>${mSolvent} g de $\\text{H}_2\\text{O}$</strong>. Calcula el percentatge en massa del solut.`,
+          tab1: `
+            <p><strong>1. Dades inicials:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>$m_{\\text{solut}} = ${mSolut}\\text{ g}$</li>
+              <li>$m_{\\text{dissolvent}} = ${mSolvent}\\text{ g}$</li>
+              <li>$m_{\\text{dissolució}} = ${mSolut} + ${mSolvent} = ${mTotal.toFixed(1)}\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Fórmula del percentatge en massa:</strong></p>
+            $$\\%\\text{ en massa} = \\frac{m_{\\text{solut}}}{m_{\\text{dissolució}}} \\cdot 100$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <p><strong>Càlcul numèric:</strong></p>
+              $$\\%\\text{ en massa} = \\frac{${mSolut}\\text{ g}}{${mTotal.toFixed(1)}\\text{ g}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} % en massa</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.4 % en volum
+      'sub_dis_pct_volum': () => {
+        const vSolut = randInt(20, 50);
+        const vSolvent = randInt(100, 200);
+        const vTotal = vSolut + vSolvent;
+        const correctVal = (vSolut / vTotal) * 100;
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Percentatge en volum (% volum)',
+          unit: '%',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Es mesclen <strong>${vSolut} mL d'etanol</strong> amb <strong>${vSolvent} mL d'aigua</strong>. Considerant que els volums són additius ($V_{\\text{total}} = ${vTotal}\\text{ mL}$), quin és el percentatge en volum de l'etanol?`,
+          statementFormulas: `Es mesclen <strong>${vSolut} mL de $\\text{C}_2\\text{H}_5\\text{OH}$</strong> amb <strong>${vSolvent} mL de $\\text{H}_2\\text{O}$</strong>. Quin és el percentatge en volum de l'alcohol?`,
+          tab1: `
+            <p><strong>1. Dades:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>$V_{\\text{solut}} = ${vSolut}\\text{ mL}$</li>
+              <li>$V_{\\text{dissolució}} = ${vSolut} + ${vSolvent} = ${vTotal}\\text{ mL}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Fórmula del percentatge en volum:</strong></p>
+            $$\\%\\text{ en volum} = \\frac{V_{\\text{solut}}}{V_{\\text{dissolució}}} \\cdot 100$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <p><strong>Càlcul:</strong></p>
+              $$\\%\\text{ en volum} = \\frac{${vSolut}\\text{ mL}}{${vTotal}\\text{ mL}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} % en volum</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.5 Molaritat
+      'sub_dis_molaritat': () => {
+        const mKOH = randFloat(8, 30, 1);
+        const V_mL = randInt(250, 1000);
+        const M_KOH = 56.11;
+        const n_KOH = mKOH / M_KOH;
+        const correctVal = n_KOH / (V_mL / 1000);
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Molaritat (M)',
+          unit: 'M',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Una dissolució d'<strong>hidròxid de potassi</strong> es prepara dissolent <strong>${mKOH} g d'aquesta substància</strong> en aigua fins a completar un volum total de <strong>${V_mL} mL de dissolució</strong>. Quina és la seva concentració molar (Molaritat)?`,
+          statementFormulas: `Una dissolució de $\\text{KOH}$ conté <strong>${mKOH} g de $\\text{KOH}$</strong> en <strong>${V_mL} mL de dissolució</strong>. Quina és la seva concentració molar (Molaritat)?`,
+          tab1: `
+            <p><strong>1. Dades del solut i del volum:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Solut: Hidròxid de potassi ($\\text{KOH}$), $m = ${mKOH}\\text{ g}$</li>
+              <li>Volum: $V = ${V_mL}\\text{ mL} = ${(V_mL/1000).toFixed(3)}\\text{ L}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Definició de Molaritat ($M$):</strong></p>
+            $$M = \\frac{n_{\\text{solut}}(\\text{mols})}{V_{\\text{dissolució}}(\\text{L})}$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Massa molar del KOH:</strong></p>
+              <p>$M(\\text{KOH}) = 39{,}10 + 16{,}00 + 1{,}01 = 56{,}11\\text{ g/mol}$</p>
+              <p class="mt-2"><strong>2. Mols i Molaritat:</strong></p>
+              $$n = \\frac{${mKOH}\\text{ g}}{56{,}11\\text{ g/mol}} = ${n_KOH.toFixed(4)}\\text{ mol}$$
+              $$M = \\frac{${n_KOH.toFixed(4)}\\text{ mol}}{${(V_mL/1000).toFixed(3)}\\text{ L}} = ${correctVal.toFixed(2)}\\text{ M}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} M</p>
+            </div>
+          `
+        };
+      },
+
+      // 2.6 Fracció molar
+      'sub_dis_fraccio_molar': () => {
+        const mNaCl = randFloat(20, 60, 1);
+        const mH2O = randFloat(150, 300, 1);
+        const M_NaCl = 58.44;
+        const M_H2O = 18.02;
+        const n_NaCl = mNaCl / M_NaCl;
+        const n_H2O = mH2O / M_H2O;
+        const correctVal = n_NaCl / (n_NaCl + n_H2O);
+
+        return {
+          category: '2. Magnituds i concentració de dissolucions',
+          subcategory: 'Fracció molar (χ)',
+          unit: '',
+          correctValue: parseFloat(correctVal.toFixed(3)),
+          statementNames: `En un laboratori es prepara una dissolució dissolent <strong>${mNaCl} g de clorur de sodi</strong> en <strong>${mH2O} g d'aigua destil·lada</strong>. Calcula la fracció molar de clorur de sodi ($\\chi_{\\text{NaCl}}$).`,
+          statementFormulas: `Es prepara una dissolució dissolent <strong>${mNaCl} g de $\\text{NaCl}$</strong> en <strong>${mH2O} g de $\\text{H}_2\\text{O}$</strong>. Calcula la fracció molar del solut ($\\chi_{\\text{NaCl}}$).`,
+          tab1: `
+            <p><strong>1. Components:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Solut: Clorur de sodi ($\\text{NaCl}$), $m = ${mNaCl}\\text{ g}$</li>
+              <li>Dissolvent: Aigua ($\\text{H}_2\\text{O}$), $m = ${mH2O}\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Fórmula de la Fracció Molar ($\\chi$):</strong></p>
+            $$\\chi_{\\text{solut}} = \\frac{n_{\\text{solut}}}{n_{\\text{solut}} + n_{\\text{dissolvent}}}$$
+          `,
+          tab3: `
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Masses molars i mols:</strong></p>
+              <p>$M(\\text{NaCl}) = 22{,}99 + 35{,}45 = 58{,}44\\text{ g/mol} \\implies n(\\text{NaCl}) = \\frac{${mNaCl}}{58{,}44} = ${n_NaCl.toFixed(4)}\\text{ mol}$</p>
+              <p>$M(\\text{H}_2\\text{O}) = 2 \\cdot 1{,}01 + 16{,}00 = 18{,}02\\text{ g/mol} \\implies n(\\text{H}_2\\text{O}) = \\frac{${mH2O}}{18{,}02} = ${n_H2O.toFixed(4)}\\text{ mol}$</p>
+              <p class="mt-2"><strong>2. Fracció molar:</strong></p>
+              $$\\chi_{\\text{NaCl}} = \\frac{${n_NaCl.toFixed(4)}}{${n_NaCl.toFixed(4)} + ${n_H2O.toFixed(4)}} = ${correctVal.toFixed(3)}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: χ = ${correctVal.toFixed(3)}</p>
+            </div>
+          `
+        };
+      },
+
+      // 3.1 Volum/Molaritat a Massa
+      'sub_est_dis_vm_massa': () => {
+        const V_mL = randInt(40, 150);
+        const M_sol = randFloat(0.2, 1.0, 2);
+        const n_CaOH2 = (V_mL / 1000) * M_sol;
+        const M_CaCl2 = 110.98;
+        const correctVal = n_CaOH2 * M_CaCl2;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'Ca(OH)₂', x: 140, isComp: true, w: 75 },
+            { text: '+', x: 205 },
+            { text: '2 HCl', x: 255, isComp: true, w: 60 },
+            { text: '→', x: 305 },
+            { text: 'CaCl₂', x: 365, isComp: true, w: 65 },
+            { text: '+', x: 425 },
+            { text: '2 H₂O', x: 475, isComp: true, w: 60 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'Ca(OH)₂',
+          startVal: `${V_mL} mL, ${M_sol}`,
+          startUnit: 'M',
+          targetSubstance: 'CaCl₂',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '3. Càlculs estequiomètrics amb dissolucions',
+          subcategory: 'Volum/Molaritat a Massa',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `L'àcid clorhídric reacciona amb l'hidròxid de calci per donar clorur de calci i aigua. Tenim <strong>${V_mL} mL d'una dissolució d'hidròxid de calci ${M_sol} M</strong>. Calcula la massa de <strong>clorur de calci</strong> que es formarà.`,
+          statementFormulas: `Calcula la massa de $\\text{CaCl}_2$ obtinguda quan reaccionen <strong>${V_mL} mL de dissolució de $\\text{Ca(OH)}_2$ ${M_sol} M</strong> amb quantitat suficient de $\\text{HCl}$.`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{Ca(OH)}_2(aq) + \\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p><strong>2. Dades i incògnita:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Dissolució de $\\text{Ca(OH)}_2$: $V = ${V_mL}\\text{ mL}$, $M = ${M_sol}\\text{ M}$</li>
+              <li>Incògnita: $m(\\text{CaCl}_2) = ?\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$\\text{Ca(OH)}_2(aq) + 2\\,\\text{HCl}(aq) \\rightarrow \\text{CaCl}_2(aq) + 2\\,\\text{H}_2\\text{O}(l)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Mols inicials de $\\text{Ca(OH)}_2$:</strong></p>
+              $$n = M \\cdot V = ${M_sol}\\text{ M} \\cdot ${(V_mL/1000).toFixed(3)}\\text{ L} = ${n_CaOH2.toFixed(4)}\\text{ mol}$$
+              <p class="mt-2"><strong>2. Factor de conversió a grams de $\\text{CaCl}_2$:</strong></p>
+              $$${n_CaOH2.toFixed(4)}\\text{ mol Ca(OH)}_2 \\cdot \\frac{1\\text{ mol CaCl}_2}{1\\text{ mol Ca(OH)}_2} \\cdot \\frac{110{,}98\\text{ g CaCl}_2}{1\\text{ mol CaCl}_2} = ${correctVal.toFixed(2)}\\text{ g CaCl}_2$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de CaCl₂</p>
+            </div>
+          `
+        };
+      },
+
+      // 3.2 Neutralitzacions Volum/Molaritat a Volum/Molaritat
+      'sub_est_dis_neutralitzacio': () => {
+        const V1_mL = randInt(20, 50);
+        const V2_mL = randInt(30, 80);
+        const M2 = randFloat(0.1, 0.5, 2);
+        
+        const n_NaOH = (V2_mL / 1000) * M2;
+        const n_H2SO4 = n_NaOH / 2;
+        const correctVal = n_H2SO4 / (V1_mL / 1000);
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'H₂SO₄', x: 140, isComp: true, w: 65 },
+            { text: '+', x: 200 },
+            { text: '2 NaOH', x: 260, isComp: true, w: 70 },
+            { text: '→', x: 325 },
+            { text: 'Na₂SO₄', x: 390, isComp: true, w: 70 },
+            { text: '+', x: 450 },
+            { text: '2 H₂O', x: 495, isComp: true, w: 60 }
+          ],
+          startIndex: 2,
+          targetIndex: 0,
+          startSubstance: 'NaOH',
+          startVal: `${V2_mL} mL, ${M2}`,
+          startUnit: 'M',
+          targetSubstance: 'H₂SO₄',
+          targetUnit: 'M'
+        });
+
+        return {
+          category: '3. Càlculs estequiomètrics amb dissolucions',
+          subcategory: 'Neutralitzacions Volum/Molaritat a Volum/Molaritat',
+          unit: 'M',
+          correctValue: parseFloat(correctVal.toFixed(3)),
+          statementNames: `Calcula la concentració molar d'una dissolució d'<strong>àcid sulfúric</strong> si <strong>${V1_mL} mL d'aquesta dissolució</strong> es neutralitzen exactament amb <strong>${V2_mL} mL d'una dissolució d'hidròxid de sodi ${M2} M</strong>.`,
+          statementFormulas: `Calcula la molaritat de $\\text{H}_2\\text{SO}_4$ si <strong>${V1_mL} mL</strong> es neutralitzen amb <strong>${V2_mL} mL de $\\text{NaOH}$ ${M2} M</strong>.`,
+          tab1: `
+            <p><strong>1. Reacció de neutralització SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{H}_2\\text{SO}_4(aq) + \\text{NaOH}(aq) \\rightarrow \\text{Na}_2\\text{SO}_4(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p><strong>2. Dades conegudes:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>Àcid: $V = ${V1_mL}\\text{ mL}$, $M = ?$</li>
+              <li>Base: $V = ${V2_mL}\\text{ mL}$, $M = ${M2}\\text{ M}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la neutralització:</strong></p>
+            $$\\text{H}_2\\text{SO}_4(aq) + 2\\,\\text{NaOH}(aq) \\rightarrow \\text{Na}_2\\text{SO}_4(aq) + 2\\,\\text{H}_2\\text{O}(l)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Mols de $\\text{NaOH}$ utilitzats:</strong></p>
+              $$n(\\text{NaOH}) = ${M2}\\text{ M} \\cdot ${(V2_mL/1000).toFixed(3)}\\text{ L} = ${n_NaOH.toFixed(4)}\\text{ mol}$$
+              <p class="mt-2"><strong>2. Mols de $\\text{H}_2\\text{SO}_4$ i Molaritat:</strong></p>
+              $$n(\\text{H}_2\\text{SO}_4) = \\frac{${n_NaOH.toFixed(4)}}{2} = ${n_H2SO4.toFixed(4)}\\text{ mol}$$
+              $$M = \\frac{${n_H2SO4.toFixed(4)}\\text{ mol}}{${(V1_mL/1000).toFixed(3)}\\text{ L}} = ${correctVal.toFixed(3)}\\text{ M}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(3)} M</p>
+            </div>
+          `
+        };
+      },
+
+      // 3.3 Dissolució amb % en massa i densitat
+      'sub_est_dis_densitat': () => {
+        const V_mL = randInt(150, 350);
+        const pctMassa = randInt(10, 25);
+        const d = randFloat(1.05, 1.20, 2);
+        
+        const mDis = V_mL * d;
+        const mCuSO4 = mDis * (pctMassa / 100);
+        const M_CuSO4 = 159.61;
+        const M_Fe = 55.85;
+        const correctVal = (mCuSO4 / M_CuSO4) * M_Fe;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'Fe', x: 160, isComp: true, w: 45 },
+            { text: '+', x: 210 },
+            { text: 'CuSO₄', x: 275, isComp: true, w: 70 },
+            { text: '→', x: 340 },
+            { text: 'FeSO₄', x: 405, isComp: true, w: 65 },
+            { text: '+', x: 465 },
+            { text: 'Cu', x: 505, isComp: true, w: 45 }
+          ],
+          startIndex: 2,
+          targetIndex: 0,
+          startSubstance: 'CuSO₄',
+          startVal: `${V_mL} mL, ${d} g/mL`,
+          startUnit: `${pctMassa}%`,
+          targetSubstance: 'Fe',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '3. Càlculs estequiomètrics amb dissolucions',
+          subcategory: 'Dissolució amb % en massa i densitat',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Calcula la massa de <strong>ferro metall</strong> que reaccionarà amb <strong>${V_mL} mL de dissolució de sulfat de coure(II)</strong> al <strong>${pctMassa}% en massa</strong> ($d = ${d}\\text{ g/mL}$), per donar sulfat de ferro(II) i coure metall.`,
+          statementFormulas: `Calcula la massa de $\\text{Fe}$ que reaccionarà amb <strong>${V_mL} mL de dissolució de $\\text{CuSO}_4$</strong> al <strong>${pctMassa}\\% en massa</strong> ($d = ${d}\\text{ g/mL}$).`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{Fe}(s) + \\text{CuSO}_4(aq) \\rightarrow \\text{FeSO}_4(aq) + \\text{Cu}(s)$$
+            </p>
+            <p><strong>2. Dades de la dissolució:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>$V = ${V_mL}\\text{ mL}$, $d = ${d}\\text{ g/mL}$, $\\%\\text{ en massa} = ${pctMassa}\\%$</li>
+              <li>Incògnita: $m(\\text{Fe}) = ?\\text{ g}$</li>
+            </ul>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$\\text{Fe}(s) + \\text{CuSO}_4(aq) \\rightarrow \\text{FeSO}_4(aq) + \\text{Cu}(s)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Càlcul de massa de dissolució i del solut pur $\\text{CuSO}_4$:</strong></p>
+              <p>$m_{\\text{dissolució}} = V \\cdot d = ${V_mL} \\cdot ${d} = ${mDis.toFixed(2)}\\text{ g}$</p>
+              <p>$m(\\text{CuSO}_4) = ${mDis.toFixed(2)} \\cdot \\frac{${pctMassa}}{100} = ${mCuSO4.toFixed(2)}\\text{ g}$</p>
+              <p class="mt-2"><strong>2. Factor de conversió:</strong></p>
+              $$${mCuSO4.toFixed(2)}\\text{ g CuSO}_4 \\cdot \\frac{1\\text{ mol CuSO}_4}{159{,}61\\text{ g}} \\cdot \\frac{1\\text{ mol Fe}}{1\\text{ mol CuSO}_4} \\cdot \\frac{55{,}85\\text{ g Fe}}{1\\text{ mol Fe}} = ${correctVal.toFixed(2)}\\text{ g Fe}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de Fe</p>
+            </div>
+          `
+        };
+      },
+
+      // 4.1 Exercicis amb excés especificat
+      'sub_lim_exces_explicite': () => {
+        const V_mL = randInt(15, 40);
+        const mDis = V_mL * 1.08;
+        const mKOH = mDis * 0.20;
+        const M_KOH = 56.11;
+        const M_KCl = 74.55;
+        const correctVal = (mKOH / M_KOH) * M_KCl;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'KOH', x: 170, isComp: true, w: 55 },
+            { text: '+', x: 225 },
+            { text: 'HCl', x: 275, isComp: true, w: 50 },
+            { text: '→', x: 325 },
+            { text: 'KCl', x: 380, isComp: true, w: 50 },
+            { text: '+', x: 430 },
+            { text: 'H₂O', x: 475, isComp: true, w: 50 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'KOH',
+          startVal: `${V_mL} mL dis.`,
+          startUnit: '20%',
+          targetSubstance: 'KCl',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '4. Reactiu limitant i en excés',
+          subcategory: 'Exercicis amb excés especificat',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Determina la massa de <strong>clorur de potassi</strong> que s'obtindrà si fem reaccionar <strong>${V_mL} mL de dissolució d'hidròxid de potassi</strong> al 20% en massa ($d = 1{,}08\\text{ g/mL}$) amb <strong>excés d'àcid clorhídric</strong>.`,
+          statementFormulas: `Determina la massa de $\\text{KCl}$ obtinguda fent reaccionar <strong>${V_mL} mL de dissolució de $\\text{KOH}$</strong> al 20\\% ($d = 1{,}08\\text{ g/mL}$) amb <strong>excés de $\\text{HCl}$</strong>.`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p>Com que l'àcid clorhídric està en excés, el reactiu limitant és el KOH.</p>
+          `,
+          tab2: `
+            <p><strong>Ajustament:</strong></p>
+            $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Massa de KOH pur:</strong> $m(\\text{KOH}) = ${V_mL} \\cdot 1{,}08 \\cdot 0{,}20 = ${mKOH.toFixed(2)}\\text{ g}$</p>
+              <p class="mt-2"><strong>2. Factor de conversió:</strong></p>
+              $$${mKOH.toFixed(2)}\\text{ g KOH} \\cdot \\frac{1\\text{ mol KOH}}{56{,}11\\text{ g}} \\cdot \\frac{1\\text{ mol KCl}}{1\\text{ mol KOH}} \\cdot \\frac{74{,}55\\text{ g KCl}}{1\\text{ mol KCl}} = ${correctVal.toFixed(2)}\\text{ g KCl}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de KCl</p>
+            </div>
+          `
+        };
+      },
+
+      // 4.2 Identificació de reactiu limitant
+      'sub_lim_identificacio': () => {
+        const V_mL = 25;
+        const mHCl = randFloat(2.5, 4.5, 1);
+        
+        const n_KOH = (25 * 1.08 * 0.20) / 56.11;
+        const n_HCl = mHCl / 36.46;
+        
+        const isHClLimiting = n_HCl < n_KOH;
+        const n_limiting = Math.min(n_KOH, n_HCl);
+        const M_KCl = 74.55;
+        const correctVal = n_limiting * M_KCl;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'KOH', x: 170, isComp: true, w: 55 },
+            { text: '+', x: 225 },
+            { text: 'HCl', x: 275, isComp: true, w: 50 },
+            { text: '→', x: 325 },
+            { text: 'KCl', x: 380, isComp: true, w: 50 },
+            { text: '+', x: 430 },
+            { text: 'H₂O', x: 475, isComp: true, w: 50 }
+          ],
+          startIndex: isHClLimiting ? 2 : 0,
+          targetIndex: 4,
+          startSubstance: isHClLimiting ? 'HCl (Limitant)' : 'KOH (Limitant)',
+          startVal: `${n_limiting.toFixed(3)}`,
+          startUnit: 'mol',
+          targetSubstance: 'KCl',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '4. Reactiu limitant i en excés',
+          subcategory: 'Identificació de reactiu limitant',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Fem reaccionar <strong>25 mL de dissolució d'hidròxid de potassi</strong> al 20% en massa ($d = 1{,}08\\text{ g/mL}$) amb <strong>${mHCl} g d'àcid clorhídric</strong>. Identifica el reactiu limitant i calcula quants grams de <strong>clorur de potassi</strong> s'obtindran.`,
+          statementFormulas: `Fem reaccionar <strong>25 mL de dissolució de $\\text{KOH}$</strong> al 20\\% ($d = 1{,}08\\text{ g/mL}$) amb <strong>${mHCl} g de $\\text{HCl}$</strong>. Calcula els grams de $\\text{KCl}$ formats.`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p><strong>2. Reactius inicials:</strong> KOH ($25\\text{ mL}$ dis.) i HCl ($${mHCl}\\text{ g}$).</p>
+          `,
+          tab2: `
+            <p><strong>Ajustament i determinació del limitant:</strong></p>
+            <ul class="list-disc list-inside ml-2">
+              <li>$n(\\text{KOH}) = \\frac{25 \\cdot 1{,}08 \\cdot 0{,}20}{56{,}11} = ${n_KOH.toFixed(4)}\\text{ mol}$</li>
+              <li>$n(\\text{HCl}) = \\frac{${mHCl}}{36{,}46} = ${n_HCl.toFixed(4)}\\text{ mol}$</li>
+            </ul>
+            <p class="mt-2 font-semibold text-amber-600 dark:text-amber-400">
+              Reactiu limitant: ${isHClLimiting ? 'HCl (s\'esgota primer)' : 'KOH (s\'esgota primer)'}.
+            </p>
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>Càlcul basat en el reactiu limitant:</strong></p>
+              $$${n_limiting.toFixed(4)}\\text{ mol limitant} \\cdot \\frac{1\\text{ mol KCl}}{1\\text{ mol limitant}} \\cdot \\frac{74{,}55\\text{ g KCl}}{1\\text{ mol KCl}} = ${correctVal.toFixed(2)}\\text{ g KCl}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de KCl</p>
+            </div>
+          `
+        };
+      },
+
+      // 5.1 Càlcul de massa real amb % de rendiment
+      'sub_ren_massa_real': () => {
+        const V_mL = randInt(20, 35);
+        const rendiment = randInt(70, 90);
+        
+        const mDis = V_mL * 1.08;
+        const mKOH = mDis * 0.20;
+        const mTeorica = (mKOH / 56.11) * 74.55;
+        const correctVal = mTeorica * (rendiment / 100);
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'KOH', x: 170, isComp: true, w: 55 },
+            { text: '+', x: 225 },
+            { text: 'HCl', x: 275, isComp: true, w: 50 },
+            { text: '→', x: 325 },
+            { text: 'KCl', x: 380, isComp: true, w: 50 },
+            { text: '+', x: 430 },
+            { text: 'H₂O', x: 475, isComp: true, w: 50 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'KOH',
+          startVal: `${V_mL} mL dis.`,
+          startUnit: '20%',
+          targetSubstance: 'KCl (Real)',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '5. Rendiment d\'una reacció',
+          subcategory: 'Càlcul de massa real amb % de rendiment',
+          unit: 'g',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Determina la massa real de <strong>clorur de potassi</strong> que s'obtendrà si fem reaccionar <strong>${V_mL} mL de dissolució d'hidròxid de potassi</strong> al 20% en massa ($d = 1{,}08\\text{ g/mL}$) amb excés d'àcid clorhídric, sabent que el <strong>rendiment de la reacció és del ${rendiment}%</strong>.`,
+          statementFormulas: `Calcula la massa real de $\\text{KCl}$ obtinguda a partir de <strong>${V_mL} mL de dissolució de $\\text{KOH}$</strong> al 20\\% ($d = 1{,}08\\text{ g/mL}$) si el <strong>rendiment és del ${rendiment}\\%</strong>.`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p>Dada: Rendiment $= ${rendiment}\\%$</p>
+          `,
+          tab2: `
+            <p><strong>Ajustament i concepte de rendiment:</strong></p>
+            $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+            <p class="mt-2 font-mono">$$\\text{Rendiment (\\%)} = \\frac{m_{\\text{real}}}{m_{\\text{teòrica}}} \\cdot 100$$</p>
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Càlcul de massa teòrica (al 100%):</strong></p>
+              $$m_{\\text{teòrica}} = \\frac{${(V_mL*1.08*0.20).toFixed(2)}}{56{,}11} \\cdot 74{,}55 = ${mTeorica.toFixed(2)}\\text{ g}$$
+              <p class="mt-2"><strong>2. Aplicació del rendiment real:</strong></p>
+              $$m_{\\text{real}} = ${mTeorica.toFixed(2)} \\cdot \\frac{${rendiment}}{100} = ${correctVal.toFixed(2)}\\text{ g}$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: ${correctVal.toFixed(2)} g de KCl</p>
+            </div>
+          `
+        };
+      },
+
+      // 5.2 Càlcul del % de rendiment de la reacció
+      'sub_ren_percentatge': () => {
+        const V_mL = 25;
+        const mObtinguda = randFloat(5.5, 6.8, 1);
+        const mTeorica = 7.17;
+        const correctVal = (mObtinguda / mTeorica) * 100;
+
+        const svgCode = generateStrategySVG({
+          items: [
+            { text: 'KOH', x: 170, isComp: true, w: 55 },
+            { text: '+', x: 225 },
+            { text: 'HCl', x: 275, isComp: true, w: 50 },
+            { text: '→', x: 325 },
+            { text: 'KCl', x: 380, isComp: true, w: 50 },
+            { text: '+', x: 430 },
+            { text: 'H₂O', x: 475, isComp: true, w: 50 }
+          ],
+          startIndex: 0,
+          targetIndex: 4,
+          startSubstance: 'KOH',
+          startVal: '25 mL dis.',
+          startUnit: '20%',
+          targetSubstance: 'KCl (Teòric)',
+          targetUnit: 'g'
+        });
+
+        return {
+          category: '5. Rendiment d\'una reacció',
+          subcategory: 'Càlcul del % de rendiment de la reacció',
+          unit: '%',
+          correctValue: parseFloat(correctVal.toFixed(2)),
+          statementNames: `Fem reaccionar <strong>25 mL de dissolució d'hidròxid de potassi</strong> al 20% en massa ($d = 1{,}08\\text{ g/mL}$) amb excés d'àcid clorhídric i s'obtenen realment al laboratori <strong>${mObtinguda} g de clorur de potassi</strong>. Calcula el percentatge de rendiment d'aquesta reacció.`,
+          statementFormulas: `Fent reaccionar <strong>25 mL de $\\text{KOH}$</strong> al 20\\% ($d = 1{,}08\\text{ g/mL}$) amb excés de $\\text{HCl}$ s'obtenen realment <strong>${mObtinguda} g de $\\text{KCl}$</strong>. Calcula el rendiment (\\%).`,
+          tab1: `
+            <p><strong>1. Reacció SENSE AJUSTAR:</strong></p>
+            <p class="font-mono bg-slate-100 dark:bg-slate-900 p-2 rounded text-center my-2">
+              $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+            </p>
+            <p>Dada real obtinguda al laboratori: $m_{\\text{real}} = ${mObtinguda}\\text{ g de KCl}$.</p>
+          `,
+          tab2: `
+            <p><strong>Ajustament de la reacció:</strong></p>
+            $$\\text{KOH}(aq) + \\text{HCl}(aq) \\rightarrow \\text{KCl}(aq) + \\text{H}_2\\text{O}(l)$$
+          `,
+          tab3: `
+            ${svgCode}
+            <div class="space-y-3 pt-2">
+              <p><strong>1. Massa teòrica esperada (100%):</strong></p>
+              $$m_{\\text{teòrica}} = \\frac{25 \\cdot 1{,}08 \\cdot 0{,}20}{56{,}11} \\cdot 74{,}55 = 7{,}17\\text{ g KCl}$$
+              <p class="mt-2"><strong>2. Percentatge de rendiment:</strong></p>
+              $$\\%\\text{ Rendiment} = \\frac{${mObtinguda}\\text{ g}}{7{,}17\\text{ g}} \\cdot 100 = ${correctVal.toFixed(2)}\\%$$
+              <p class="mt-2 font-semibold text-emerald-600 dark:text-emerald-400">Resultat final: Rendiment = ${correctVal.toFixed(2)} %</p>
+            </div>
+          `
+        };
+      }
+    };
+
+    /* ==========================================================================
+       UI INTERACTIVITY LOGIC
+       ========================================================================== */
+    function initCategoryAccordion() {
+      const container = document.getElementById('category-accordion');
+      container.innerHTML = CATEGORIES.map((cat, catIdx) => `
+        <div class="border border-slate-200 dark:border-slate-700/70 rounded-xl overflow-hidden">
+          <button onclick="toggleAccordion('acc-item-${catIdx}')" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/60 font-semibold text-xs text-left text-slate-800 dark:text-slate-200 flex items-center justify-between transition">
+            <span>${cat.title}</span>
+            <svg class="w-4 h-4 text-slate-400 transform transition-transform duration-200" id="acc-arrow-${catIdx}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="acc-item-${catIdx}" class="${catIdx === 0 ? '' : 'hidden'} p-2 bg-white dark:bg-slate-800 space-y-1">
+            ${cat.subcategories.map(sub => `
+              <button onclick="selectSubcategory('${sub.id}', '${cat.title}', '${sub.name}')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-sky-50 dark:hover:bg-sky-950/40 hover:text-sky-600 dark:hover:text-sky-400 transition flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+                ${sub.name}
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('hidden');
+    }
+
+    function selectSubcategory(subId, catTitle, subName) {
+      currentSubcatId = subId;
+      currentCatTitle = catTitle;
+      currentSubcatName = subName;
+
+      document.getElementById('badge-cat').innerText = catTitle;
+      document.getElementById('badge-subcat').innerText = subName;
+
+      generateNewExercise();
+    }
+
+    function generateNewExercise() {
+      const generator = GENERATORS[currentSubcatId] || GENERATORS['sub_massa_massa'];
+      currentExercise = generator();
+
+      // Reset Answer UI
+      document.getElementById('user-answer').value = '';
+      document.getElementById('answer-unit').innerText = currentExercise.unit;
+      const feedback = document.getElementById('feedback-box');
+      feedback.classList.add('hidden');
+
+      // Reset Solution Visibility (Hidden by default)
+      isSolutionVisible = false;
+      document.getElementById('solution-section').classList.add('hidden');
+      document.getElementById('text-toggle-solution').innerText = 'Mostrar Solució Pas a Pas';
+
+      // Render statement
+      renderStatement();
+
+      // Render Tabs Content (3 Tabs)
+      document.getElementById('tab-content-1').innerHTML = currentExercise.tab1;
+      document.getElementById('tab-content-2').innerHTML = currentExercise.tab2;
+      document.getElementById('tab-content-3').innerHTML = currentExercise.tab3;
+
+      switchTab(1);
+    }
+
+    function renderStatement() {
+      if (!currentExercise) return;
+      const box = document.getElementById('statement-box');
+      box.innerHTML = showFormulas ? currentExercise.statementFormulas : currentExercise.statementNames;
+      renderMathInContainer(box);
+    }
+
+    function toggleStatementMode() {
+      showFormulas = !showFormulas;
+      document.getElementById('toggle-mode-text').innerText = showFormulas ? 'Veure Noms' : 'Veure Fórmules';
+      renderStatement();
+    }
+
+    function toggleSolutionVisibility() {
+      isSolutionVisible = !isSolutionVisible;
+      const solSection = document.getElementById('solution-section');
+      const toggleText = document.getElementById('text-toggle-solution');
+
+      if (isSolutionVisible) {
+        solSection.classList.remove('hidden');
+        toggleText.innerText = 'Amagar Solució Pas a Pas';
+        renderMathInContainer(`tab-content-${currentTab}`);
+      } else {
+        solSection.classList.add('hidden');
+        toggleText.innerText = 'Mostrar Solució Pas a Pas';
+      }
+    }
+
+    function checkAnswer() {
+      if (!currentExercise) return;
+      const rawInput = document.getElementById('user-answer').value.replace(',', '.');
+      const userVal = parseFloat(rawInput);
+      const feedback = document.getElementById('feedback-box');
+
+      if (isNaN(userVal)) {
+        feedback.className = 'p-4 rounded-xl text-sm font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-200';
+        feedback.innerText = '⚠️ Si us plau, introdueix un nombre vàlid.';
+        feedback.classList.remove('hidden');
+        return;
+      }
+
+      stats.total++;
+      const target = currentExercise.correctValue;
+      const margin = Math.abs(target * 0.02);
+      const isCorrect = Math.abs(userVal - target) <= Math.max(margin, 0.05);
+
+      if (isCorrect) {
+        stats.correct++;
+        feedback.className = 'p-4 rounded-xl text-sm font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200 flex items-center gap-2';
+        feedback.innerHTML = `
+          <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Molt bé! Resposta correcta (${target} ${currentExercise.unit}). Fes clic a "Mostrar Solució Pas a Pas" si vols comprovar el procediment.</span>
+        `;
+      } else {
+        feedback.className = 'p-4 rounded-xl text-sm font-semibold bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-200 flex items-center gap-2';
+        feedback.innerHTML = `
+          <svg class="w-5 h-5 text-rose-600 dark:text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>El valor introduït (${userVal}) no és correcte. Revisa els càlculs i consulta la solució desglossada (${target} ${currentExercise.unit}).</span>
+        `;
+      }
+
+      feedback.classList.remove('hidden');
+
+      // Update Score UI
+      document.getElementById('score-correct').innerText = `Encerts: ${stats.correct}`;
+      document.getElementById('score-total').innerText = `Resolts: ${stats.total}`;
+    }
+
+    function switchTab(tabIndex) {
+      currentTab = tabIndex;
+      [1, 2, 3].forEach(idx => {
+        const btn = document.getElementById(`tab-btn-${idx}`);
+        const content = document.getElementById(`tab-content-${idx}`);
+
+        if (idx === tabIndex) {
+          btn.className = 'pb-2.5 border-b-2 tab-active transition whitespace-nowrap flex items-center gap-1.5';
+          content.classList.remove('hidden');
+          renderMathInContainer(content);
+        } else {
+          btn.className = 'pb-2.5 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 transition whitespace-nowrap flex items-center gap-1.5';
+          content.classList.add('hidden');
+        }
+      });
+    }
+
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.toggle('hidden');
+        if (!modal.classList.contains('hidden')) {
+          renderMathInContainer('modal-content-body');
+        }
+      }
+    }
+
+    /* ==========================================================================
+       DARK MODE TOGGLE
+       ========================================================================== */
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('theme-toggle-dark-icon');
+    const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      lightIcon.classList.remove('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      darkIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      darkIcon.classList.toggle('hidden');
+      lightIcon.classList.toggle('hidden');
+
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+      }
+    });
+
+    /* Initialize App */
+    window.onload = function() {
+      initCategoryAccordion();
+      generateNewExercise();
+    };
+  </script>
+</body>
+</html>

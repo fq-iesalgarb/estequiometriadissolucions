@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="flaskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+  </defs>
+  <!-- Fondo circular contenedor -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+  
+  <!-- Órbitas atómicas -->
+  <ellipse cx="32" cy="34" rx="24" ry="8" fill="none" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.7" transform="rotate(-30 32 34)" />
+  <ellipse cx="32" cy="34" rx="24" ry="8" fill="none" stroke="#818CF8" stroke-width="2" stroke-opacity="0.7" transform="rotate(30 32 34)" />
+  
+  <!-- Matraz Erlenmeyer -->
+  <path d="M29 16 h6 v6 l7.5 14.5 a2 2 0 0 1 -1.8 2.9 h-17.4 a2 2 0 0 1 -1.8 -2.9 l7.5 -14.5 v-6 z" fill="#FFFFFF" />
+  <path d="M30 20 h4 v4 l6 11 h-16 l6 -11 v-4 z" fill="url(#flaskGrad)" />
+  
+  <!-- Contenido reactivo en el matraz -->
+  <path d="M25 31 L24 33 a1.5 1.5 0 0 0 1.3 2 h13.4 a1.5 1.5 0 0 0 1.3 -2 l-1 -2 z" fill="url(#liquidGrad)" />
+  
+  <!-- Burbujas de reacción -->
+  <circle cx="32" cy="27" r="1.5" fill="#FFFFFF" />
+  <circle cx="29" cy="30" r="1" fill="#FFFFFF" />
+  <circle cx="34" cy="29" r="1.2" fill="#FFFFFF" />
+  
+  <!-- Electrones orbitando -->
+  <circle cx="12" cy="24" r="2.5" fill="#FACC15" />
+  <circle cx="52" cy="44" r="2.5" fill="#FACC15" />
+</svg>
