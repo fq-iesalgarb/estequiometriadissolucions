@@ -1,38 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
   <defs>
+    <!-- Background Gradient -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E293B" />
-      <stop offset="100%" stop-color="#0F172A" />
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0f766e"/>
     </linearGradient>
-    <linearGradient id="flaskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#2563EB" />
-      <stop offset="100%" stop-color="#3B82F6" />
+
+    <!-- Liquid Gradient -->
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
     </linearGradient>
-    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#EF4444" />
-      <stop offset="100%" stop-color="#F59E0B" />
+
+    <!-- Glass Glow / Reflection -->
+    <linearGradient id="glassGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
     </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
   </defs>
-  <!-- Fondo circular contenedor -->
-  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" />
+
+  <!-- Container Box with Rounded Corners -->
+  <rect width="128" height="128" rx="32" fill="url(#bgGrad)"/>
   
-  <!-- Órbitas atómicas -->
-  <ellipse cx="32" cy="34" rx="24" ry="8" fill="none" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.7" transform="rotate(-30 32 34)" />
-  <ellipse cx="32" cy="34" rx="24" ry="8" fill="none" stroke="#818CF8" stroke-width="2" stroke-opacity="0.7" transform="rotate(30 32 34)" />
-  
-  <!-- Matraz Erlenmeyer -->
-  <path d="M29 16 h6 v6 l7.5 14.5 a2 2 0 0 1 -1.8 2.9 h-17.4 a2 2 0 0 1 -1.8 -2.9 l7.5 -14.5 v-6 z" fill="#FFFFFF" />
-  <path d="M30 20 h4 v4 l6 11 h-16 l6 -11 v-4 z" fill="url(#flaskGrad)" />
-  
-  <!-- Contenido reactivo en el matraz -->
-  <path d="M25 31 L24 33 a1.5 1.5 0 0 0 1.3 2 h13.4 a1.5 1.5 0 0 0 1.3 -2 l-1 -2 z" fill="url(#liquidGrad)" />
-  
-  <!-- Burbujas de reacción -->
-  <circle cx="32" cy="27" r="1.5" fill="#FFFFFF" />
-  <circle cx="29" cy="30" r="1" fill="#FFFFFF" />
-  <circle cx="34" cy="29" r="1.2" fill="#FFFFFF" />
-  
-  <!-- Electrones orbitando -->
-  <circle cx="12" cy="24" r="2.5" fill="#FACC15" />
-  <circle cx="52" cy="44" r="2.5" fill="#FACC15" />
+  <!-- Outer Atomic Orbit 1 -->
+  <ellipse cx="64" cy="68" rx="48" ry="16" fill="none" stroke="#38bdf8" stroke-width="3.5" stroke-dasharray="10 6" transform="rotate(-30 64 68)" opacity="0.85"/>
+  <circle cx="24" cy="46" r="5" fill="#38bdf8" filter="url(#glow)"/>
+
+  <!-- Outer Atomic Orbit 2 -->
+  <ellipse cx="64" cy="68" rx="48" ry="16" fill="none" stroke="#f43f5e" stroke-width="3" stroke-dasharray="8 5" transform="rotate(30 64 68)" opacity="0.75"/>
+  <circle cx="100" cy="46" r="4.5" fill="#f43f5e"/>
+
+  <!-- Erlenmeyer Flask Base Shadow -->
+  <ellipse cx="64" cy="100" rx="32" ry="8" fill="#022c22" opacity="0.5"/>
+
+  <!-- Flask Liquid -->
+  <path d="M 44 76 L 36 92 C 34 96 37 100 42 100 L 86 100 C 91 100 94 96 92 92 L 84 76 Q 64 72 44 76 Z" fill="url(#liquidGrad)"/>
+
+  <!-- Bubbles inside flask -->
+  <circle cx="56" cy="84" r="3" fill="#ffffff" opacity="0.9"/>
+  <circle cx="68" cy="78" r="4" fill="#ffffff" opacity="0.8"/>
+  <circle cx="74" cy="88" r="2.5" fill="#ffffff" opacity="0.85"/>
+  <circle cx="62" cy="66" r="2" fill="#38bdf8" opacity="0.9"/>
+  <circle cx="66" cy="54" r="2.5" fill="#38bdf8" opacity="0.9"/>
+
+  <!-- Flask Glass Body Outline -->
+  <path d="M 54 32 L 74 32 M 58 32 L 58 50 L 89 93 C 92 98 88 104 82 104 L 46 104 C 40 104 36 98 39 93 L 70 50 L 70 32" 
+        fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Glass Highlight Line -->
+  <path d="M 44 91 L 62 56" fill="none" stroke="url(#glassGlow)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Sparkle Star at top right -->
+  <path d="M 96 24 L 98 30 L 104 32 L 98 34 L 96 40 L 94 34 L 88 32 L 94 30 Z" fill="#facc15"/>
 </svg>
